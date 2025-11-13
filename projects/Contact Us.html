@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact Us</title>
+<style>
+  /* Basic Reset */
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    margin: 40px;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .container {
+    display: flex;
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Left side content */
+  .left {
+    flex: 1;
+  }
+
+  .left p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .left p a {
+    color: #58a6ff;
+    text-decoration: none;
+  }
+
+  .left p a:hover {
+    text-decoration: underline;
+  }
+
+  .left img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+  }
+
+  /* Right side form styling */
+  .right {
+    flex: 1;
+    background-color: #161b22;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #c9d1d9;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s;
+  }
+
+  form input[type="text"]:focus,
+  form input[type="email"]:focus,
+  form textarea:focus {
+    outline: none;
+    border-color: #58a6ff;
+  }
+
+  form textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .g-recaptcha {
+    margin-bottom: 1rem;
+  }
+
+  button {
+    width: 100%;
+    background-color: #21262d;
+    color: #8b949e;
+    border: none;
+    font-size: 1rem;
+    padding: 0.75rem 0;
+    border-radius: 6px;
+    cursor: not-allowed;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  button.enabled {
+    background-color: #238636;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+<div class="container">
+  <!-- Left Section -->
+  <div class="left">
+    <h1>Contact Us</h1>
+    <p>We are available for questions, feedback, or collaboration opportunities. Let us know how we can help!</p>
+    <p>You can also contact us at <a href="mailto:contact@codewithharry.com">contact@codewithharry.com</a> for any payment or course access related queries.</p>
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&h=400&q=80" alt="Contact Image" />
+  </div>
+
+  <!-- Right Section (Form) -->
+  <div class="right">
+    <form id="contactForm" novalidate>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your Name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" name="phone" placeholder="Your 10-digit Indian Number" pattern="[6-9][0-9]{9}" required />
+
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" name="subject" placeholder="Subject" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Type your message here." required></textarea>
+
+      <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY" data-callback="captchaVerified"></div>
+
+      <button type="submit" id="submitBtn" disabled>Send Message</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Enable submit button only after reCAPTCHA is solved
+  function captchaVerified() {
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('submitBtn').classList.add('enabled');
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const phone = this.phone.value.trim();
+    const subject = this.subject.value.trim();
+    const message = this.message.value.trim();
+    const phonePattern = /^[6-9][0-9]{9}$/;
+
+    if (!name) {
+      alert('Please enter your name.');
+      return;
+    }
+
+    if (!email || !this.email.checkValidity()) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    if (!phonePattern.test(phone)) {
+      alert('Please enter a valid 10-digit Indian phone number.');
+      return;
+    }
+
+    if (!subject) {
+      alert('Please enter the subject.');
+      return;
+    }
+
+    if (!message) {
+      alert('Please enter your message.');
+      return;
+    }
+
+    if (grecaptcha.getResponse() === "") {
+      alert("Please verify that you are not a robot.");
+      return;
+    }
+
+    // If all validations pass, you can send the data to your server or show a success message
+    alert('Message sent successfully!');
+    this.reset();
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('submitBtn').classList.remove('enabled');
+    grecaptcha.reset();
+  });
+</script>
+
+</body>
+</html>
