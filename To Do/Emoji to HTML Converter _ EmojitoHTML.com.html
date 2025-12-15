@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)https://www.emojitohtml.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="./Emoji to HTML Converter _ EmojitoHTML.com_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XYW4BRDK8M');
+</script>
+
+<!-- Primary Meta Tags -->
+<title>Emoji to HTML Converter | EmojitoHTML.com</title>
+<meta name="description" content="Convert emojis to numeric HTML entities (decimal or hex) instantly. Preview, copy, and embed emojis safely in your HTML. Free, lightweight, and browser-friendly.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emojitohtml.com/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emojitohtml.com/">
+<meta property="og:title" content="Emoji to HTML Converter | EmojitoHTML.com">
+<meta property="og:description" content="Convert emojis to numeric HTML entities (decimal or hex) instantly. Preview, copy, and embed emojis safely in your HTML. Free, lightweight, and browser-friendly.">
+<meta property="og:image" content="https://emojitohtml.com/og-image.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://emojitohtml.com/">
+<meta property="twitter:title" content="Emoji to HTML Converter | EmojitoHTML.com">
+<meta property="twitter:description" content="Convert emojis to numeric HTML entities (decimal or hex) instantly. Preview, copy, and embed emojis safely in your HTML. Free, lightweight, and browser-friendly.">
+<meta property="twitter:image" content="https://emojitohtml.com/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "EmojitoHTML",
+  "url": "https://emojitohtml.com",
+  "logo": "https://emojitohtml.com/favicon-32x32.png",
+  "applicationCategory": "Utilities",
+  "description": "Convert emojis to numeric HTML entities (decimal or hex) instantly. Preview, copy, and embed emojis safely in your HTML.",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires modern web browser with JavaScript support.",
+  "author": {
+    "@type": "Person",
+    "name": "Viktor Veljanovski",
+    "url": "https://viktorvel.dev"
+  }
+}
+</script>
+
+
+<title>Emoji to HTML Converter | EmojitoHTML.com</title>
+<link rel="icon" type="image/png" href="https://www.emojitohtml.com/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="https://www.emojitohtml.com/favicon/favicon.svg">
+<link rel="shortcut icon" href="https://www.emojitohtml.com/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.emojitohtml.com/favicon/apple-touch-icon.png">
+<link rel="manifest" href="https://www.emojitohtml.com/favicon/site.webmanifest">
+<style>
+  :root{font-family: system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{margin:16px;background:#f7f8fb;color:#111}
+  .card{max-width:920px;margin:0 auto;background:#fff;border-radius:10px;padding:20px;box-shadow:0 6px 20px rgba(12,20,40,0.08)}
+  h1{margin:0 0 8px;font-size:20px}
+  h2{margin:0 0 8px;font-size:16px}
+  p.lead{margin:0 0 16px;color:#555}
+  .row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap}
+  textarea{width:100%;min-height:84px;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:15px;resize:vertical}
+  .controls{display:flex;gap:8px;align-items:center}
+  button{background:#111;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+  .btn-ghost{background:#fff;color:#111;border:1px solid #ddd}
+  .small{font-size:13px;color:#666}
+  .output{line-break: anywhere; white-space:pre-wrap;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;background:#fbfbff;padding:12px;border-radius:8px;border:1px solid #eee;min-height:64px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  label{font-size:13px;color:#333;margin-bottom:6px;display:block}
+  .meta{font-size:13px;color:#666;margin-left:6px}
+  .preview{font-size:28px;padding:12px;border-radius:8px;border:1px dashed #eee;min-height:56px;display:flex;align-items:center;gap:8px}
+  .note{font-size:13px;color:#666;margin-top:8px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .footer{margin-top:14px;font-size:13px;color:#666}
+  /* Emoji picker */
+  .picker-wrap{position:relative}
+  .emoji-btn{background:#fff;color:#111;border:1px solid #ddd}
+  .emoji-btn span{font-size:18px;margin-right:6px}
+  .emoji-panel{position:absolute;z-index:20;top:42px;left:0;background:#fff;border:1px solid #e6e6ea;border-radius:10px;box-shadow:0 8px 30px rgba(12,20,40,0.12);width:920px;max-height:360px;display:none;flex-direction:column;overflow:hidden}
+  .emoji-panel.open{display:flex}
+  .emoji-search{padding:8px;border-bottom:1px solid #f0f0f3}
+  .emoji-search input{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:8px;font-size:14px}
+  .emoji-grid{padding:8px;display:grid;grid-template-columns:repeat(8, 1fr);gap:6px;overflow:auto}
+  .emoji-item{display:flex;align-items:center;justify-content:center;height:36px;border-radius:8px;border:1px solid #eee;background:#fff;cursor:pointer}
+  .emoji-item:hover{background:#f6f7fb}
+  .emoji-empty{padding:14px;font-size:13px;color:#666}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="topbar">
+      <div>
+        <h1>Emoji → HTML Entity Converter</h1>
+        <a href="https://www.producthunt.com/products/emoji-to-html?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_source=badge-emoji-to-html" target="_blank" style="float:right;"><img src="./Emoji to HTML Converter _ EmojitoHTML.com_files/featured.svg" alt="Emoji To HTML - Convert emojis to clean HTML entities instantly | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54"></a>
+        <p class="lead">Paste your text containing emojis into the input box and choose the format: Hex (&amp;#x…;) or Decimal (&amp;#…;). Get the converted HTML entities instantly, see a live preview, and copy the results with one click. Supports combined emoji sequences (ZWJ) and works offline.</p>
+        <h2>Convert emojis to &amp;#x…; or &amp;#…; with live preview and copy buttons.</h2>
+      </div>
+    </div>
+
+    <label for="input">Paste text with emoji(s)</label>
+    <div class="picker-wrap">
+      <textarea id="input" placeholder="Type or paste: Hello 🌍 — 👩‍💻👍🏽"></textarea>
+      <div class="row" style="margin-top:8px;align-items:center">
+        <div class="controls">
+          <button id="toggleEmoji" class="emoji-btn" type="button" title="Emoji picker"><span>😃</span>Emoji</button>
+        </div>
+      </div>
+      <div id="emojiPanel" class="emoji-panel" role="dialog" aria-label="Emoji picker" aria-modal="false">
+        <div class="emoji-search"><input id="emojiSearch" type="search" placeholder="Search emoji by name or keyword" autocomplete="off"></div>
+        <div id="emojiGrid" class="emoji-grid" role="listbox" aria-label="Emojis"><button type="button" class="emoji-item" role="option" aria-label="grinning face">😀</button><button type="button" class="emoji-item" role="option" aria-label="grinning face with big eyes">😃</button><button type="button" class="emoji-item" role="option" aria-label="grinning face with smiling eyes">😄</button><button type="button" class="emoji-item" role="option" aria-label="beaming face with smiling eyes">😁</button><button type="button" class="emoji-item" role="option" aria-label="grinning squinting face">😆</button><button type="button" class="emoji-item" role="option" aria-label="grinning face with sweat">😅</button><button type="button" class="emoji-item" role="option" aria-label="face with tears of joy">😂</button><button type="button" class="emoji-item" role="option" aria-label="rolling on the floor laughing">🤣</button><button type="button" class="emoji-item" role="option" aria-label="smiling face with smiling eyes">😊</button><button type="button" class="emoji-item" role="option" aria-label="slightly smiling face">🙂</button><button type="button" class="emoji-item" role="option" aria-label="winking face">😉</button><button type="button" class="emoji-item" role="option" aria-label="smiling face with heart-eyes">😍</button><button type="button" class="emoji-item" role="option" aria-label="face blowing a kiss">😘</button><button type="button" class="emoji-item" role="option" aria-label="kissing face">😗</button><button type="button" class="emoji-item" role="option" aria-label="kissing face with smiling eyes">😙</button><button type="button" class="emoji-item" role="option" aria-label="kissing face with closed eyes">😚</button><button type="button" class="emoji-item" role="option" aria-label="face savoring food">😋</button><button type="button" class="emoji-item" role="option" aria-label="winking face with tongue">😜</button><button type="button" class="emoji-item" role="option" aria-label="zany face">🤪</button><button type="button" class="emoji-item" role="option" aria-label="smiling face with sunglasses">😎</button><button type="button" class="emoji-item" role="option" aria-label="star-struck">🤩</button><button type="button" class="emoji-item" role="option" aria-label="partying face">🥳</button><button type="button" class="emoji-item" role="option" aria-label="smirking face">😏</button><button type="button" class="emoji-item" role="option" aria-label="unamused face">😒</button><button type="button" class="emoji-item" role="option" aria-label="pensive face">😔</button><button type="button" class="emoji-item" role="option" aria-label="crying face">😢</button><button type="button" class="emoji-item" role="option" aria-label="loudly crying face">😭</button><button type="button" class="emoji-item" role="option" aria-label="face with steam from nose">😤</button><button type="button" class="emoji-item" role="option" aria-label="angry face">😠</button><button type="button" class="emoji-item" role="option" aria-label="weary face">😩</button><button type="button" class="emoji-item" role="option" aria-label="face screaming in fear">😱</button><button type="button" class="emoji-item" role="option" aria-label="sleeping face">😴</button><button type="button" class="emoji-item" role="option" aria-label="thinking face">🤔</button><button type="button" class="emoji-item" role="option" aria-label="face with raised eyebrow">🤨</button><button type="button" class="emoji-item" role="option" aria-label="neutral face">😐</button><button type="button" class="emoji-item" role="option" aria-label="face with rolling eyes">🙄</button><button type="button" class="emoji-item" role="option" aria-label="hugging face">🤗</button><button type="button" class="emoji-item" role="option" aria-label="handshake">🤝</button><button type="button" class="emoji-item" role="option" aria-label="thumbs up">👍</button><button type="button" class="emoji-item" role="option" aria-label="thumbs down">👎</button><button type="button" class="emoji-item" role="option" aria-label="clapping hands">👏</button><button type="button" class="emoji-item" role="option" aria-label="folded hands">🙏</button><button type="button" class="emoji-item" role="option" aria-label="flexed biceps">💪</button><button type="button" class="emoji-item" role="option" aria-label="fire">🔥</button><button type="button" class="emoji-item" role="option" aria-label="hundred points">💯</button><button type="button" class="emoji-item" role="option" aria-label="sparkles">✨</button><button type="button" class="emoji-item" role="option" aria-label="party popper">🎉</button><button type="button" class="emoji-item" role="option" aria-label="red heart">❤️</button><button type="button" class="emoji-item" role="option" aria-label="broken heart">💔</button><button type="button" class="emoji-item" role="option" aria-label="blue heart">💙</button><button type="button" class="emoji-item" role="option" aria-label="green heart">💚</button><button type="button" class="emoji-item" role="option" aria-label="yellow heart">💛</button><button type="button" class="emoji-item" role="option" aria-label="orange heart">🧡</button><button type="button" class="emoji-item" role="option" aria-label="purple heart">💜</button><button type="button" class="emoji-item" role="option" aria-label="black heart">🖤</button><button type="button" class="emoji-item" role="option" aria-label="white heart">🤍</button><button type="button" class="emoji-item" role="option" aria-label="brown heart">🤎</button><button type="button" class="emoji-item" role="option" aria-label="globe showing Europe-Africa">🌍</button><button type="button" class="emoji-item" role="option" aria-label="globe showing Americas">🌎</button><button type="button" class="emoji-item" role="option" aria-label="globe showing Asia-Australia">🌏</button><button type="button" class="emoji-item" role="option" aria-label="star">⭐</button><button type="button" class="emoji-item" role="option" aria-label="glowing star">🌟</button><button type="button" class="emoji-item" role="option" aria-label="high voltage">⚡</button><button type="button" class="emoji-item" role="option" aria-label="sun">☀️</button><button type="button" class="emoji-item" role="option" aria-label="cloud with rain">🌧️</button><button type="button" class="emoji-item" role="option" aria-label="snowflake">❄️</button><button type="button" class="emoji-item" role="option" aria-label="hot beverage">☕</button><button type="button" class="emoji-item" role="option" aria-label="pizza">🍕</button><button type="button" class="emoji-item" role="option" aria-label="hamburger">🍔</button><button type="button" class="emoji-item" role="option" aria-label="red apple">🍎</button><button type="button" class="emoji-item" role="option" aria-label="soccer ball">⚽</button><button type="button" class="emoji-item" role="option" aria-label="basketball">🏀</button><button type="button" class="emoji-item" role="option" aria-label="guitar">🎸</button><button type="button" class="emoji-item" role="option" aria-label="headphone">🎧</button><button type="button" class="emoji-item" role="option" aria-label="laptop">💻</button><button type="button" class="emoji-item" role="option" aria-label="woman technologist">👩‍💻</button><button type="button" class="emoji-item" role="option" aria-label="man technologist">👨‍💻</button></div>
+        <div id="emojiEmpty" class="emoji-empty" style="display:none">No matches</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="controls">
+        <label><input type="radio" name="format" value="hex" checked=""> Hex (&amp;#x...;)</label>
+        <label style="margin-left:8px"><input type="radio" name="format" value="dec"> Decimal (&amp;#...;)</label>
+        <button id="convert" title="Convert">Convert</button>
+        <button id="copyOutput" class="btn-ghost" title="Copy output">Copy output</button>
+        <button id="copyPreview" class="btn-ghost" title="Copy preview">Copy preview</button>
+      </div>
+      <div class="small" style="margin-left:auto">
+        <span id="segmentsInfo">Segmentation: <strong>grapheme (Intl.Segmenter)</strong></span>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <label>Output (entities)</label>
+        <div id="output" class="output" contenteditable="false" aria-live="polite">&amp;#x1F3AF;</div>
+      </div>
+      <div>
+        <label>Rendered preview</label>
+        <div id="preview" class="preview"><div>🎯</div></div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:12px">
+      <div class="small">
+        Tip: For combined emojis (ZWJ sequences like 👩‍💻) the tool will try to treat them as one "emoji cluster" using <code>Intl.Segmenter</code>. If the browser lacks support it will fallback to codepoint-based conversion.
+      </div>
+    </div>
+
+    <div class="footer">
+      <span class="small">Made with ♥ By <a href="https://viktorvel.dev/" target="_blank">ViktorVel.dev.</a> Works offline.</span>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const input = document.getElementById('input');
+  const convertBtn = document.getElementById('convert');
+  const outputEl = document.getElementById('output');
+  const previewEl = document.getElementById('preview');
+  const copyOutputBtn = document.getElementById('copyOutput');
+  const copyPreviewBtn = document.getElementById('copyPreview');
+  const segmentsInfo = document.getElementById('segmentsInfo');
+  const toggleEmojiBtn = document.getElementById('toggleEmoji');
+  const emojiPanel = document.getElementById('emojiPanel');
+  const emojiSearch = document.getElementById('emojiSearch');
+  const emojiGrid = document.getElementById('emojiGrid');
+  const emojiEmpty = document.getElementById('emojiEmpty');
+
+  // Choose segmentation strategy
+  const hasSegmenter = (typeof Intl !== 'undefined' && Intl.Segmenter);
+  segmentsInfo.innerHTML = 'Segmentation: <strong>' + (hasSegmenter ? 'grapheme (Intl.Segmenter)' : 'code points (fallback)') + '</strong>';
+
+  function segmentText(text){
+    if(!text) return [];
+    if(hasSegmenter){
+      try{
+        const seg = new Intl.Segmenter(undefined, {granularity: 'grapheme'});
+        return Array.from(seg.segment(text), s => s.segment);
+      }catch(e){
+        // fallback if unexpected error
+      }
+    }
+    // Fallback: split into user-perceived code points by Array.from (still splits ZWJ combos sometimes)
+    return Array.from(text);
+  }
+
+  function toEntities(segment, format){
+    // convert a segment (string) to one or more numeric references.
+    // We'll map each code point inside the segment to a numeric reference concatenated.
+    const arr = [];
+    for (let i = 0; i < segment.length; ) {
+      const codePoint = segment.codePointAt(i);
+      const hex = codePoint.toString(16).toUpperCase();
+      if (format === 'hex') {
+        arr.push('&#x' + hex + ';');
+      } else {
+        arr.push('&#' + codePoint + ';');
+      }
+      // advance by 1 or 2 JS string positions depending on code point size
+      i += codePoint > 0xFFFF ? 2 : 1;
+    }
+    // join with no separator so combined sequences can be represented as a concatenation
+    // but we also return a logical grouping per segment
+    return arr.join('');
+  }
+
+  function convertAll(text, format){
+    // We will find emoji-like parts and convert them; but to keep it simple:
+    // Convert whole input text by replacing every grapheme (segmented) with:
+    // - If it contains at least one non-ASCII char (likely emoji), convert to entities
+    // - Else keep as-is (preserve words & punctuation)
+    const parts = segmentText(text);
+    const results = parts.map(p => {
+      // detect if the segment contains an emoji / non-ascii char
+      // heuristic: characters above 0x007F are candidates (covers emoji and many unicode characters)
+      const needs = [...p].some(ch => ch.codePointAt(0) > 0x007F);
+      return needs ? toEntities(p, format) : p;
+    });
+    return results.join('');
+  }
+
+  function updateUI(){
+    const txt = input.value;
+    const format = document.querySelector('input[name="format"]:checked').value;
+    const out = convertAll(txt, format);
+    outputEl.textContent = out || '— nothing yet —';
+    // Render the preview by decoding numeric entities inside a sandbox div
+    // We'll create a temporary element to set innerHTML safely (no scripts in entities).
+    if(out){
+      const tmp = document.createElement('div');
+      tmp.innerHTML = out;
+      previewEl.innerHTML = '';
+      previewEl.appendChild(tmp);
+    } else {
+      previewEl.textContent = '— nothing yet —';
+    }
+  }
+
+  // --- Emoji picker dataset & logic ---
+  let EMOJIS = [
+    {c:'😀', n:'grinning face', k:'smile happy grin'},
+    {c:'😃', n:'grinning face with big eyes', k:'smile happy'},
+    {c:'😄', n:'grinning face with smiling eyes', k:'smile happy'},
+    {c:'😁', n:'beaming face with smiling eyes', k:'grin'},
+    {c:'😆', n:'grinning squinting face', k:'laugh'},
+    {c:'😅', n:'grinning face with sweat', k:'sweat relief'},
+    {c:'😂', n:'face with tears of joy', k:'lol laugh cry'},
+    {c:'🤣', n:'rolling on the floor laughing', k:'rofl'},
+    {c:'😊', n:'smiling face with smiling eyes', k:'blush'},
+    {c:'🙂', n:'slightly smiling face', k:'smile'},
+    {c:'😉', n:'winking face', k:'wink'},
+    {c:'😍', n:'smiling face with heart-eyes', k:'love hearts'},
+    {c:'😘', n:'face blowing a kiss', k:'kiss'},
+    {c:'😗', n:'kissing face', k:'kiss'},
+    {c:'😙', n:'kissing face with smiling eyes', k:'kiss'},
+    {c:'😚', n:'kissing face with closed eyes', k:'kiss'},
+    {c:'😋', n:'face savoring food', k:'yum tasty'},
+    {c:'😜', n:'winking face with tongue', k:'joke'},
+    {c:'🤪', n:'zany face', k:'goofy crazy'},
+    {c:'😎', n:'smiling face with sunglasses', k:'cool'},
+    {c:'🤩', n:'star-struck', k:'star eyes amazed'},
+    {c:'🥳', n:'partying face', k:'party celebration'},
+    {c:'😏', n:'smirking face', k:'smirk'},
+    {c:'😒', n:'unamused face', k:'meh'},
+    {c:'😔', n:'pensive face', k:'sad'},
+    {c:'😢', n:'crying face', k:'cry'},
+    {c:'😭', n:'loudly crying face', k:'sob'},
+    {c:'😤', n:'face with steam from nose', k:'triumph annoyed'},
+    {c:'😠', n:'angry face', k:'angry mad'},
+    {c:'😩', n:'weary face', k:'tired'},
+    {c:'😱', n:'face screaming in fear', k:'scream shock'},
+    {c:'😴', n:'sleeping face', k:'sleep'},
+    {c:'🤔', n:'thinking face', k:'think'},
+    {c:'🤨', n:'face with raised eyebrow', k:'skeptical'},
+    {c:'😐', n:'neutral face', k:'meh'},
+    {c:'🙄', n:'face with rolling eyes', k:'eyeroll'},
+    {c:'🤗', n:'hugging face', k:'hug'},
+    {c:'🤝', n:'handshake', k:'agreement deal'},
+    {c:'👍', n:'thumbs up', k:'like approve'},
+    {c:'👎', n:'thumbs down', k:'dislike'},
+    {c:'👏', n:'clapping hands', k:'applause clap'},
+    {c:'🙏', n:'folded hands', k:'please thanks prayer'},
+    {c:'💪', n:'flexed biceps', k:'strong strength'},
+    {c:'🔥', n:'fire', k:'lit hot'},
+    {c:'💯', n:'hundred points', k:'100 keep it real'},
+    {c:'✨', n:'sparkles', k:'stars shiny'},
+    {c:'🎉', n:'party popper', k:'celebration'},
+    {c:'❤️', n:'red heart', k:'love heart'},
+    {c:'💔', n:'broken heart', k:'heartbreak'},
+    {c:'💙', n:'blue heart', k:'heart'},
+    {c:'💚', n:'green heart', k:'heart'},
+    {c:'💛', n:'yellow heart', k:'heart'},
+    {c:'🧡', n:'orange heart', k:'heart'},
+    {c:'💜', n:'purple heart', k:'heart'},
+    {c:'🖤', n:'black heart', k:'heart'},
+    {c:'🤍', n:'white heart', k:'heart'},
+    {c:'🤎', n:'brown heart', k:'heart'},
+    {c:'🌍', n:'globe showing Europe-Africa', k:'earth world'},
+    {c:'🌎', n:'globe showing Americas', k:'earth world'},
+    {c:'🌏', n:'globe showing Asia-Australia', k:'earth world'},
+    {c:'⭐', n:'star', k:'favorite'},
+    {c:'🌟', n:'glowing star', k:'star'},
+    {c:'⚡', n:'high voltage', k:'zap lightning'},
+    {c:'☀️', n:'sun', k:'sunny'},
+    {c:'🌧️', n:'cloud with rain', k:'rain weather'},
+    {c:'❄️', n:'snowflake', k:'cold snow'},
+    {c:'☕', n:'hot beverage', k:'coffee'},
+    {c:'🍕', n:'pizza', k:'food'},
+    {c:'🍔', n:'hamburger', k:'food'},
+    {c:'🍎', n:'red apple', k:'fruit'},
+    {c:'⚽', n:'soccer ball', k:'football sport'},
+    {c:'🏀', n:'basketball', k:'sport'},
+    {c:'🎸', n:'guitar', k:'music'},
+    {c:'🎧', n:'headphone', k:'music'},
+    {c:'💻', n:'laptop', k:'computer work'},
+    {c:'👩‍💻', n:'woman technologist', k:'coder developer'},
+    {c:'👨‍💻', n:'man technologist', k:'coder developer'}
+  ];
+
+  const EMOJI_CACHE_KEY = 'EMOJI_DATA_V1';
+  const EMOJI_CACHE_TTL_MS = 1000 * 60 * 60 * 24 * 30; // 30 days
+
+  function getCachedEmojis(){
+    try{
+      const raw = localStorage.getItem(EMOJI_CACHE_KEY);
+      if(!raw) return null;
+      const obj = JSON.parse(raw);
+      if(!obj || !obj.ts || !Array.isArray(obj.data)) return null;
+      if(Date.now() - obj.ts > EMOJI_CACHE_TTL_MS) return null;
+      return obj.data;
+    }catch(_){ return null; }
+  }
+
+  function setCachedEmojis(data){
+    try{
+      localStorage.setItem(EMOJI_CACHE_KEY, JSON.stringify({ts: Date.now(), data}));
+    }catch(_){ /* ignore quota */ }
+  }
+
+  async function fetchWithTimeout(url, ms){
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), ms);
+    try{
+      const res = await fetch(url, {signal: ctrl.signal});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      return await res.json();
+    } finally {
+      clearTimeout(t);
+    }
+  }
+
+  function normalizeToPickerFormat(items){
+    // Support common emoji.json shapes
+    // 1) [{"char":"😀","name":"grinning face","keywords":["grinning","face"]}, ...]
+    // 2) [{"emoji":"😀","name":"grinning face","keywords":[...]}, ...]
+    // 3) CLDR-like objects
+    const out = [];
+    for(const it of items){
+      const ch = it.char || it.emoji || it.c || it.e || it.symbol;
+      const name = (it.name || it.n || it.description || '').toLowerCase();
+      let kw = it.keywords || it.k || it.tags || [];
+      if(typeof kw === 'string') kw = kw.split(/[\s,]+/g);
+      const k = Array.isArray(kw) ? kw.join(' ').toLowerCase() : '';
+      if(ch && ch.length){ out.push({c: ch, n: name || '', k}); }
+    }
+    // De-duplicate by character
+    const seen = new Set();
+    const deduped = [];
+    for(const e of out){
+      if(seen.has(e.c)) continue;
+      seen.add(e.c);
+      deduped.push(e);
+    }
+    return deduped;
+  }
+
+  async function loadFullEmojiDataset(){
+    // 1) cache
+    const cached = getCachedEmojis();
+    if(cached){
+      EMOJIS = cached;
+      if(emojiPanel.classList.contains('open')) renderEmojiGrid(filterEmojis(emojiSearch.value));
+      return;
+    }
+    // 2) try local file next to HTML (optional). Place emojis.json there to ship offline.
+    try{
+      const local = await fetchWithTimeout('./emojis.json', 1500);
+      const norm = normalizeToPickerFormat(local);
+      if(norm && norm.length){
+        EMOJIS = norm;
+        setCachedEmojis(norm);
+        if(emojiPanel.classList.contains('open')) renderEmojiGrid(filterEmojis(emojiSearch.value));
+        return;
+      }
+    }catch(_){ /* ignore */ }
+    // 3) fallback to CDN (cached for offline after first load)
+    try{
+      const cdn = await fetchWithTimeout('https://unpkg.com/emoji.json@13.1.0/emoji.json', 4000);
+      const norm = normalizeToPickerFormat(cdn);
+      if(norm && norm.length){
+        EMOJIS = norm;
+        setCachedEmojis(norm);
+        if(emojiPanel.classList.contains('open')) renderEmojiGrid(filterEmojis(emojiSearch.value));
+        return;
+      }
+    }catch(_){ /* ignore */ }
+    // If all failed, keep the small built-in set.
+  }
+
+  function filterEmojis(query){
+    const q = (query || '').trim().toLowerCase();
+    if(!q) return EMOJIS;
+    return EMOJIS.filter(e => e.n.includes(q) || e.k.includes(q));
+  }
+
+  function renderEmojiGrid(list){
+    emojiGrid.innerHTML = '';
+    if(!list.length){
+      emojiEmpty.style.display = '';
+      return;
+    }
+    emojiEmpty.style.display = 'none';
+    const frag = document.createDocumentFragment();
+    list.forEach((e, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'emoji-item';
+      btn.setAttribute('role', 'option');
+      btn.setAttribute('aria-label', e.n);
+      btn.textContent = e.c;
+      btn.addEventListener('click', () => {
+        insertAtCursor(input, e.c);
+        updateUI();
+        // keep panel open for multi-insert
+        input.focus();
+      });
+      frag.appendChild(btn);
+    });
+    emojiGrid.appendChild(frag);
+  }
+
+  function openEmoji(){
+    emojiPanel.classList.add('open');
+    renderEmojiGrid(filterEmojis(emojiSearch.value));
+    setTimeout(() => emojiSearch.focus(), 0);
+  }
+  function closeEmoji(){
+    emojiPanel.classList.remove('open');
+  }
+
+  function toggleEmoji(){
+    if(emojiPanel.classList.contains('open')) closeEmoji(); else openEmoji();
+  }
+
+  function insertAtCursor(textarea, text){
+    const start = textarea.selectionStart ?? textarea.value.length;
+    const end = textarea.selectionEnd ?? textarea.value.length;
+    const before = textarea.value.slice(0, start);
+    const after = textarea.value.slice(end);
+    textarea.value = before + text + after;
+    const caret = start + text.length;
+    textarea.selectionStart = textarea.selectionEnd = caret;
+    textarea.dispatchEvent(new Event('input', {bubbles:true}));
+  }
+
+  toggleEmojiBtn.addEventListener('click', toggleEmoji);
+  emojiSearch.addEventListener('input', () => {
+    renderEmojiGrid(filterEmojis(emojiSearch.value));
+  });
+  document.addEventListener('click', (e) => {
+    if(!emojiPanel.classList.contains('open')) return;
+    const t = e.target;
+    if(t === toggleEmojiBtn || toggleEmojiBtn.contains(t)) return;
+    if(emojiPanel.contains(t)) return;
+    closeEmoji();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeEmoji();
+  });
+
+  convertBtn.addEventListener('click', updateUI);
+  input.addEventListener('input', updateUI);
+  document.querySelectorAll('input[name="format"]').forEach(r => r.addEventListener('change', updateUI));
+
+  function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      const successful = document.execCommand('copy');
+      console.log('Fallback copy was ' + (successful ? 'successful' : 'unsuccessful'));
+    } catch (err) {
+      console.error('Fallback: Could not copy text', err);
+      alert('Copy failed — your browser may block clipboard access.');
+    }
+    document.body.removeChild(textArea);
+  }
+
+  // usage in your buttons
+  copyOutputBtn.addEventListener('click', async () => {
+    const text = outputEl.textContent.trim();
+    if(!text || text === '— nothing yet —') return;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        copyOutputBtn.textContent = 'Copied!';
+        setTimeout(()=> copyOutputBtn.textContent = 'Copy output', 1200);
+        return;
+      } catch (err) {
+        console.warn('Clipboard API failed, falling back', err);
+      }
+    }
+    fallbackCopyTextToClipboard(text);
+  });
+
+  copyPreviewBtn.addEventListener('click', async () => {
+    const text = previewEl.textContent.trim();
+    if(!text || text === '— nothing yet —') return;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      copyPreviewBtn.textContent = 'Copied!';
+      setTimeout(()=> copyPreviewBtn.textContent = 'Copy preview', 1200);
+    } catch (err) {
+      console.error(err);
+      alert('Copy failed — your browser may block clipboard access.');
+    }
+  });
+
+
+  // initialize
+  updateUI();
+  // initialize emoji grid (closed by default)
+  renderEmojiGrid(EMOJIS);
+  // lazy load the full dataset
+  loadFullEmojiDataset();
+})();
+</script>
+
+
+</body></html>

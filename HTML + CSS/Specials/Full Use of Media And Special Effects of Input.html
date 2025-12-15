@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rForms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: hsl(220 30% 8%);
+            padding-top: 100px;
+        }
+
+        .form {
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+        }
+
+        form div label {
+            font-family: sans-serif;
+            color: white;
+            margin: 10px 0px;
+            font-size: 14px;
+        }
+
+        form div {
+            margin: auto 0;
+            display: inline-flex;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 100%;
+            padding: 0 30px;
+        }
+
+        form {
+            border: 1px solid #222A39;
+            display: inline-flex;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 90vw;
+            max-width: 490px;
+            border-radius: 10px;
+            justify-content: center;
+            padding: 0 30px;
+        }
+
+        form input {
+            padding: 1.05rem .75rem;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 6px;
+            height: 25px;
+            background-color: transparent;
+            font-size: 16px;
+            cursor: text;
+            color: white;
+            border: 1px solid RGB(55, 60, 75);
+            text-overflow: ellipsis;
+            transition: all 0.3s ease;
+        }
+
+        form input::placeholder {
+            font-family: sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            color: #B6BCC9;
+        }
+
+        .name {
+            margin-top: 40px;
+        }
+
+        .input-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+
+        .error-message {
+            color: #EF4444;
+            font-weight: bold;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        form input[type="number"]:invalid:not(:placeholder-shown)~.error-message {
+            display: block;
+        }
+
+        form input[type="number"]:invalid:not(:placeholder-shown)~.error-message::before {
+            content: "Invalid Number";
+        }
+
+        .btn {
+            margin: 30px auto;
+            font-family: sans-serif;
+            width: 100%;
+            padding: 0 30px;
+            box-sizing: border-box;
+            transition: transform .2s ease;
+        }
+
+        button {
+            padding: 4px 12px;
+            width: 100%;
+            border-radius: 7px;
+            height: 35px;
+            background-color: #2B6AFF;
+            color: white;
+            border: none;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        /* ========important======== */
+        form input:focus {
+            outline: none;
+            border-color: #2B6AFF;
+            box-shadow: 0 0 8px rgba(43, 106, 255, 0.2);
+        }
+
+        form input[type="number"]:valid {
+            border-color: #10B981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+        }
+
+        form input[type="number"]:invalid:not(:placeholder-shown) {
+            animation: showRed 1s ease forwards;
+        }
+
+        @keyframes showRed {
+            0% {
+                border-color: RGB(55, 60, 75);
+                box-shadow: none;
+            }
+
+            100% {
+                border-color: #EF4444;
+                box-shadow: 0 0 8px rgba(239, 68, 68, 0.2);
+            }
+        }
+
+        form:valid button {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        button:enabled:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(43, 106, 255, 0.3);
+        }
+
+        @media (max-width:600px) {
+            form {
+                width: 95vw;
+                padding: 0 15px;
+            }
+
+            form div {
+                padding: 0 15px;
+            }
+        }
+
+        @media print {
+            @page {
+                margin: 20mm;
+                size: A4;
+            }
+
+            body {
+                background-color: white;
+                padding-top: 0;
+            }
+
+            .form {
+                margin: 0;
+            }
+
+            form {
+                border: 2px solid black;
+                max-width: 100%;
+                width: 100%;
+                padding: 0 30px;
+            }
+
+            form::before {
+                content: "FORM SUBMISSION - " attr(data-date);
+                display: block;
+                font-weight: bold;
+                font-size: 25px;
+                margin: 20px 0;
+                text-align: center;
+            }
+
+            form div label {
+                font-size: 24px;
+                font-weight: bold;
+                color: black;
+                margin-top: 10px;
+            }
+
+            form input {
+                border: 1px solid black;
+                color: black;
+                background: white;
+                box-shadow: none;
+                font-size: 24px;
+                padding: 18px;
+                margin-bottom: 15px;
+            }
+
+            form input::placeholder {
+                color: transparent !important;
+                opacity: 0 !important;
+            }
+
+            form input:focus {
+                border-color: black;
+                box-shadow: none;
+            }
+
+            form input[type="number"]:invalid:not(:placeholder-shown) {
+                animation: none;
+                border-color: #EF4444;
+            }
+
+            form input[type="number"]:invalid:not(:placeholder-shown)~.error-message::before {
+                content: "Invalid Number";
+                color: red;
+                font-weight: bold;
+                font-size: 18px;
+                display: block;
+            }
+
+            button,
+            .btn {
+                display: none;
+            }
+
+            form div {
+                page-break-inside: avoid;
+            }
+
+            body::after {
+                content: "Printed on: " attr(data-date);
+                display: block;
+                font-size: 10px;
+                color: #666;
+                margin-top: 30px;
+                text-align: center;
+                page-break-before: avoid;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: hsl(220 30% 8%);
+            }
+        }
+
+        @media (hover: hover) {
+            button:hover {
+                background-color: #1d4ed8;
+                transform: translateY(-2px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form">
+        <form action="">
+            <div class="name">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="email">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="number">
+                <label for="number">Phone number</label>
+                <div class="input-wrapper">
+                    <input type="number" id="number" placeholder="Your 10-digit Indian Number" required min="1000000000"
+                        max="9999999999">
+                    <span class="error-message"></span>
+                </div>
+            </div>
+            <div class="sub">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="sms">
+                <label for="message">Message</label>
+                <input type="text" id="message" placeholder="Type your message here." required>
+            </div>
+            <div class="btn">
+                <button type="submit">Send Message</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const today = new Date();
+        const formattedDate = today.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        document.querySelector('form').setAttribute('data-date', formattedDate);
+    </script>
+</body>
+
+</html>

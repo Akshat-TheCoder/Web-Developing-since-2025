@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            background-color:rgb(9, 101, 38);
+            height: 90vh;
+            width: 80vw;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+
+        .box1 {
+            background-color: greenyellow;
+            color: darkblue;
+            height: 60%;
+            width: 400px;
+            margin: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-size: 2rem;
+            text-align: center;
+            transition-property: all;
+            /* transition-delay: ; */
+            transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition-duration: 2s;
+        }
+        .box1:hover{
+            transform: scale(120% , 120%);
+            background-color:rgb(181, 229, 109) ;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+            <div class="box1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, non?</div>
+            <div class="box1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, non?</div>
+            <div class="box1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, non?</div>
+    </div>
+</body>
+
+</html>

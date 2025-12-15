@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            background-color: peachpuff;
+            width: 100%;
+            padding: 10px 0;
+            z-index: 1000;
+
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .boxes {
+            margin-top: 70px;
+            /* To avoid content being hidden behind the fixed header */
+            display: flex;
+            justify-content: space-around;
+        }
+
+        main {
+            padding: 20px;
+            background-color: aquamarine;
+
+        }
+
+        .box1 {
+            background-color: coral;
+            width: 30vw;
+        }
+
+        .box2 {
+            background-color: lightblue;
+            width: 30vw;
+        }
+
+        .sub {
+            /* display: none; */
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border: 10px solid black;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        .des {
+            margin: auto;
+            margin-top: 20px;
+            font-size: 18px;
+            width: 60vw;
+            background-color: lightgray;
+            padding: 10px;
+            color: darkblue;
+            font-size: larger;
+            font-weight: bold;
+            border-radius: 28px;
+            width: 50vw;
+            text-align: center;
+            
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: peachpuff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="boxes">
+            <div class="box1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae illum illo culpa
+                voluptatibus commodi, nesciunt sit vero quos dolore et voluptas, quisquam ut in doloribus amet soluta
+                debitis. Adipisci quos vel consequatur, perspiciatis blanditiis iste ut recusandae reiciendis officia
+                maiores harum quia aliquam quas velit dolorem, nisi deserunt. Laudantium quasi, neque earum suscipit eum
+                exercitationem cupiditate dignissimos officia, debitis assumenda, quisquam saepe esse. Consequatur illo
+                iure rerum esse ipsa quaerat sint ab quis. Distinctio corporis error unde amet nisi porro repudiandae,
+                quam at voluptatibus incidunt quibusdam facilis impedit veniam optio, a eos, commodi voluptatem! Amet
+                laboriosam voluptatibus accusamus ipsa repudiandae labore debitis, quisquam minus iure commodi delectus
+                fugiat praesentium aspernatur doloribus impedit voluptates eius quis, officia nobis, quaerat dignissimos
+                ducimus. Perferendis, omnis animi delectus nihil officiis molestiae laborum. Id facere sit sint tempora.
+                Dolore inventore praesentium iusto nihil odio facere perferendis delectus hic molestias quod, aliquam
+                mollitia sunt repudiandae libero eius beatae. Dolorum saepe omnis ratione, consectetur itaque sunt
+                voluptatibus doloremque natus quidem, in modi provident, laboriosam ea nisi quam distinctio nihil
+                deleniti reiciendis facere? Dolore tempora, soluta iste, minus harum quos ea asperiores, quia maiores
+                corrupti consequuntur perspiciatis distinctio quo dignissimos! Quas ducimus sed beatae quaerat vitae,
+                quis commodi.</div>
+            <div class="box2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi placeat rem amet tenetur
+                iste suscipit totam optio! Optio incidunt commodi, delectus debitis illum aliquid quos minima tenetur
+                tempore reprehenderit nulla doloremque ipsam obcaecati, ex, dicta consequatur sint iure ipsum facere!
+                Non soluta earum qui, delectus iusto deserunt ut eius. Pariatur, ducimus dicta. Hic quaerat recusandae
+                placeat dolore quasi illum? Ratione neque odit cupiditate ipsa expedita voluptas adipisci delectus
+                minima, possimus blanditiis aliquid voluptates enim dolore cumque quas doloremque quibusdam deserunt at.
+                Autem ducimus cum quasi laboriosam saepe excepturi aspernatur delectus voluptate voluptatum maiores nemo
+                voluptatem sequi debitis alias, nobis rerum. Nostrum corrupti vero eligendi quasi neque hic error
+                accusamus id? Unde sunt optio ab mollitia in exercitationem, repellat soluta eos voluptas, est quo! Iste
+                commodi unde cumque atque ratione et impedit ipsum illum totam omnis quod error modi minima ex alias,
+                enim, delectus at aperiam tempore beatae non. Cupiditate, sed. Sequi tenetur repellendus voluptatum? Nam
+                aperiam et ipsa facilis atque recusandae quibusdam officia incidunt fuga deserunt. Sit porro impedit
+                cupiditate facilis dicta animi illo fugiat soluta culpa excepturi beatae est laboriosam, delectus omnis
+                optio architecto nisi natus in nostrum totam esse minus magni cumque. Deleniti, soluta. Nobis quae nemo
+                numquam!</div>
+        </div>
+        <div class="sub"></div>
+        <div class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, itaque.</div>
+    </main>
+    <footer>@copyright</footer>
+</body>
+
+</html>
