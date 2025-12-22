@@ -1,0 +1,27 @@
+// let a = [1, 3, 5, 3, 6];
+// console.log(a);
+// console.log(a.length);
+// console.log(a[0]);
+// a[4] = 399;
+// console.log(a);
+// a.push(555);
+// console.log(typeof a);
+// console.log(a.toString());
+// console.log(a.join("-"));
+// console.log(a.pop());
+// console.log(a.shift());
+// console.log(a.unshift("aj"));
+// delete a[2];
+// console.log(a);
+let b = ["Akshat", "Shivam", "Rahul", 2, 34, true];
+// console.log(a.concat(b).sort());
+console.log(b)
+// console.log(a);
+// console.log(b.sort());
+console.log(b.reverse());
+let c = b.slice(1, 4);
+console.log(c);
+console.log(c.splice(1, 2, "X", "Y", "Z"));
+console.log(c);
+// console.log(d);
+// console.log(d.sort());

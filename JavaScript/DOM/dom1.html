@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 1</title>
+    <style>
+        * {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            border: 5px solid black;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box1">boxes</div>
+        <div class="box1">boxes</div>
+        <div class="box1">boxes</div>
+        <div class="box1">boxes</div>
+        <div class="box1">boxes</div>
+        <div class="box1">boxes</div>
+    </div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+        <tr>
+            <td>Harry</td>
+            <td>100</td>
+        </tr>
+    </table>
+</body>
+<script>
+    // childNodes
+    let p = document.body.childNodes[1]
+    p.firstChild
+    p.firstElementChild
+    let q = p.firstElementChild
+    q
+    q.style.backgroundColor = "green"
+    q.style.color = "red"
+    q.style.fontSize = "2rem"
+    let m = p.childNodes[p.childNodes.length - 4]
+    m.style.backgroundColor = "grey"
+
+    // siblng nodes
+    m.nextElementSibling.style.width = "200px"
+
+    // parent element
+    m.parentElement.style.backgroundColor = "aqua"
+    let r = document.body.childNodes[3].childNodes[1]
+    r.rows[0].cells[1].style.border = "2px solid black"
+
+</script>
+
+</html>

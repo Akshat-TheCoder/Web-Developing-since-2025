@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial</title>
+</head>
+<body>
+    <script>
+        let a = prompt("Enter a number");
+        n= Number(a)
+
+        function predecessor(n) {
+            let result = [n];
+            while (n > 1){
+                n--;
+                result.push(n);
+            }
+            return result;
+        }
+        let result = predecessor(n);
+        console.log(result);
+
+        const Factorial = (a,b) =>{
+            return a*b
+        }
+
+        const Add = (a,b) => {
+            return a+b
+        }
+
+        let fact = result.reduce(Factorial);
+        console.log(fact);
+        let nat = result.reduce(Add);
+        console.log(nat)
+        alert(`The Factorial of the number ${a} is ${fact}`);
+        alert(`The Sum of all the Natural numbers untill ${a} is ${nat}`)
+
+    </script>
+</body>
+</html>
