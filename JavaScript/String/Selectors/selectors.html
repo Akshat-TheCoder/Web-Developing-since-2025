@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectors</title>
+    <style>
+        * {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            border: 5px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box" id="sg">Akshat</div>
+        <div class="box">Akshat</div>
+        <div class="box e">Akshat</div>
+        <div class="box" id="ef">Akshat</div>
+        <div class="box">Akshat</div>
+        <div class="box" name="Ak">Akshat</div>
+        <div class="box" id ="pg">Akshat</div>
+        <div class="box">Akshat</div>
+    </div>
+    <script>
+        let a = document.getElementsByClassName("box");
+        for (let box of a) {
+            box.style.backgroundColor = "red";
+        }
+
+        let f = document.getElementsByTagName("div");
+        for (let elements of f) {
+            elements.style.border = "3px solid yellow";
+        }
+
+        let b = document.getElementById("sg");
+        b.style.backgroundColor = "blue";
+
+        let c = document.querySelectorAll(".box");
+        c.forEach((element) => {
+            element.style.width = "100px";
+        })
+
+        let d = document.querySelector(".box");
+        d.style.height = "100px";
+
+
+        let e = document.getElementsByName("Ak");
+        for (let elements of e) {
+            elements.style.backgroundColor = "green";
+        }
+
+        let g = document.getElementById("pg");
+        let h = document.getElementById("ef");
+        console.log(g.matches("#ef"));
+        console.log(h.closest("html"));
+        console.log(h.closest(".container"));
+        let i = document.getElementsByClassName("container");
+        console.log(document.querySelector(".container").contains(g));
+        console.log(g.contains(h));
+        console.log(document.querySelector(".container").contains(i[0]))
+    </script>
+</body>
+
+</html>
