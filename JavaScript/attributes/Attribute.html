@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attribute Methods</title>
+    <style>
+        * {
+            margin: 10px;
+            padding: 10px;
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" data-createdby="Akshat" data-createdfor="Public">
+        <div class="box" style="color: red;">Hey I am Akshat!</div>
+        <div class="box">Hey I am Akshat!</div>
+        <div class="box" hidden>This Line was hidden</div>
+    </div>
+
+    <script>
+        let a = document.querySelector(".container");
+        let b = document.querySelector(".box");
+
+        a.childNodes[5].removeAttribute("hidden");
+        console.log(a.childNodes[5].hasAttribute("hidden"));
+        let d = a.childNodes[5].getAttribute("hidden");
+        console.log(d);
+        a.getAttribute("class");
+        a.childNodes[1].setAttribute("style", "color: green");
+        console.log(a.childNodes[5].attributes);
+        console.log(a.dataset);
+        let s = a.dataset;
+
+    </script>
+</body>
+
+</html>
