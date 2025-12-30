@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Card + Player</title>
+  <style>
+    * { box-sizing: border-box; }
+    html {
+      background: #000;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 20px;
+      color: #fff;
+    }
+    .form-container {
+      max-width: 650px;
+      margin: 0 auto 30px;
+      background: #181818;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    }
+    .form-group { margin-bottom: 16px; }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    input[type="url"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 2px solid #333;
+      background: #121212;
+      color: #fff;
+      font-size: 15px;
+    }
+    input::placeholder { color: #666; }
+    input:focus {
+      outline: none;
+      border-color: #ff0000;
+      box-shadow: 0 0 0 2px rgba(255,0,0,0.3);
+    }
+    button {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: none;
+      background: #ff0000;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+    .error {
+      color: #ff4b4b;
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .layout {
+      max-width: 800px;
+      margin: 0 auto;
+      margin-top: 100px;
+      display: grid;
+      /* grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr); */
+      gap: 24px;
+      align-items: flex-start;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card styles */
+    .card {
+      background: #232323;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      gap: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+    .thumb {
+      position: relative;
+      width: 200px;
+      flex-shrink: 0;
+    }
+    .thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .dur {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.75);
+      font-size: 13px;
+    }
+    .content {
+      padding: 10px 14px 12px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: #aaa;
+    }
+    .meta a {
+      color: #3ea6ff;
+      text-decoration: none;
+    }
+    .meta a:hover {
+      text-decoration: underline;
+    }
+
+    /* Player */
+    .player-wrapper {
+      background: #181818;
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+    }
+    .player-wrapper h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+    .player-frame {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .player-frame iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <form class="form-container" id="yt-form">
+    <div class="form-group">
+      <label for="yt-url">YouTube URL</label>
+      <input
+        type="url"
+        id="yt-url"
+        placeholder="https://www.youtube.com/watch?v=tVzUXW6siu0"
+        required
+      />
+      <div class="error" id="err-msg"></div>
+    </div>
+    <button type="submit" id="submit-btn">Generate Card + Player</button>
+  </form>
+
+  <div class="layout">
+    <div id="card-slot"></div>
+
+    <div class="player-wrapper" id="player-wrapper" style="display:none;">
+      <h3>Video player</h3>
+      <div class="player-frame">
+        <iframe
+          id="yt-frame"
+          src=""
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 🔑 REPLACE WITH YOUR REAL API KEY
+    const API_KEY = "AIzaSyBh56RtBHE7eYBUvoY3n4vRoF6bKcZLTLg";
+
+    // Extract video ID from URL
+    function getYouTubeId(url) {
+      const reg =
+        /(?:youtube\.com\/.*v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/;
+      const match = url.match(reg);
+      return match ? match[1] : null;
+    }
+
+    // Thumbnail URL
+    function getThumbnail(id) {
+      return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    }
+
+    // Watch URL
+    function getWatchUrl(id) {
+      return `https://www.youtube.com/watch?v=${id}`;
+    }
+
+    // Embed URL for iframe
+    function getEmbedUrl(id) {
+      return `https://www.youtube.com/embed/${id}`;
+    }
+
+    // Format views
+    function formatViews(views) {
+      const num = parseInt(views);
+      if (num < 1_000) return num.toString();
+      if (num < 1_000_000)
+        return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
+      if (num < 1_000_000_000)
+        return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+      return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B";
+    }
+
+    // ISO duration (PT1H5M30S) -> H:MM:SS or M:SS
+    function formatDuration(iso) {
+      const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      if (!m) return "0:00";
+      const h = parseInt(m[1]) || 0;
+      const min = parseInt(m[2]) || 0;
+      const s = parseInt(m[3]) || 0;
+      if (h > 0) {
+        return `${h}:${min.toString().padStart(2, "0")}:${s
+          .toString()
+          .padStart(2, "0")}`;
+      }
+      return `${min}:${s.toString().padStart(2, "0")}`;
+    }
+
+    // Months between date and now
+    function monthsBetween(dateStr) {
+      const start = new Date(dateStr);
+      const end = new Date();
+      let months =
+        (end.getFullYear() - start.getFullYear()) * 12 +
+        (end.getMonth() - start.getMonth());
+      if (end.getDate() < start.getDate()) months--;
+      return Math.max(months, 0);
+    }
+
+    // Fetch data from YouTube Data API
+    async function fetchVideoData(videoId) {
+      const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${API_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      console.log("API response:", data); // helpful for debugging
+
+      if (data.error) {
+        throw new Error(data.error.message);
+      }
+      if (!data.items || data.items.length === 0) {
+        throw new Error("Video not found. Check ID, privacy or API restrictions.");
+      }
+
+      const v = data.items[0];
+      return {
+        id: videoId,
+        title: v.snippet.localized?.title || v.snippet.title,
+        channel: v.snippet.channelTitle,
+        views: v.statistics.viewCount,
+        publishedAt: v.snippet.publishedAt,
+        durationIso: v.contentDetails.duration,
+        thumbnail: v.snippet.thumbnails?.high?.url || getThumbnail(videoId),
+      };
+    }
+
+    // Render card
+    function renderCard(video) {
+      const monthsAgo = monthsBetween(video.publishedAt);
+      const dur = formatDuration(video.durationIso);
+      const views = formatViews(video.views);
+      const watchUrl = getWatchUrl(video.id);
+
+      const cardHtml = `
+        <div class="card">
+          <div class="thumb">
+            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy" />
+            <div class="dur">${dur}</div>
+          </div>
+          <div class="content">
+            <div class="title">${video.title}</div>
+            <div class="meta">
+              <span>${video.channel}</span>
+              <span>${views} views</span>
+              <span>${monthsAgo} months ago</span>
+              <span><a href="${watchUrl}" target="_blank" rel="noopener noreferrer">Open on YouTube</a></span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("card-slot").innerHTML = cardHtml;
+    }
+
+    // Set iframe player
+    function renderPlayer(videoId) {
+      const iframe = document.getElementById("yt-frame");
+      iframe.src = getEmbedUrl(videoId); // https://www.youtube.com/embed/ID[web:115][web:116]
+      document.getElementById("player-wrapper").style.display = "block";
+    }
+
+    // Form submit handler
+    document.getElementById("yt-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const urlInput = document.getElementById("yt-url");
+      const errBox = document.getElementById("err-msg");
+      const btn = document.getElementById("submit-btn");
+
+      errBox.style.display = "none";
+      errBox.textContent = "";
+
+      const url = urlInput.value.trim();
+      const id = getYouTubeId(url);
+
+      if (!id) {
+        errBox.textContent = "Please enter a valid YouTube video URL.";
+        errBox.style.display = "block";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Loading...";
+
+      try {
+        const video = await fetchVideoData(id);
+        renderCard(video);
+        renderPlayer(video.id);
+      } catch (err) {
+        console.error(err);
+        errBox.textContent = err.message;
+        errBox.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Generate Card + Player";
+      }
+    });
+  </script>
+</body>
+</html>
