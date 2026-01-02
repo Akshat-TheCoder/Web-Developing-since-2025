@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events</title>
+    <style>
+        html {
+            background-color: black;
+            min-height: 100vh;
+            display: grid;
+            align-items: center;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            margin: 0 100px;
+        }
+
+        .card {
+            display: inline-flex;
+            gap: 0.5rem;
+            background-color: #232323;
+            color: white;
+            margin: auto;
+            border-radius: 5px;
+        }
+
+        .img img {
+            width: 200px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        .thumb {
+            position: relative;
+        }
+
+        .dur {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: #232323b0;
+            padding: 2px;
+            border-radius: 4px;
+        }
+
+        .title {
+            margin: 10px 10px 10px 0;
+            font-size: 20px;
+            letter-spacing: 0px;
+            word-spacing: -1px;
+        }
+
+        .cont {
+            display: flex;
+            gap: 1rem;
+            font-size: 15.5px;
+            color: #797979;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        #btn {
+            margin-top: 47px;
+            color: white;
+            background: #ff0000ab;
+            border: none;
+            font-size: 2rem;
+            border-radius: 5px;
+            padding: 15px 35px;
+            font-weight: 400;
+            font-family: fantasy;
+        }
+
+        #btna {
+
+            /* margin-top: 27px; */
+            color: white;
+            background: #ff0000ab;
+            border: none;
+            font-size: 2rem;
+            border-radius: 5px;
+            padding: 15px 35px;
+            font-weight: 400;
+            font-family: fantasy;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <button id="btn">Hide</button><br>
+    <button id="btna">Show</button>
+    <script>
+        // Helper: format views like YouTube (simple version)
+        function formatViews(view) {
+            if (view < 1_000_000) {
+                return (view / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
+            } else if (view < 1_000_000_000) {
+                return (view / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+            } else if (view < 1_000_000_000_000) {
+                return (view / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B";
+            } else {
+                return String(view);
+            }
+        }
+
+        // Helper: months between given date and today
+        function monthsBetween(startDate) {
+            const start = new Date(startDate);
+            const end = new Date(); // current date
+
+            let months =
+                (end.getFullYear() - start.getFullYear()) * 12 +
+                (end.getMonth() - start.getMonth());
+
+            // Use getDate() for day of month, not getDay()
+            if (end.getDate() < start.getDate()) {
+                months--;
+            }
+
+            return months;
+        }
+
+        function createCard(img, duration, title, name, viewsNumber, uploadedAt) {
+            const viewText = formatViews(viewsNumber);
+            const monthsAgo = monthsBetween(uploadedAt);
+
+            const html = `
+        <div class="card">
+          <div class="thumb">
+            <div class="img">
+              <img src="${img}" alt="">
+            </div>
+            <div class="dur">${duration}</div>
+          </div>
+          <div class="con">
+            <div class="title">${title}</div>
+            <div class="cont">
+              <div class="name">${name}</div>
+              <div class="views">${viewText} views</div>
+              <div class="mon">${monthsAgo} months ago</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+            // Append to container
+            document.querySelector(".container").insertAdjacentHTML("beforeend", html);
+        }
+
+        createCard(
+            "https://i.ytimg.com/vi/tVzUXW6siu0/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLB6VzxANxt3dHm91HW9lLfDlxvmuA",
+            "31:20",
+            "Installing VS Code & How Websites Work | Sigma Web Development Course - Tutorial #1",
+            "CodeWithHarry",
+            6600000,              // number, not string with 'views'
+            "2023-09-26"            // ISO format date for reliable parsing
+        );
+        let btna = document.getElementById("btna");
+        btna.hidden = true;
+
+        let button = document.getElementById("btn");
+        button.addEventListener("click", () => {
+            document.querySelector(".card").style.display = "none";
+            btna.hidden = false;
+            button.hidden = true;
+            alert("Card is hidden");
+        })
+
+        btna.addEventListener("dblclick", () => {
+            document.querySelector(".card").style.display = "flex";
+            btna.hidden = true;
+            button.hidden = false;
+            alert("Card is shown");
+        });
+
+        let img = document.querySelector(".img");
+        img.addEventListener("click", ()=> {
+            alert("Image is clicked");
+        });
+        let thumbnail = document.querySelector(".thumb");
+        thumbnail.addEventListener("click", (e) => {
+            e.stopPropagation();
+            alert("Thumbnail is clicked");
+        });
+
+        let card = document.querySelector(".card");
+        card.addEventListener("click", () => {
+            // alert("Card is clicked");
+        });
+        
+        document.addEventListener("keydown", (e)=>{
+            console.log(e.key);
+        });
+    </script>
+</body>
+
+</html>
