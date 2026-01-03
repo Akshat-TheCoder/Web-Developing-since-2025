@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" name="html">
 
 <head>
     <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
     <title>Events</title>
     <style>
         html {
-            background-color: black;
+            background-color: white;
             min-height: 100vh;
             display: grid;
             align-items: center;
@@ -168,10 +168,13 @@
 
         let button = document.getElementById("btn");
         button.addEventListener("click", () => {
-            document.querySelector(".card").style.display = "none";
-            btna.hidden = false;
-            button.hidden = true;
+            {
+                document.querySelector(".card").style.display = "none";
+                btna.hidden = false;
+                button.hidden = true;
+            }
             alert("Card is hidden");
+            alert("Please click once and press any key or click twice to show thr content")
         })
 
         btna.addEventListener("dblclick", () => {
@@ -182,7 +185,7 @@
         });
 
         let img = document.querySelector(".img");
-        img.addEventListener("click", ()=> {
+        img.addEventListener("click", () => {
             alert("Image is clicked");
         });
         let thumbnail = document.querySelector(".thumb");
@@ -193,12 +196,40 @@
 
         let card = document.querySelector(".card");
         card.addEventListener("click", () => {
-            // alert("Card is clicked");
+            alert("Card is clicked");
         });
-        
-        document.addEventListener("keydown", (e)=>{
-            console.log(e.key);
-        });
+
+        btna.addEventListener("keydown", (e) => {
+            console.log(e.key, e.keyCode);
+            alert(e.key, e.keyCode);
+        })
+
+        function randomcolora() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r},${g},${b})`;  // Direct full string
+        }
+        function randomcolorb() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r},${g},${b})`;  // Direct full string
+        }
+        // Then: button.style.backgroundColor = randomcolor();
+
+        setInterval(() => {
+            button.style.background = randomcolora();
+        }, 2000);
+
+        setInterval(() => {
+            button.style.color = randomcolorb();
+        }, 1500);
+
+        setTimeout(() => {
+            document.documentElement.style.backgroundColor = "black";  // Targets <html> directly
+        }, 3000);
+
     </script>
 </body>
 
