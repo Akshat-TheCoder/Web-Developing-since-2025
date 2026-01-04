@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Periodic fetch in iframe</title>
+  </head>
+  <body>
+    <!-- The iframe displays the target website -->
+    <iframe id="viewer" src="https://www.accuweather.com/en/in/lalganj/191163/daily-weather-forecast/191163" width="100%" height="500"></iframe>
+
+    <script>
+      // Reload the iframe by updating its src or using contentWindow reload
+      setInterval(function () {
+        var frame = document.getElementById("viewer");
+        // Reassigning src refetches the page inside the iframe
+        frame.setAttribute("src", frame.getAttribute("src"));
+        // Alternatively, if same-origin:
+        // frame.contentWindow.location.reload();
+      }, 5000);
+    </script>
+  </body>
+</html>

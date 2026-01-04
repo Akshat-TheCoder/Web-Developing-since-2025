@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wht {
+            background-color: white !important;
+            border: 2px solid red !important;
+        }
+
+        .circle {
+            border: 2px solid white;
+            width: 150px;
+            height: 150px;
+            background-color: rgb(38, 38, 38);
+            border-radius: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="circle"></div>
+    <script>
+        setInterval(() => {
+            document.querySelector(".circle").classList.toggle("wht");
+        }, 2000);
+    </script>
+
+
+    </script>
+</body>
+
+</html>

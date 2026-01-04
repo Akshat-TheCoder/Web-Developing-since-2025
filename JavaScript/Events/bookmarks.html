@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boomarks</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        .form {
+            min-height: 100vh;
+            background-color: rgb(0, 37, 53);
+            /* padding: 100px; */
+            text-align: center;
+            color: wheat;
+            font-size: 20px;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        form {
+            border: 2px solid white;
+            padding: 50px 100px;
+            border-radius: 10px;
+            margin: 0 3rem;
+            max-width: 600px;
+        }
+
+        .input {
+            margin-top: 20px;
+            display: flex;
+        }
+
+        #btn {
+            font-size: 24px;
+            background: red;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-left: 1rem;
+            width: 100px;
+        }
+
+        #inp {
+            width: calc(100% - 125px);
+            border-radius: 5px;
+            background: rgb(0 70 100);
+            border: 2px solid white;
+            padding-left: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        #inp::placeholder {
+            font-size: 16px;
+            color: white;
+            font-weight: 500;
+        }
+
+        #book {
+            border: 2px solid white;
+            padding: 20px 50px;
+            border-radius: 10px;
+            margin: 3rem;
+            width: -webkit-fill-available;
+            max-height: 400px;
+            /* Limit height */
+            overflow-y: auto;
+            /* Vertical scroll if too many */
+            box-sizing: border-box;
+            max-width: 772px;
+        }
+
+        #ul {
+            text-align: left;
+            /* Align list left */
+            max-width: 100%;
+            padding: 0;
+        }
+
+        #ul li {
+            list-style-type: decimal;
+            margin-bottom: 20px;
+            word-break: break-all;
+            /* Break long words/URLs */
+        }
+
+        #ul li a {
+            color: rgb(0, 0, 255);
+            cursor: pointer;
+            overflow-wrap: break-word;
+            /* Modern word break */
+            display: block;
+            /* Full width for better wrapping */
+            word-break: break-all;
+            /* Force break on any char */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form">
+        <form action="">
+            <h1>Enter any bookmark to save it</h1>
+            <div class="input">
+                <input type="text" id="inp" placeholder="Enter the Href of the link">
+                <button id="btn" type="button">Add</button>
+            </div>
+        </form>
+        <div id="book" hidden>
+            <ul id="ul">
+
+            </ul>
+        </div>
+    </div>
+    <script>
+        let button = document.getElementById("btn")
+        let input = document.getElementById("inp")
+        let bm = document.getElementById("book")
+        let lister = document.getElementById("ul")
+
+        button.addEventListener("click", () => {
+            let v = input.value.trim();
+            if (!v) {
+                alert("Enter a valid URL");
+                console.log("The input is null");
+                return;
+            }
+            // alert(v);
+            console.log(v);
+            bm.hidden = false;
+            const vi = document.createElement("li")
+            vi.innerHTML = `<a href="${v.startsWith('http') ? v : 'https://' + v}" target="_blank">${v}</a>`;
+            lister.appendChild(vi);  // Simple and correct
+            input.value = "";
+        })
+    </script>
+</body>
+
+</html>
