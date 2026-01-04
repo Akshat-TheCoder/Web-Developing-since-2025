@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callbacks</title>
+</head>
+
+<body>
+    <script>
+        alert("we are loding a script using callback function.")
+
+        // A callback function is a function passed as an argument to another function, which then executes the callback at a later time, often after completing some task or in response to an event. This pattern is fundamental in JavaScript for handling asynchronous operations like API calls, timers, or event listeners without blocking the main thread.
+
+        setTimeout(() => {
+            console.log("hello I am Akshat")
+        }, 0);
+
+        // the Setout function runs after the script is fully loaded beacause it is an asynchronus action and the alerts,consoles and functions are synchronus actions
+
+        let a = prompt("Enter your name")
+
+        function callback(arg) {
+            alert(arg)
+            console.log(arg)
+        }
+
+        function loadScript(src, callback) {
+            let s = document.createElement("script");
+            s.src = src
+            s.onload = callback(`Welcome! hacker ${a} to our Developers' Zone`)
+            document.head.append(s)
+        }
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js", callback)
+    </script>
+</body>
+
+</html>
