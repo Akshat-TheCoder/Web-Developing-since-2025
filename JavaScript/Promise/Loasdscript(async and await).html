@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .con {
+            background-color: rgb(1, 10, 78);
+            color: white;
+            text-align: center;
+            font-size: 3rem;
+            font-family: sans-serif;
+            font-weight: 600;
+            font-style: oblique;
+            /* padding: 100px; */
+            min-height: 100vh;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            text-decoration: line-through;
+            text-decoration-color: #00000096;
+            text-decoration-thickness: 10px;
+            text-decoration-style: dashed;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function delay(ms) {
+            return new Promise(
+                resolve => setTimeout(resolve, ms)
+            )
+        }
+
+        async function Fonk() {
+            let a = document.createElement('script')
+            const b = document.createElement('h1')
+            b.innerText = `I am A Hacker`
+
+            try {
+                let M = Math.random();
+                console.log(M);
+                if (M < 0.1) {
+                    await delay(3000);
+                    document.body.prepend(b);
+                    document.body.classList.add("con");
+                    console.log("I am Hacker");
+                }
+                else if (M < 0.5) {
+                    await delay(3000);
+                    a.innerHTML = `alert('Welcome Me! As I am a newly Loaded Script')`;
+                    document.head.append(a);
+                    console.log('Script is loaded');
+                }
+                else {
+                    await delay(1500);
+                    throw new Error('Script is not loaded');
+                }
+                alert("Hello World!");
+            }catch(err){
+                alert(err.message);
+                console.log(err.message);
+            }
+        }
+        Fonk();
+    </script>
+</body>
+
+</html>

@@ -37,7 +37,7 @@
 <body>
     <script>
         let a = document.createElement('script')
-        // a.innerHTML = `alert('Welcome Me! As I am a newly Loaded Script')`
+        a.innerHTML = `alert('Welcome Me! As I am a newly Loaded Script')`
 
         const b = document.createElement('h1')
         b.innerText = `I am A Hacker`
@@ -92,81 +92,81 @@
         // Promise APIs
 
         // Promise.all
-        let prom3 = Promise.all([prom1, prom2])
-        prom3.then((a) => {
-            console.log(a);
-        }).catch((b) => {
-            console.log(b);
-        })
+        // let prom3 = Promise.all([prom1, prom2])
+        // prom3.then((a) => {
+        //     console.log(a);
+        // }).catch((b) => {
+        //     console.log(b);
+        // })
 
-        // promise.allsetteled
-        let prom4 = Promise.allSettled([prom1, prom2])
-        prom4.then((a) => {
-            console.log(a);
-        }).catch((b) => {
-            console.log(b);
-        })
+        // // promise.allsetteled
+        // let prom4 = Promise.allSettled([prom1, prom2])
+        // prom4.then((a) => {
+        //     console.log(a);
+        // }).catch((b) => {
+        //     console.log(b);
+        // })
 
-        // promise.race
-        let prom5 = Promise.race([prom1, prom2])
-        prom5.then((a) => {
-            console.log(a);
-        }).catch((b) => {
-            console.log(b);
-        })
+        // // promise.race
+        // let prom5 = Promise.race([prom1, prom2])
+        // prom5.then((a) => {
+        //     console.log(a);
+        // }).catch((b) => {
+        //     console.log(b);
+        // })
 
-        // promise.any
-        let prom6 = Promise.any([prom1, prom2])
-        prom6.then((a) => {
-            console.log(a + " N");
-        }).catch((b) => {
-            console.log(b + " N");
-        })
+        // // promise.any
+        // let prom6 = Promise.any([prom1, prom2])
+        // prom6.then((a) => {
+        //     console.log(a + " N");
+        // }).catch((b) => {
+        //     console.log(b + " N");
+        // })
 
-        // promise.resolve and promise.reject
-        // Randomized promises
-        let rand1 = Math.random();
-        let rand2 = Math.random();
+        // // promise.resolve and promise.reject
+        // // Randomized promises
+        // let rand1 = Math.random();
+        // let rand2 = Math.random();
 
-        console.log("rand1:", rand1);
-        console.log("rand2:", rand2);
+        // console.log("rand1:", rand1);
+        // console.log("rand2:", rand2);
 
-        // Use Promise.resolve / Promise.reject based on random values
-        let prom7 = (rand1 < 0.5)
-            ? Promise.resolve("Success from prom7")
-            : Promise.reject("Failure from prom7");
+        // // Use Promise.resolve / Promise.reject based on random values
+        // let prom7 = (rand1 < 0.5)
+        //     ? Promise.resolve("Success from prom7")
+        //     : Promise.reject("Failure from prom7");
 
-        let prom8 = (rand2 < 0.5)
-            ? Promise.resolve("Success from prom8")
-            : Promise.reject("Failure from prom8");
+        // let prom8 = (rand2 < 0.5)
+        //     ? Promise.resolve("Success from prom8")
+        //     : Promise.reject("Failure from prom8");
 
-        // Handle them individually
-        prom7.then(msg => console.log("prom7 resolved:", msg))
-            .catch(err => console.log("prom7 rejected:", err));
+        // // Handle them individually
+        // prom7.then(msg => console.log("prom7 resolved:", msg))
+        //     .catch(err => console.log("prom7 rejected:", err));
 
-        prom8.then(msg => console.log("prom8 resolved:", msg))
-            .catch(err => console.log("prom8 rejected:", err));
+        // prom8.then(msg => console.log("prom8 resolved:", msg))
+        //     .catch(err => console.log("prom8 rejected:", err));
 
-        // Try with Promise APIs
+        // // Try with Promise APIs
 
-        // Promise.all → succeeds only if both succeed
-        Promise.all([prom7, prom8])
-            .then(results => console.log("Promise.all results:", results))
-            .catch(err => console.log("Promise.all failed:", err));
+        // // Promise.all → succeeds only if both succeed
+        // Promise.all([prom7, prom8])
+        //     .then(results => console.log("Promise.all results:", results))
+        //     .catch(err => console.log("Promise.all failed:", err));
 
-        // Promise.allSettled → always resolves with array of outcomes
-        Promise.allSettled([prom7, prom8])
-            .then(results => console.log("Promise.allSettled results:", results));
+        // // Promise.allSettled → always resolves with array of outcomes
+        // Promise.allSettled([prom7, prom8])
+        //     .then(results => console.log("Promise.allSettled results:", results));
 
-        // Promise.race → first one to settle (success or failure)
-        Promise.race([prom7, prom8])
-            .then(result => console.log("Promise.race result:", result))
-            .catch(err => console.log("Promise.race failed:", err));
+        // // Promise.race → first one to settle (success or failure)
+        // Promise.race([prom7, prom8])
+        //     .then(result => console.log("Promise.race result:", result))
+        //     .catch(err => console.log("Promise.race failed:", err));
 
-        // Promise.any → first success, rejects only if all fail
-        Promise.any([prom7, prom8])
-            .then(result => console.log("Promise.any result:", result))
-            .catch(err => console.log("Promise.any failed:", err));
+        // // Promise.any → first success, rejects only if all fail
+        // Promise.any([prom7, prom8])
+        //     .then(result => console.log("Promise.any result:", result))
+        //     .catch(err => console.log("Promise.any failed:", err));
     </script>
 </body>
 
