@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heking</title>
+    <style>
+        .hack-pulse {
+            display: flex;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 4rem;
+            transition: color 0.5s ease;
+            text-shadow: none;
+            color: unset;
+        }
+
+        body {
+            padding: 20px 0 0 20px;
+            font-size: 3rem;
+            color: lime;
+            font-family: monospace;
+            font-weight: bold;
+            text-shadow: 00px 0px 10px lime;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con"></div>
+    <script>
+        let body = document.body;
+        let con = document.querySelector('.con');
+        let currentBlinkInterval = null;  // Declare global
+
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function Rand() {
+            let M = Math.random();
+            console.log(`${M}`);
+            const g = M * 7000;  // Use M here
+            return g;
+        }
+
+        function randomcolora() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return "rgb(" + r + ", " + g + ", " + b + ")";
+        }
+
+        function RandomRedColorB() {
+            const g = Math.floor(Math.random() * 50);
+            const b = Math.floor(Math.random() * 50);
+            return "rgb( 255, " + g + ", " + b + ")";
+        }
+
+        function CreElem(text, tag = 'h1') {  // Fixed params: text first
+            let elem = document.createElement(tag);
+            elem.innerText = text;  // Rainbow!
+            con.appendChild(elem);
+            return elem;  // Return for blink
+        }
+
+        function blink(m) {
+            let dot = '.'
+            let count = 0;
+            let int = setInterval(() => {
+                m.textContent += dot;
+                count++;
+                if (count === 4) {
+                    clearInterval(int);
+                    m.textContent = m.textContent.slice(0, -4)
+                }
+            }, 500);
+        }
+
+        function OriBlink(g) {
+            if (currentBlinkInterval) {
+                clearInterval(currentBlinkInterval); // stop old heading
+            }
+            blink(g); // blink immediately
+            currentBlinkInterval = setInterval(() => {
+                blink(g);
+            }, 2000);
+        }
+
+        function colorPulse(elem) {
+            let isBlack = true;
+            elem.classList.add('hack-pulse');
+
+            const interval = setInterval(() => {
+                if (isBlack) {
+                    elem.style.backgroundColor = 'red';
+                } else {
+                    elem.style.backgroundColor = 'black';
+                }
+                isBlack = !isBlack;
+            }, 500);  // Every 1 second
+
+            return interval;  // Return to stop later
+        }
+
+        async function hacked() {
+            let text = document.createElement('h1');
+            text.innerText = 'You are Hacked';
+            body.innerHTML = '';
+            body.classList.toggle('.all');
+            document.body.append(text);
+            colorPulse(body);
+            setInterval(() => {
+                body.style.color = randomcolora();
+            }, 250);
+
+        }
+
+        async function Hack() {
+            await delay(Rand());
+            let elem1 = CreElem('Initializing Hecking');
+            OriBlink(elem1);
+
+            await delay(Rand());
+            let elem2 = CreElem('Reading your files');
+            OriBlink(elem2);
+
+            await delay(Rand());
+            let elem3 = CreElem('Password Files detected');
+            OriBlink(elem3);
+
+            await delay(Rand());
+            let elem4 = CreElem('Sending all passwords and personal files to server');
+            OriBlink(elem4);
+
+            await delay(Rand());
+            let elem5 = CreElem('Finalizing hack');
+            OriBlink(elem5);
+
+            await delay(Rand());
+            hacked();
+        }
+        Hack();
+    </script>
+</body>
+
+</html>

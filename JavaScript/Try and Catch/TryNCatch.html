@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let a = prompt("Enter First Number");
+        let b = prompt("Enter Second Number");
+
+
+        let sum = parseInt(a) + parseInt(b);
+
+        if (isNaN(a) || isNaN(b)) {
+            throw SyntaxError("Galat kyun likhte ho bhai sahab")
+        }
+        try {
+            console.log(sum);
+        } catch (error) {
+            alert(`Galat kyun likhte ho bhai sahab`);
+            console.log(error.name);
+            console.log(error.message);
+            console.log(error.stack);
+        }
+        finally{
+            alert("The developer's name is Akshat");
+        }
+    </script>
+</body>
+
+</html>

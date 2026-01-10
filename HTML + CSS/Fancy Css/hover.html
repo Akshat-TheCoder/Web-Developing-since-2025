@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-size: 1rem;
+            font-family: sans-serif;
+        }
+
+        ul{
+
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 100px;
+        }
+        ul li {
+            list-style-type: none;
+            font-size: 2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out,
+                opacity 0.3s ease-in-out;
+        }
+
+        ul li:hover {
+            color: #ff7a18;
+        }
+
+        ul:has(li:hover) li:not(:hover) {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>Home</li>
+        <li>About Us</li>
+        <li>Contact Us</li>
+        <li>For Us</li>
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fake Hack</title>
+    <style>
+        body {
+            background-color: green;
+            color: rgb(255, 50, 50);
+            font-family: monospace;
+            font-size: 3rem;
+            padding: 20px;
+            text-shadow: 4px 4px 10px black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con"></div>
+    <script>
+        let container = document.querySelector('.con');
+        let currentBlinkInterval = null; // track active blinking
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Blink function that stops after 3 dots
+        function blink(m) {
+            let x = '.';
+            let count = 0;
+            let interval = setInterval(() => {
+                m.textContent += x;
+                count++;
+                if (count === 4) {
+                    clearInterval(interval); // stop after 3
+                    m.textContent = m.textContent.slice(0, -4);
+                }
+            }, 1000);
+        }
+
+        // Random delay generator
+        function Rand() {
+            let a = Math.random();
+            if (a < 0.4) return Rand(); // retry if too small
+            console.log(a);
+            return Math.floor(a * 7000); // up to 7s
+        }
+
+        // Blink only for the current heading
+        function OriBlink(g) {
+            if (currentBlinkInterval) {
+                clearInterval(currentBlinkInterval); // stop old heading
+            }
+            blink(g); // blink immediately
+            currentBlinkInterval = setInterval(() => {
+                blink(g);
+            }, 4000);
+        }
+
+        function randomcolora() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r},${g},${b})`;  // Direct full string
+        }
+
+        function randomcolorb() {
+            const g = Math.floor(Math.random() * 50);
+            const b = Math.floor(Math.random() * 50);
+            return `rgb(255,${g},${b})`;  // Direct full string
+        }
+
+        function hacked() {
+            let p = document.createElement('p');
+            p.innerText = 'You are hacked!!!';
+
+            // Get the actual body element
+            let body = document.body;
+
+            // Apply styles
+            setInterval(() => {
+                body.style.color = randomcolora(); // update color every second
+            }, 1000);
+
+            setInterval(() => {
+                body.style.background = randomcolorb();
+            }, 1500);
+            body.style.fontSize = '8rem';      // camelCase
+            body.style.textAlign = 'center';   // camelCase
+            body.style.display = 'flex';
+            body.style.alignContent = 'center';
+            body.style.justifyContent = 'center';
+            body.style.alignItems = 'center';
+            body.style.flexWrap = 'wrap';
+            body.style.minHeight = '100vh';
+            body.style.fontWeight = 'bold';
+
+            // Append the message
+            body.innerHTML = '';        // clear existing content if you want
+            body.appendChild(p);
+        }
+
+
+        async function hack() {
+            await delay(Rand());
+
+            let h1 = document.createElement('h1');
+            h1.innerText = 'Initializing Hacking';
+            container.append(h1);
+            OriBlink(h1);
+            await delay(Rand());
+
+            let h2 = document.createElement('h1');
+            h2.innerText = 'Reading your files';
+            container.append(h2);
+            OriBlink(h2);
+            await delay(Rand());
+
+            let h3 = document.createElement('h1');
+            h3.innerText = 'Password Files detected';
+            container.append(h3);
+            OriBlink(h3);
+            await delay(Rand());
+
+            let h4 = document.createElement('h1');
+            h4.innerText = 'Sending all passwords and personal files to server';
+            container.append(h4);
+            OriBlink(h4);
+            await delay(Rand());
+
+            let h5 = document.createElement('h1');
+            h5.innerText = 'Finalizing hack...';
+            container.append(h5);
+            OriBlink(h5);
+            await delay(Rand());
+
+            hacked();
+        }
+        hack();
+    </script>
+</body>
+
+</html>
