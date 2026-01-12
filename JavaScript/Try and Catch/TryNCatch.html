@@ -1,35 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Natural Number Validation</title>
 </head>
-
 <body>
-    <script>
-        let a = prompt("Enter First Number");
-        let b = prompt("Enter Second Number");
+<script>
+    // ✅ Utility function to check natural numbers
+    function isNaturaal(num) {
+        return Number.isInteger(num) && num > 0;
+    }
 
+    // ✅ Function to get two natural numbers and return their sum
+    function Em() {
+        let a, b;
 
-        let sum = parseInt(a) + parseInt(b);
+        while (true) {
+            a = Number(prompt("Enter First Number"));
+            b = Number(prompt("Enter Second Number"));
 
-        if (isNaN(a) || isNaN(b)) {
-            throw SyntaxError("Galat kyun likhte ho bhai sahab")
+            if (!isNaturaal(a) || !isNaturaal(b)) {
+                alert("Please Enter Natural Numbers Only!!");
+                continue; // loop restarts
+            }
+
+            return a + b; // ✅ valid sum
         }
-        try {
-            console.log(sum);
-        } catch (error) {
-            alert(`Galat kyun likhte ho bhai sahab`);
-            console.log(error.name);
-            console.log(error.message);
-            console.log(error.stack);
+    }
+
+    try {
+        let sum = Em();
+        alert(`The Sum is ${sum}`);
+        console.log(`The Sum is ${sum}`);
+    } catch (error) {
+        alert(error.message);
+        console.log(error.name);
+        console.log(error.message);
+        console.log(error.stack);
+    } finally {
+        alert("The developer's name is Akshat");
+    }
+
+    // ✅ Function to get age and validate it
+    function AGA() {
+        let age;
+
+        while (true) {
+            age = Number(prompt("Enter Your Age"));
+
+            if (!isNaturaal(age)) {
+                alert("Please Enter Your Age as a Natural Number");
+                continue; // loop restarts
+            } else if (age > 100) {
+                alert("Invalid Age: Age Too High!!");
+                continue; // loop restarts
+            }
+
+            return age; // ✅ valid age
         }
-        finally{
-            alert("The developer's name is Akshat");
-        }
-    </script>
+    }
+
+    try {
+        let age = AGA();
+        alert(`Your Age is ${age}`);
+    } catch (error) {
+        alert(error.message);
+    } finally {
+        alert("Hello!");
+    }
+</script>
 </body>
-
 </html>
