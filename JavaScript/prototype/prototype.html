@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="a.banana()">Banana</button>
+    <button onclick="a.santara()">Santara</button>
+    <button onclick="a.apple()">Apple</button>
+    <div id="output"></div>
+
+    <script>
+        window.addEventListener("load", () => {
+            alert(`The Content is Fully Loaded!!`);
+        });
+        window.addEventListener("online", () => {
+            document.getElementById("output").innerText = "You are Online!!";
+            console.log(`You are Online`);
+        });
+        window.addEventListener("offline", () => {
+            document.getElementById("output").innerText = "You are Offline!!";
+            alert("You are offline!!");
+            console.log(`You are Offline!!`);
+        });
+
+        class food {
+            constructor() {
+                // this.name = "Akshat";
+                this.v = "Akshat";
+            }
+            type(){
+                console.log(`Food`);
+            }
+            banana() {
+                document.getElementById("output").innerText = "The banana shake is solid";
+                console.log(`The banana shake is solid`);
+            }
+            santara() {
+                document.getElementById("output").innerText = "The santara is juicy";
+                console.log(`The santara is juicy`);
+            }
+            apple() {
+                document.getElementById("output").innerText = "The apple is solid";
+                console.log(`The apple is solid`);
+            }
+        };
+        class tomato extends food{
+            constructor (){
+                super();
+                this.name = "tomato";
+            }
+            type(){
+                // super.type();
+                super.apple();
+            }
+            solidity(){
+                console.log(`A tomato can be solid or juicy`);
+            }
+            reddness(){
+                console.log(`A Tomato can be red or greenish`);
+            }
+
+        }
+
+        let a = new food();
+        alert(`hi!`);
+        console.log(a);
+        // console.log(a.name);
+        console.log(a.v);
+
+        let c = new tomato();
+        console.log(c);
+
+        let h = c instanceof tomato;
+        // let h = tomato instanceof food; // false
+        // let h = c instanceof food // true
+        console.log(h);
+    </script>
+</body>
+
+
+</html>

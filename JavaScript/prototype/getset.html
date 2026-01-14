@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class doc {
+            constructor(name){
+                this.name = name;
+            }
+            get name(){
+                return this._name;
+            }set name(a){
+                if (a.length < 4) {
+                    alert("Name is too short!!");
+                }
+                this._name = a;
+            }
+        }
+
+        let docu = new doc("Aks");
+        alert(docu.name);
+    </script>
+</body>
+</html>

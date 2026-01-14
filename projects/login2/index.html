@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="login">
+        <form action="" id="loginForm">
+            <div class="form">
+                <div class="header">
+                    <div class="h">
+                        <h1>Login</h1>
+                    </div>
+                </div>
+                <div class="con">
+                    <div class="index">
+                        <input type="text" required id="username">
+                        <span>Username</span>
+                        <div class="icona">
+                            <svg width="50px" height="30px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Transparent background (default) -->
+
+                                <!-- User icon outline -->
+                                <g fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <!-- Head -->
+                                    <circle cx="100" cy="70" r="24" />
+                                    <!-- Shoulders/body (half-oval) -->
+                                    <path d="M50 150
+             C50 120, 80 110, 100 110
+             C120 110, 150 120, 150 150" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="index">
+                        <input type="password" name="" id="pass" required>
+                        <span>Password</span>
+                        <div class="iconb" id="ed">
+                            <svg width="50" height="30" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="64" height="64" fill="none" />
+                                <path fill="white" transform="scale(0.8) translate(8,8)"
+                                    d="M48 28h-2v-8c0-8.837-7.163-16-16-16S14 11.163 14 20v8h-2c-2.209 0-4 1.791-4 4v24c0 2.209 1.791 4 4 4h36c2.209 0 4-1.791 4-4V32c0-2.209-1.791-4-4-4zM20 20c0-5.523 4.477-10 10-10s10 4.477 10 10v8H20v-8zm28 36H16V32h32v24z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="ex">
+                        <div class="check">
+                            <div class="inc">
+                                <input type="checkbox" name="" id="">
+                                <span>Remember Me</span>
+                            </div>
+                            <span><a href="#">Forget Password?</a></span>
+                        </div>
+                        <div class="btn">
+                            <button>Login</button>
+                        </div>
+                        <div class="rg">
+                            <span>Don't have an accout?</span>
+                            <span><a href="#">Register</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let lock = document.getElementById("ed");
+        let pass = document.getElementById("pass");
+
+        lock.addEventListener("click", () => {
+            if (pass.type === "password") {
+                pass.type = "text";   // show password
+            } else {
+                pass.type = "password"; // hide password
+            }
+        });
+
+
+        const form = document.getElementById("loginForm");
+        const username = document.getElementById("username");
+        const password = document.getElementById("pass");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // stop default refresh
+
+            // Example criteria: username not empty, password length >= 8
+            if (username.value.trim() !== "" && password.value.trim() !== "") {
+                // ✅ All criteria met → refresh page
+                location.reload();
+            } else {
+                // ❌ Criteria not met → show error
+                alert("Please fill all fields correctly!");
+            }
+        });
+
+    </script>
+</body>
+
+</html>

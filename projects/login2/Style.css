@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    ---primary-color: #e7e7e7;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+body {
+    color: white;
+    box-sizing: border-box;
+    height: 100vh;
+    min-height: 700px;
+}
+
+.login {
+    background-image: url("0zun_56kz_211202.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+form {
+    background: rgba(0, 0, 0, 0.2);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.form {
+    backdrop-filter: blur(25px);
+    width: 450px;
+    position: relative;
+    border: 2px solid white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 7.5em 2.5em 4em 2.5em;
+}
+
+.form * {
+    width: 100%;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: white;
+    width: 140px;
+    height: 70px;
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h h1 {
+    font-weight: 400;
+    color: black;
+    font-size: 30px;
+}
+
+.header::before {
+    content: '';
+    background: transparent;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    left: -30px;
+    border-top-right-radius: 50%;
+    top: 0;
+    box-shadow: 15px 0 0 0 white;
+}
+
+.header::after {
+    content: '';
+    background: transparent;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    right: -30px;
+    border-top-left-radius: 50%;
+    top: 0;
+    box-shadow: -15px 0 0 0 white;
+}
+
+.index {
+    position: relative;
+    margin: 20px 0;
+}
+
+.index input {
+    width: 100%;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 30px;
+    height: 55px;
+    color: white;
+    font-size: 16px;
+    padding-inline: 20px 50px;
+    outline: none;
+    z-index: 100;
+    position: relative;
+}
+
+.index input:active {
+    border: 2px soliid white;
+}
+
+.index input:focus~span,
+.index input:valid~span {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background-color: white;
+    border-radius: 30px;
+    font-size: 14px;
+    color: black;
+    padding: 0 10px;
+}
+
+.index input:focus,
+.index input:valid {
+    z-index: unset;
+}
+
+.index span {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    transition: .2s linear;
+}
+
+.icona {
+    width: 55px;
+    height: 50px;
+    position: absolute;
+    top: 12.5px;
+    right: 0px;
+}
+
+.iconb {
+    position: absolute;
+    top: 12.5px;
+    right: 0;
+    width: 55px;
+    height: 50px;
+}
+
+.check {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.inc *,
+.inc {
+    width: unset;
+}
+
+.inc,
+.check span {
+    width: unset;
+    display: inline-block;
+}
+
+.check span {
+    text-decoration: underline;
+}
+
+.inc span {
+    text-decoration: none;
+}
+
+.btn button {
+    height: 50px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    margin: 20px 0;
+    background-color: #cecece;
+}
+
+.btn button:hover {
+    background-color: white;
+}
+
+.rg {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.rg span {
+    width: unset;
+}
+
+.index span {
+    width: unset;
+}
+
+.rg span:nth-child(2) {
+    text-decoration: underline;
+}
