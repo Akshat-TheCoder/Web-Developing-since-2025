@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function delayed() {
+            return new Promise((_,reject) => {
+                setTimeout(() => {
+                    reject("promise is delayed for 3sec");
+                }, 3000);
+            });
+        }
+        async function handle() {
+            try {
+                const result = await delayed();
+                console.log("promise resolved : ",result);
+            } catch (error) {
+                console.log("Caught Error : ",error)
+            }
+        }
+        handle();
+    </script>
+</body>
+
+</html>
