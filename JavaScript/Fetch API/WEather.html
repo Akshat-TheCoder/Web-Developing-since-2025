@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather + Current Location</title>
+</head>
+
+<body>
+    <script>
+        // 1) Ask user for a city and show its weather (GoWeather)
+        let a = prompt("Enter the name of the city of whose weather you want to check");
+        console.log(`${a}`);
+
+        let p = fetch(`http://goweather.xyz/weather/${a.toLowerCase()}`);
+
+        p.then((response) => response.json())
+            .then((response) => {
+                if (response.message === "NOT_FOUND") {
+                    alert(`It is not in list`);
+                } else {
+                    console.log(response);
+                    // Example: "Delhi -5 °C Moderate snow"
+                    alert(
+                        `Weather for ${a}:\n` +
+                        `Temperature: ${response.temperature}\n` +
+                        `Description: ${response.description}`
+                    );
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                alert("Could not get weather for that city.");
+            });
+
+        // 2) Use browser Geolocation for precise current location
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    const lat = pos.coords.latitude;
+                    const lon = pos.coords.longitude;
+                    console.log("Browser location:", lat, lon);
+
+                    // 3) Get current weather for those coordinates from Open‑Meteo
+                    fetch(
+                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m`
+                    )
+                        .then(res => res.json())
+                        .then(weatherData => {
+                            console.log(weatherData.current);
+
+                            const temp = weatherData.current?.temperature_2m;
+                            const wind = weatherData.current?.wind_speed_10m;
+
+                            // 4) Reverse‑geocode lat/lon to get real city (e.g. Pratapgarh)
+                            return fetch(
+                                `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=ccab344c39044a4dbcc908fdeac7df99`
+                            )
+                                .then(r => r.json())
+                                .then(geoData => {
+                                    console.log(geoData);
+
+                                    const props = geoData.features?.[0]?.properties || {};
+                                    const city =
+                                        props.city ||
+                                        props.town ||
+                                        props.village ||
+                                        props.county ||
+                                        "your location";
+                                    const state = props.state || "";
+                                    const country = props.country || "";
+                                    const postcode = props.postcode || "";
+
+                                    // Build detailed message with location + weather
+                                    const msg =
+                                        `Current precise location info:\n` +
+                                        `City: ${city}\n` +
+                                        `State: ${state}\n` +
+                                        `Country: ${country}\n` +
+                                        `Postcode: ${postcode}\n` +
+                                        `Latitude: ${lat}\n` +
+                                        `Longitude: ${lon}\n\n` +
+                                        `Current weather:\n` +
+                                        `Temperature: ${temp} °C\n` +
+                                        `Wind: ${wind} m/s`;
+
+                                    alert(msg);
+                                });
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            alert("Could not get weather for your current location.");
+                        });
+                },
+                (err) => {
+                    console.error(err);
+                    alert("Location permission denied or unavailable.");
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: black;
+            font-size: 4rem;
+            gap: 2rem;
+            transition: all 0.1s ease;
+        }
+        @media screen and (max-width:425px) {
+            body{
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="date"></div>
+    <div class="time"></div>
+    <script>
+        let ddiv = document.querySelector('.date');
+        let tdiv = document.querySelector('.time');
+
+        function Showtime() {
+            let data = new Date();
+            let h = data.getHours();
+            let m = data.getMinutes();
+            let s = data.getSeconds();
+            let session = "AM";
+
+            if (h == 0) {
+                h = 12;
+            } else if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+
+            h = h < 10 ? "0" + h : h;
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+
+            let time = h + ":" + m + ":" + s + " " + session;
+            ddiv.innerHTML = data.toDateString();
+            setInterval(() => {
+                Showtime();
+            }, 1000);
+            tdiv.innerHTML = time;
+        }
+        Showtime();
+    </script>
+</body>
+
+</html>

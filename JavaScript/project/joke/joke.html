@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokes</title>
+    <style>
+        .jokes {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="jokes"></div>
+    <script>
+        let div = document.querySelector('.jokes');
+        let M = Math.floor(Math.random() * 10) + 1;
+
+        let jokes ={
+            1: "Why don't scientists trust atoms? Because they make up everything!",
+            2: "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            3: "Why don't skeletons fight each other? They don't have the guts.",
+            4: "What do you call fake spaghetti? An impasta!",
+            5: "Why did the bicycle fall over? Because it was two-tired!",
+            6: "What do you call cheese that isn't yours? Nacho cheese!",
+            7: "Why couldn't the leopard play hide and seek? Because he was always spotted.",
+            8: "What do you get when you cross a snowman and a vampire? Frostbite.",
+            9: "Why did the math book look sad? Because it had too many problems.",
+            10: "What do you call a bear with no teeth? A gummy bear!"
+        }
+        if (jokes[M]) {
+            div.innerHTML = jokes[M];
+            console.log(jokes[M]);
+        }
+    </script>
+</body>
+</html>

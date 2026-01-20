@@ -50,7 +50,7 @@
         }
 
         .h2 {
-            font-size: 30px;
+            font-size: 28px;
             margin-top: 10px;
             font-weight: 700;
         }
@@ -90,7 +90,8 @@
         }
 
         .hg {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             justify-content: space-around;
             margin-top: 20px;
         }
@@ -112,13 +113,209 @@
             margin: 10px 0 0 0;
             font-weight: 500;
         }
+
+        .head {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .dev {
+            color: greenyellow;
+            font-size: 32px;
+            margin: 40px 2px;
+            text-align: center;
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+        }
+
+        @media screen and (max-width:1080px) {
+            .hg h1 {
+                font-size: 32px;
+                font-weight: 700;
+            }
+        }
+
+        @media screen and (max-width:768px) {
+            .hg h1 {
+                font-size: 28px;
+            }
+
+            .result {
+                margin: 32px;
+                padding: 20px 30px;
+            }
+
+            .dev {
+                font-size: 24px;
+            }
+        }
+
+        @media screen and (max-width:600px) {
+            .hg h1 {
+                font-size: 22px;
+            }
+        }
+
+        @media screen and (max-width:500px) {
+            .result {
+                margin: 16px;
+                padding: 15px 20px;
+            }
+        }
+
+        @media screen and (max-width:426px) {
+
+            /* .h1{
+                font-size: 33px;
+            } */
+            .btn button {
+                font-size: 1.2rem;
+                padding: 8px 16px;
+            }
+
+            .btn {
+                gap: 20px;
+            }
+
+            .h2 {
+                font-size: 22px;
+            }
+
+            .h3 {
+                font-size: 20px;
+            }
+
+            .h1 {
+                font-size: 28px;
+            }
+
+            .result h1 {
+                font-size: 28px;
+            }
+
+            .result p {
+                font-size: 24px;
+            }
+
+            .result {
+                margin: 8px;
+                padding: 10px 15px;
+            }
+
+            .hg h1 {
+                font-size: 20px;
+            }
+
+            .hg p {
+                font-size: 18px;
+            }
+
+            .head {
+                margin: 10px;
+            }
+
+        }
+
+        @media screen and (max-width:375px) {
+            .btn {
+                gap: 10px;
+                justify-content: space-evenly;
+            }
+
+            .btn button {
+                font-size: 1.3rem;
+                padding: 6px 12px;
+            }
+
+            .hg h1 {
+                font-size: 24px;
+            }
+
+            .hg p {
+                font-size: 16px;
+            }
+
+            .h2 {
+                font-size: 20px;
+            }
+
+            .h3 {
+                font-size: 18px;
+            }
+
+            .h1 {
+                font-size: 24px;
+            }
+
+            .result h1 {
+                font-size: 24px;
+            }
+
+            .result p {
+                font-size: 20px;
+            }
+
+            .result {
+                margin: 6px;
+                padding: 8px 10px;
+            }
+
+            .hg {
+                grid-template-columns: 1fr;
+                /* gap: 20px; */
+            }
+
+            .head {
+                margin: 6px;
+            }
+
+            /* .btn {
+                flex-direction: column;
+            }
+
+            .btn button {
+                width: 100%;
+            }
+
+            .btn button:not(:last-child) {
+                margin-bottom: 10px;
+            } */
+
+            .hg {
+                margin-top: 10px;
+            }
+
+            .result {
+                margin-top: 20px;
+            }
+
+            .result h1 {
+                margin-bottom: 10px;
+            }
+
+            .hg h1 {
+                font-size: 24px;
+            }
+
+            .hg p {
+                font-size: 24px;
+            }
+
+            .h1,
+            .h2,
+            .h3 {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <h1 class="h1">Hi! I am The Ai Sweety!!</h1>
-    <h1 class="h2">Let's We Play The Ancient Game Snake, Water And Gun.</h1>
-    <h2 class="h3">Choose an Option</h2>
+    <div class="head">
+        <h1 class="h1">Hi! I am The Ai Sweety!!</h1>
+        <h1 class="h2">Let's We Play The Ancient Game Snake, Water And Gun.</h1>
+        <h2 class="h3">Choose an Option</h2>
+    </div>
 
     <div class="opt">
         <div class="btn">
@@ -142,6 +339,7 @@
             </div>
         </div>
     </div>
+    <h1 class="dev">Professionally Develloped by Akshat</h1>
 
     <script>
         let btn1 = document.getElementById("btn1");
@@ -171,7 +369,7 @@
             h1.innerText = "You Win!";
             h1.style.color = "lightgreen";
             h1.hidden = false;
-            count+= 2;
+            count += 2;
             compcount--;
             updateScore();
         }
@@ -180,7 +378,7 @@
             h1.innerText = "You Lose! Better luck next time.";
             h1.style.color = "red";
             h1.hidden = false;
-            compcount+= 2;
+            compcount += 2;
             count--;
             updateScore();
         }

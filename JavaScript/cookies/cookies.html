@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let a = prompt("Enter you name");
+
+        document.cookie = `name=${a}`
+        console.log(document.cookie);
+
+        let key = encodeURIComponent(prompt("enter your key"));
+        let value = encodeURIComponent(prompt("enter your value"));
+
+        document.cookie = `${key}=${value}`;
+        console.log(document.cookie);
+
+        console.log(decodeURIComponent(document.cookie));
+    </script>
+</body>
+
+</html>
