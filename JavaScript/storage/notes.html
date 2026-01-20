@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        #notes {
+            white-space: pre-wrap;
+            font-family: monospace;
+            text-align: left;
+            margin: 100px;
+            border: 2px solid black;
+            border-radius: 20px;
+            padding: 20px;
+            width: 700px;
+            font-size: 1.5rem;
+            font-family: monospace;
+            text-transform: capitalize;
+        }
+
+        .input {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        input {
+            width: 460px;
+            height: 50px;
+            font-size: 20px;
+            padding: 24px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            height: 36px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #4CAF50;
+            color: white;
+            outline: none;
+            height: 50px;
+            padding: 10px;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .input input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #999;
+            font-style: italic;
+
+        }
+
+        .n {
+            background-color: red;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+            height: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 5px 10px;
+            position: absolute;
+            right: 0;
+        }
+
+        .m {
+            background-color: green;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-left: 0px;
+            height: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 5px 10px;
+            position: absolute;
+            right: 100px;
+        }
+
+        #notes li {
+            list-style-position: inside;
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 170px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input">
+        <input type="text" placeholder="Type Whether you want to store in your library">
+        <button id="btn">Add Note</button>
+    </div>
+    <div id="notes" hidden></div>
+
+    <script>
+        // 1. Get important elements from the page
+        let addButton = document.getElementById("btn");
+        let notesBox = document.getElementById("notes");
+        let inputBox = document.querySelector(".input input");
+
+        // 2. Load notes when the page first opens
+        loadNotes();
+
+        // 3. When the Add Note button is clicked
+        addButton.addEventListener("click", () => {
+            let text = inputBox.value.trim();  // remove extra spaces
+            if (text) {                       // only if not empty
+                addNoteToPage(text);          // show note on page
+                inputBox.value = "";          // clear input
+                saveNotes();                  // save all notes
+            }
+        });
+
+        // 4. When user presses Enter inside the input box
+        inputBox.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {      // if key is Enter
+                event.preventDefault();       // stop default behavior
+                addButton.click();            // act like button was clicked
+            }
+        });
+
+        // ========== FUNCTIONS ==========
+
+        // 5. Load notes from localStorage and show them
+        function loadNotes() {
+            try {
+                // Get notes from localStorage, or use [] if nothing stored
+                let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+
+                // Make sure we really got an array
+                if (!Array.isArray(notes)) throw new Error("Data is not an array");
+
+                // Clear what is currently shown
+                notesBox.innerHTML = "";
+
+                // Add each saved note back to the page
+                notes.forEach(note => addNoteToPage(note.text, note.done));
+            } catch (error) {
+                console.error("Notes were corrupted, clearing them:", error);
+                localStorage.removeItem("notes");
+                notesBox.innerHTML = "";
+            }
+
+            // Hide the notes box if there are no notes
+            notesBox.hidden = notesBox.children.length === 0;
+        }
+
+        // 6. Create one note element and put it on the page
+        function addNoteToPage(text, done = false) {
+            // Create <li> for the note text
+            let li = document.createElement("li");
+            li.textContent = text;
+
+            // If note is already done, add line-through
+            if (done) {
+                li.style.textDecoration = "line-through";
+            }
+
+            // Create "Done" button
+            let doneBtn = document.createElement("button");
+            doneBtn.textContent = "Done";
+            doneBtn.className = "m";
+            doneBtn.addEventListener("click", () => toggleDone(li));
+
+            // Create "Remove" button
+            let removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.className = "n";
+            removeBtn.addEventListener("click", () => removeNote(text));
+
+            // Add buttons inside the <li>
+            li.appendChild(doneBtn);
+            li.appendChild(removeBtn);
+
+            // Add <li> into the notes box
+            notesBox.appendChild(li);
+        }
+
+        // 7. Mark a note as done / not done
+        function toggleDone(li) {
+            let isDone = li.style.textDecoration === "line-through";
+            li.style.textDecoration = isDone ? "none" : "line-through";
+            saveNotes();   // update saved data
+        }
+
+        // 8. Save all current notes (text + done status) into localStorage
+        function saveNotes() {
+            // Take all <li> elements (all notes on the page)
+            let notesArray = Array.from(notesBox.querySelectorAll("li")).map(li => ({
+                text: li.childNodes[0].textContent.trim(),   // note text
+                done: li.style.textDecoration === "line-through"  // true/false
+            }));
+
+            // Turn array into a string and store it
+            localStorage.setItem("notes", JSON.stringify(notesArray));
+
+            // Hide notes box if no notes
+            notesBox.hidden = notesArray.length === 0;
+        }
+
+        // 9. Remove one note from localStorage, then reload the list
+        function removeNote(text) {
+            let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+
+            // Keep only notes whose text is different from the one we remove
+            notes = notes.filter(note => note.text !== text);
+
+            // Save new list and reload the UI
+            localStorage.setItem("notes", JSON.stringify(notes));
+            loadNotes();
+        }
+
+    </script>
+</body>
+
+</html>

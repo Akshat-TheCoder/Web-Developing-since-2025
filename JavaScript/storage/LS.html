@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Ask user for data
+        let name = prompt("Enter Your Name");
+        let col = prompt("Enter Your Favourite Colour");
+        let city = prompt("Enter your City Name");
+
+        // Save to localStorage
+        localStorage.setItem("name", name);
+        console.log(localStorage);
+        console.log(`Your Name is ${localStorage.getItem("name")}`);
+
+        localStorage.setItem("colour", col);
+        console.log(localStorage);
+        console.log(`Your Favourite Colour is ${localStorage.getItem("colour")}`);
+
+        localStorage.setItem("city", city);
+        console.log(localStorage);
+        console.log(`Your City Name is ${localStorage.getItem("city")}`);
+
+        // Show first key in localStorage
+        console.log(localStorage.key(0));
+
+        // Set background to favourite colour
+        document.body.style.backgroundColor = localStorage.getItem("colour");
+
+        // Show total items
+        console.log(`Total Items Stored in Local Storage is ${localStorage.length}`);
+
+        // Add and delete a temporary key
+        localStorage.cam = "India";
+        console.log("After adding cam");
+        console.log(localStorage);
+
+        delete localStorage.cam;
+        console.log("After deleting cam");
+        console.log(localStorage);
+
+        // Remove colour key
+        localStorage.removeItem("colour");
+        console.log("After removing colour");
+        console.log(localStorage);
+
+        // OPTIONAL: Clear all
+        // localStorage.clear();
+        // console.log("After clearing all data");
+        // console.log(localStorage);
+
+        // -------- WEATHER PART (USING OPEN-METEO + NOMINATIM) --------
+
+        async function getWeatherForCity(cityName) {
+            try {
+                // 1) Geocode city -> lat/lon with Nominatim
+                const geoRes = await fetch(
+                    "https://nominatim.openstreetmap.org/search?" +
+                    `q=${encodeURIComponent(cityName)}&format=json&limit=1`,
+                    {
+                        headers: {
+                            // Nominatim usage policy requires an identifying User-Agent or Referer
+                            "User-Agent": "local-weather-demo/1.0 (your-email@example.com)"
+                        }
+                    }
+                );
+                const geoData = await geoRes.json();
+
+                if (!Array.isArray(geoData) || geoData.length === 0) {
+                    alert("City not found in geocoding service.");
+                    return;
+                }
+
+                const lat = geoData[0].lat;
+                const lon = geoData[0].lon;
+
+                // 2) Open-Meteo current weather
+                const weatherRes = await fetch(
+                    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+                );
+                const weatherData = await weatherRes.json();
+
+                if (!weatherData.current_weather) {
+                    alert("Could not get current weather for that city.");
+                    return;
+                }
+
+                const temp = weatherData.current_weather.temperature; // °C
+                const wind = weatherData.current_weather.windspeed;   // km/h
+                const code = weatherData.current_weather.weathercode; // condition code
+
+                alert(
+                    `Weather for ${cityName}:\n` +
+                    `Temperature: ${temp} °C\n` +
+                    `Wind speed: ${wind} km/h\n` +
+                    `Weather code: ${code}`
+                );
+                console.log(
+                    `Weather for ${cityName}:\n` +
+                    `Temperature: ${temp} °C\n` +
+                    `Wind speed: ${wind} km/h\n` +
+                    `Weather code: ${code}`
+                )
+                console.log(weatherData);
+            } catch (err) {
+                console.error(err);
+                alert("Could not get weather for that city.");
+            }
+        }
+
+        // Call the function using the stored city
+        const storedCity = localStorage.getItem("city");
+        if (storedCity) {
+            getWeatherForCity(storedCity);
+        }
+    </script>
+</body>
+
+</html>
