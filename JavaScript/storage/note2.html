@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+        }
+
+        body {
+            background: #FCF5EB;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            min-height: 100vh;
+            overflow-x: clip;
+            gap: 100px;
+            font-family: cursive;
+        }
+
+        .pv {
+            padding-top: 20vh;
+        }
+
+        .input input {
+            width: 400px;
+            height: 60px;
+            border: 2px solid black;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: system-ui;
+            padding: 0 30px;
+            box-sizing: border-box;
+            color: #333;
+            outline: none;
+        }
+
+        .input {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        input::placeholder {
+            color: #165;
+        }
+
+        input:focus {
+            border: 2px solid greenyellow;
+        }
+
+        #btn {
+            font-weight: 600;
+            font-size: 24px;
+            background: #9ddc3c;
+            outline: none;
+            height: 60px;
+            padding: 0 15px;
+            border-radius: 15px;
+            border: 2px solid black;
+            margin-left: 32px;
+        }
+
+        #btn:hover,
+        #btn:active {
+            background-color: #8ac32f;
+        }
+
+        .Notearea li {
+            list-style-position: inside;
+            text-align: left;
+            font-size: 28px;
+            text-transform: capitalize;
+            font-family: monospace;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            margin-bottom: 1rem;
+            padding-right: 160px;
+        }
+
+        .r {
+            position: absolute;
+            right: 0;
+            transform: translateY(-50%);
+            top: 50%;
+            background: #d32424;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: monospace;
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+
+        .d {
+            background: #ff9b00;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-family: monospace;
+            font-weight: 600;
+            position: absolute;
+            transform: translateY(-50%);
+            top: 50%;
+            right: 85px;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .Notearea {
+            border: 4px solid black;
+            padding: 30px;
+            width: 700px;
+            border-radius: 20px;
+        }
+
+        .done {
+            text-decoration: line-through;
+            text-decoration-color: #ff9b00;
+            text-decoration-thickness: 5px;
+        }
+
+        /* Tablet and smaller screens */
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 10vh;
+                gap: 50px;
+            }
+
+            .input input {
+                width: 90%;
+                max-width: 350px;
+                height: 50px;
+                font-size: 16px;
+                padding: 0 20px;
+            }
+
+            #btn {
+                height: 50px;
+                font-size: 18px;
+                padding: 0 12px;
+                margin-left: 10px;
+            }
+
+            .Notearea {
+                width: 90%;
+                max-width: 600px;
+                padding: 20px;
+                border: 3px solid black;
+            }
+
+            .Notearea li {
+                font-size: 22px;
+                padding-right: 140px;
+            }
+        }
+
+        /* Mobile phones */
+        @media screen and (max-width: 480px) {
+            body {
+                padding-top: 15px;
+                gap: 30px;
+            }
+
+            .input {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .input input {
+                width: 85%;
+                max-width: 280px;
+                height: 45px;
+                font-size: 14px;
+                padding: 0 15px;
+                border-radius: 15px;
+            }
+
+            #btn {
+                width: 90%;
+                max-width: 280px;
+                height: 45px;
+                font-size: 16px;
+                margin-left: 0;
+                border-radius: 12px;
+            }
+
+            .Notearea {
+                width: 90%;
+                max-width: 100%;
+                padding: 15px;
+                border: 2px solid black;
+                border-radius: 15px;
+            }
+
+            .Notearea li {
+                font-size: 16px;
+                padding-right: 120px;
+                margin-bottom: 0.8rem;
+            }
+
+            .r,
+            .d {
+                font-size: 12px;
+                padding: 3px 6px;
+                border-radius: 5px;
+            }
+
+            .d {
+                right: 65px;
+            }
+
+            .r {
+                right: 0;
+            }
+
+            .done {
+                text-decoration-thickness: 3px;
+            }
+
+            .input {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .input input {
+                width: 90%;
+                font-size: 18px;
+                height: 50px;
+            }
+
+            .Notearea {
+                width: 90%;
+            }
+
+        }
+
+        /* Extra small phones */
+        @media screen and (max-width: 360px) {
+            .input input {
+                font-size: 12px;
+            }
+
+            .Notearea li {
+                font-size: 14px;
+                padding-right: 110px;
+            }
+
+            .r,
+            .d {
+                font-size: 11px;
+                padding: 2px 5px;
+            }
+
+            .d {
+                right: 60px;
+            }
+        }
+
+        @media screen and (max-width:550px) and (min-width:481px) {
+            .input input {
+                width: 68%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input">
+        <input type="text" placeholder="Type Your Todo-Work Here">
+        <button id="btn">Add Note</button>
+    </div>
+    <div class="Notearea" hidden></div>
+
+    <script>
+        let inputarea = document.querySelector("input");
+        let button = document.getElementById("btn");
+        let notearea = document.querySelector(".Notearea");
+
+        function loadNotes() {
+            try {
+                let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+
+                if (!Array.isArray(notes)) throw new Error("Data is not an Array");
+
+                notearea.innerHTML = "";
+
+                notes.forEach(note => addNoteToPage(note.text, note.done));
+                notearea.hidden = notes.length === 0;
+            } catch (err) {
+                console.log(err);
+                localStorage.removeItem("notes");
+                notearea.innerHTML = "";
+                notearea.hidden = true;
+            }
+        }
+
+        function addNoteToPage(text, done = false) {
+            let li = document.createElement("li");
+
+            let span = document.createElement("span");
+            span.textContent = text;
+            if (done) {
+                span.classList.add("done");
+            }
+            li.appendChild(span);
+
+            let doneBtn = document.createElement("button");
+            doneBtn.textContent = "Done";
+            doneBtn.classList.add("d");
+            doneBtn.addEventListener("click", () => {
+                toggleDone(span);
+            });
+            li.appendChild(doneBtn);
+
+            let removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.classList.add("r");
+            removeBtn.addEventListener("click", () => {
+                removeLi(text);
+            });
+            li.appendChild(removeBtn);
+
+            notearea.appendChild(li);
+        }
+
+        function toggleDone(span) {
+            span.classList.toggle("done");
+            saveNotes();
+        }
+
+        function removeLi(text) {
+            let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+            notes = notes.filter(note => note.text !== text);
+            localStorage.setItem("notes", JSON.stringify(notes));
+            loadNotes();
+        }
+
+        function saveNotes() {
+            let notesArray = Array.from(notearea.querySelectorAll("li")).map(li => {
+                let span = li.querySelector("span");
+                return {
+                    text: span.textContent.trim(),
+                    done: span.classList.contains("done")
+                };
+            });
+
+            localStorage.setItem("notes", JSON.stringify(notesArray));
+            notearea.hidden = notesArray.length === 0;
+        }
+
+        button.addEventListener("click", () => {
+            let text = inputarea.value.trim();
+
+            if (text) {
+                addNoteToPage(text);
+                inputarea.value = "";
+                saveNotes();
+            }
+        });
+
+        inputarea.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                button.click();
+            }
+        });
+
+        // Load notes AFTER all functions are defined
+        loadNotes();
+
+        if (!notearea.hidden) {
+            document.body.classList.add("pv");
+        }
+    </script>
+</body>
+
+</html>
