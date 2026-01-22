@@ -22,6 +22,7 @@
             justify-content: center;
             flex-wrap: wrap;
             min-height: 100vh;
+            align-items: center;
             overflow-x: clip;
             gap: 100px;
             font-family: cursive;
@@ -153,7 +154,9 @@
                 height: 50px;
                 font-size: 18px;
                 padding: 0 12px;
-                margin-left: 10px;
+                margin-left: 0;
+                width: 90%;
+                max-width: 350px;
             }
 
             .Notearea {
@@ -172,7 +175,7 @@
         /* Mobile phones */
         @media screen and (max-width: 480px) {
             body {
-                padding-top: 15px;
+                padding-top: 0px;
                 gap: 30px;
             }
 
@@ -180,22 +183,24 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
+                max-width: 100%;
+                width: 100%;
                 align-items: center;
             }
 
             .input input {
-                width: 85%;
-                max-width: 280px;
-                height: 45px;
                 font-size: 14px;
                 padding: 0 15px;
                 border-radius: 15px;
+                width: 90%;
+                max-width: 350px;
+                font-size: 18px;
+                height: 50px;
             }
 
             #btn {
                 width: 90%;
-                max-width: 280px;
-                height: 45px;
+                height: 50px;
                 font-size: 16px;
                 margin-left: 0;
                 border-radius: 12px;
@@ -240,12 +245,6 @@
                 gap: 10px;
             }
 
-            .input input {
-                width: 90%;
-                font-size: 18px;
-                height: 50px;
-            }
-
             .Notearea {
                 width: 90%;
             }
@@ -255,29 +254,20 @@
         /* Extra small phones */
         @media screen and (max-width: 360px) {
             .input input {
-                font-size: 12px;
+                font-size: 16px;
             }
 
             .Notearea li {
-                font-size: 14px;
+                font-size: 16px;
                 padding-right: 110px;
-            }
-
-            .r,
-            .d {
-                font-size: 11px;
-                padding: 2px 5px;
             }
 
             .d {
                 right: 60px;
             }
         }
-
-        @media screen and (max-width:550px) and (min-width:481px) {
-            .input input {
-                width: 68%;
-            }
+        .Notearea li:last-child{
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -301,6 +291,7 @@
                 if (!Array.isArray(notes)) throw new Error("Data is not an Array");
 
                 notearea.innerHTML = "";
+                document.body.click();
 
                 notes.forEach(note => addNoteToPage(note.text, note.done));
                 notearea.hidden = notes.length === 0;
