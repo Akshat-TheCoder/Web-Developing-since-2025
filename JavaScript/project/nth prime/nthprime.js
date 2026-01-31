@@ -4,7 +4,6 @@ console.log("Program started 🚀");
 function getNAsync() {
     console.log("Waiting for n...");
     return new Promise(resolve => {
-        let value = 12;
         setTimeout(() => {
             resolve(`${value}`); // try n = 10
             console.log("n received ✅");

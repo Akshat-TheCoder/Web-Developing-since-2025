@@ -1,0 +1,269 @@
+@font-face {
+    font-family: 'Circular Std';
+    src: url('fonts/CircularStd-Book.woff2') format('woff2'),
+        url('fonts/CircularStd-Book.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 0.5px;
+    color: white;
+    font-family: sans-serif;
+}
+
+.container {
+    background-color: black;
+    padding: 8px;
+    position: relative;
+    min-height: 100vh;
+}
+
+.header {
+    position: absolute;
+    padding: 8px;
+    top: 0;
+    width: 100%;
+    left: 0;
+}
+
+.home:hover.home:hover {
+    background-color: #2a2a2a;
+    transform: scale(1.025);
+}
+
+.svg {
+    width: 32px;
+    /* filter: invert(1); */
+    fill: #fff;
+    cursor: pointer;
+}
+
+.home svg {
+    width: 24px;
+    /* filter: invert(1); */
+    cursor: pointer;
+}
+
+.spotify svg {
+    /* filter: invert(1); */
+    cursor: pointer;
+    width: 32px;
+}
+
+a {
+    text-decoration: none;
+    display: flex;
+}
+
+.h-left {
+    display: flex;
+    position: absolute;
+    top: -4px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.spotify svg {
+    margin: 20px;
+    color: #fff;
+    fill: currentColor;
+}
+
+.home.home {
+    margin-left: 8px;
+    background: #1f1f1f;
+    padding: 12px;
+    border-radius: 50px;
+    transition: all 0.2s ease-in-out;
+    height: 48px;
+}
+
+.search {
+    padding-inline: 8px;
+    position: absolute;
+    display: flex;
+    left: 128px;
+    /* height: max-content; */
+    top: 12px;
+}
+
+.searchy svg {
+    width: 24px;
+    background: transparent;
+    /* filter: invert(1); */
+    fill: #b3b3b3;
+    transition: all 0.2s ease-in-out;
+}
+
+.searchy {
+    background: transparent;
+    border: none;
+    position: absolute;
+    z-index: 2;
+    /* Increase to keep button above input */
+    top: 12px;
+    left: 20px;
+}
+
+.search input {
+    background: #1f1f1f;
+    border: none;
+    border-radius: 50px;
+    position: relative;
+    /* Change from absolute to relative */
+    z-index: 1;
+    /* Change from 0 to 1, above the button */
+    padding-block-end: 12px;
+    padding-block-start: 12px;
+    padding-bottom: 12px;
+    padding-inline-end: 96px;
+    padding-inline-start: 48px;
+    padding-left: 48px;
+    height: 48px;
+    padding-right: 96px;
+    padding-top: 12px;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 470px;
+    transition: all 0.5s;
+}
+
+.inpl {
+    position: relative;
+    width: 470px;
+}
+
+.search input:hover {
+    background: #2a2a2a;
+    box-shadow: inset 0 0 0 1px #ffffff1a;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+/* Optional: Also remove search decoration (magnifying glass highlight) */
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.search input:focus {
+    /* border: 3px solid white; */
+    outline: none;
+    cursor: unset;
+    background: #2a2a2a;
+    box-shadow: inset 0 0 0 2px #fff;
+}
+
+.search input::placeholder {
+    letter-spacing: 0.2px;
+    line-height: 0.2px;
+    color: #b3b3b3;
+}
+
+.search input:placeholder-shown {
+    text-overflow: ellipsis;
+    transition: box-shadow .22s ease-in, background .22s ease-in, color .22s ease-in;
+}
+
+.searchy svg:hover {
+    fill: white;
+    transform: scale(1.1);
+}
+
+.pl {
+    position: absolute;
+    width: 470px;
+    display: flex;
+    top: 24px;
+    transform: translate(0, -50%);
+    padding-left: 48px;
+    z-index: 1;
+    align-items: center;
+    pointer-events: none;
+}
+
+.ctrl-k {
+    display: flex;
+    gap: 5px;
+}
+
+.pl label {
+    color: #b3b3b3;
+    margin-right: 10px;
+}
+
+/* transition-friendly hidden state */
+.ctrl-k>div {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    opacity: 0;
+    transform: translateY(-6px);
+    visibility: hidden;
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+    color: #b3b3b3;
+    border: 2px solid #7a7a7a;
+    padding: 2px 4px;
+    border-radius: 5px;
+}
+
+/* visible state (also via keyboard focus) */
+.ctrl-k>div.visible,
+.inpl:focus-within .ctrl-k>div,
+.inpl:hover .ctrl-k>div {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+/* visible state (used by CSS :focus-within or JS class) */
+
+.icon {
+    position: absolute;
+    right: 24px;
+    z-index: 1;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    gap: 12px;
+}
+
+#browse-icon,
+#cross-icon {
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#browse-icon svg,
+#cross-icon svg {
+    width: 23px;
+    background: none;
+    /* color: #7a7a7a; */
+    fill: #b3b3b3;
+}
+
+.lamba {
+    height: 24px;
+    width: 0.5px;
+    background: #b3b3b3;
+}
+
+.cross{
+    display: none;
+}
