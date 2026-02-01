@@ -15,6 +15,14 @@
     font-family: sans-serif;
 }
 
+body>* {
+    background-color: black;
+}
+
+button {
+    cursor: pointer;
+}
+
 .container {
     background-color: black;
     padding: 8px;
@@ -23,16 +31,21 @@
 }
 
 .header {
-    position: absolute;
+    /* position: absolute; */
     padding: 8px;
+    display: flex;
+    flex-direction: row;
     top: 0;
-    width: 100%;
+    width: -webkit-fill-available;
     left: 0;
+    justify-content: space-between;
+    height: 48px;
+    box-sizing: content-box;
 }
 
 .home:hover.home:hover {
     background-color: #2a2a2a;
-    transform: scale(1.025);
+    transform: scale(1.04);
 }
 
 .svg {
@@ -57,20 +70,22 @@
 a {
     text-decoration: none;
     display: flex;
+    cursor: pointer;
 }
 
 .h-left {
     display: flex;
-    position: absolute;
-    top: -4px;
+    position: relative;
+    /* top: -4px; */
     align-content: center;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    height: 48px;
 }
 
 .spotify svg {
-    margin: 20px;
+    margin: 8px;
     color: #fff;
     fill: currentColor;
 }
@@ -86,11 +101,11 @@ a {
 
 .search {
     padding-inline: 8px;
-    position: absolute;
+    position: relative;
     display: flex;
-    left: 128px;
+    /* left: 128px; */
     /* height: max-content; */
-    top: 12px;
+    /* top: 12px;*/
 }
 
 .searchy svg {
@@ -180,7 +195,7 @@ input[type="search"]::-webkit-search-decoration {
 
 .searchy svg:hover {
     fill: white;
-    transform: scale(1.1);
+    transform: scale(1.04);
 }
 
 .pl {
@@ -252,10 +267,17 @@ input[type="search"]::-webkit-search-decoration {
 
 #browse-icon svg,
 #cross-icon svg {
+    transition: all 0.2s ease-in-out;
     width: 23px;
     background: none;
     /* color: #7a7a7a; */
     fill: #b3b3b3;
+}
+
+#browse-icon svg:hover,
+#cross-icon svg:hover {
+    fill: white;
+    transform: scale(1.04);
 }
 
 .lamba {
@@ -264,6 +286,97 @@ input[type="search"]::-webkit-search-decoration {
     background: #b3b3b3;
 }
 
-.cross{
+.cross {
     display: none;
+}
+
+.h-right {
+    /* position: absolute; */
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+}
+
+/* .inst-icon svg {
+    fill: white;
+    width: 24px;
+    }*/
+.h-right div>a {
+    color: #b3b3b3;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.h-r-r {
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.h-r-l div:hover>a,
+.su:hover>a,
+.log-in:hover>a {
+    color: white;
+    transform: scale(1.04);
+}
+
+.lambal {
+    background: white;
+    width: 1px;
+    height: 25px;
+    margin: 16px;
+}
+
+.h-r-l,
+.h-r-r {
+    display: flex;
+    gap: 8px;
+}
+
+.inst {
+    display: flex;
+    position: relative;
+    padding: 4px 16px 4px 36px;
+
+}
+
+.inst:hover>div>a {
+    color: white;
+    fill: white;
+    transform: scale(1.04);
+}
+
+.inst-icon svg {
+    width: 16px;
+    fill: #b3b3b3;
+}
+
+.inst-icon {
+    position: absolute;
+    inset-inline-start: 12px;
+}
+
+.su {
+    padding: 4px 16px 4px 8px;
+}
+
+.log-in>a {
+    padding: 8px 32px;
+    background: white;
+    color: black !important;
+    border-radius: 500px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    font-weight: 700;
+    font-size: 16px;
 }
