@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="HomeCSS.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -16,7 +20,7 @@
             <div>
                 <a href="" class="spotify">
                     <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" class="svg"
-                        aria-label="Spotify" aria-hidden="false" height="32" data-encore-id="logoSpotify"
+                        aria-label="Spotify" aria-hidden="false" data-encore-id="logoSpotify"
                         style="--encore-logo-fill-color: var(--decorative-base);">
                         <title>Spotify</title>
                         <path
@@ -25,56 +29,61 @@
                     </svg>
                 </a>
             </div>
-            <div class="home">
-                <svg data-encore-id="icon" xmlns="http://www.w3.org/2000/svg" fill="current-color" role="img"
-                    aria-hidden="true" class="e-91000-icon e-91000-baseline svg" viewBox="0 0 24 24">
-                    <path
-                        d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732z">
-                    </path>
-                </svg>
-            </div>
-            <div class="search">
-                <button class="searchy">
-                    <svg data-encore-id="icon" role="img" fill="current-color" aria-hidden="true"
-                        class="e-91000-icon e-91000-baseline svg" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+        </div>
+        <div class="home-search">
+            <div class="home-search-1">
+                <div class="home">
+                    <svg data-encore-id="icon" xmlns="http://www.w3.org/2000/svg" fill="current-color" role="img"
+                        aria-hidden="true" class="e-91000-icon e-91000-baseline svg" viewBox="0 0 24 24">
                         <path
-                            d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z">
+                            d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732z">
                         </path>
                     </svg>
-                </button>
-                <div class="inpl">
-                    <input type="search" name="" id="tuinp" spellcheck="false" tabindex="0">
-                    <div class="pl">
-                        <label for="input">What do you want to play?</label>
-                        <div class="ctrl-k">
-                            <div class="ctrl">Ctrl</div>
-                            <div class="k">K</div>
+                </div>
+                <div class="search">
+                    <button class="searchy">
+                        <svg data-encore-id="icon" role="img" fill="current-color" aria-hidden="true"
+                            class="e-91000-icon e-91000-baseline svg" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="inpl">
+                        <input type="search" name="" id="tuinp" spellcheck="false" tabindex="0">
+                        <div class="pl">
+                            <label for="input">What do you want to play?</label>
+                            <div class="ctrl-k">
+                                <div class="ctrl">Ctrl</div>
+                                <div class="k">K</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="icon">
-                    <div class="cross">
-                        <button id="cross-icon">
-                            <svg data-encore-id="icon" role="img" aria-hidden="true"
-                                class="e-91000-icon e-91000-baseline" viewBox="0 0 24 24">
-                                <path
-                                    d="M3.293 3.293a1 1 0 0 1 1.414 0L12 10.586l7.293-7.293a1 1 0 1 1 1.414 1.414L13.414 12l7.293 7.293a1 1 0 0 1-1.414 1.414L12 13.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L10.586 12 3.293 4.707a1 1 0 0 1 0-1.414">
-                                </path>
-                            </svg></button>
-                    </div>
-                    <div class="lamba"></div>
-                    <div class="browse">
-                        <a href="https://open.spotify.com/search">
-                            <button id="browse-icon">
+                    <div class="icon">
+                        <div class="cross">
+                            <button id="cross-icon">
                                 <svg data-encore-id="icon" role="img" aria-hidden="true"
                                     class="e-91000-icon e-91000-baseline" viewBox="0 0 24 24">
-                                    <path d="M15 15.5c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2"></path>
                                     <path
-                                        d="M1.513 9.37A1 1 0 0 1 2.291 9h19.418a1 1 0 0 1 .979 1.208l-2.339 11a1 1 0 0 1-.978.792H4.63a1 1 0 0 1-.978-.792l-2.339-11a1 1 0 0 1 .201-.837zM3.525 11l1.913 9h13.123l1.913-9zM4 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4h-2V3H6v3H4z">
+                                        d="M3.293 3.293a1 1 0 0 1 1.414 0L12 10.586l7.293-7.293a1 1 0 1 1 1.414 1.414L13.414 12l7.293 7.293a1 1 0 0 1-1.414 1.414L12 13.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L10.586 12 3.293 4.707a1 1 0 0 1 0-1.414">
                                     </path>
-                                </svg>
-                            </button></a>
+                                </svg></button>
+                        </div>
+                        <div class="lamba"></div>
+                        <div class="browse">
+                            <a href="https://open.spotify.com/search">
+                                <button id="browse-icon">
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true"
+                                        class="e-91000-icon e-91000-baseline" viewBox="0 0 24 24">
+                                        <path d="M15 15.5c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2">
+                                        </path>
+                                        <path
+                                            d="M1.513 9.37A1 1 0 0 1 2.291 9h19.418a1 1 0 0 1 .979 1.208l-2.339 11a1 1 0 0 1-.978.792H4.63a1 1 0 0 1-.978-.792l-2.339-11a1 1 0 0 1 .201-.837zM3.525 11l1.913 9h13.123l1.913-9zM4 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4h-2V3H6v3H4z">
+                                        </path>
+                                    </svg>
+                                </button></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,9 +129,43 @@
             </div>
         </div>
     </div>
-    <aside class="aisd"></aside>
     <main class="container">
-        <footer class="Foot"></footer>
+        <aside class="aisd">
+            <div class="asid-1">
+                <h1>Your Library</h1>
+                <button class="create">
+                    <div class="create-svg">
+                        <svg data-encore-id="icon" role="img" aria-hidden="true"
+                            class="e-91000-icon e-91000-baseline GorxihKONk8nwCGm" viewBox="0 0 16 16"
+                            style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);">
+                            <path
+                                d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75">
+                            </path>
+                        </svg>
+                    </div>
+                    <h1 class="create-h1">Create</h1>
+                </button>
+            </div>
+            <div class="asid-2"></div>
+            <div class="asid-3">
+                <div class="asid-3-grey">
+                    <a href="https://www.spotify.com/in-en/legal/" target="_blank">Legal</a>
+                    <a href="https://www.spotify.com/in-en/safetyandprivacy/" target="_blank">Safety & Privacy
+                        Center</a>
+                    <a href="https://www.spotify.com/in-en/legal/privacy-policy/" target="_blank">Privacy Policy</a>
+                    <a href="https://www.spotify.com/in-en/legal/cookies-policy/" target="_blank">Cookies</a>
+                    <a href="https://www.spotify.com/in-en/legal/privacy-policy/#s3" target="_blank">About Ads</a>
+                    <a href="https://www.spotify.com/in-en/accessibility/" target="_blank">Accessibility</a>
+                </div>
+                <a href="https://www.spotify.com/legal/cookies-policy/" target="_blank" rel="noopener"
+                    class="asid-3-white"> Cookies </a>
+            </div>
+            <div class="asid-4"></div>
+        </aside>
+        <main class="main">
+            swe
+            <footer class="Foot"></footer>
+        </main>
     </main>
     <!-- </div> -->
     <script src="Home.js"></script>
