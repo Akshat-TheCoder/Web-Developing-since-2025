@@ -158,37 +158,6 @@ window.addEventListener('online', (listener) => {
 //     ad.play();
 // }
 
-// GetSongs();
-let folders = [];
-let imgsrc = [];  // ✅ Declare as array
-
-async function FetchSongsFolder() {
-    let r = await fetch('http://127.0.0.1:5501/projects/Spotify%20Clone/Songs/');
-    let ru = await r.text();
-    let div = document.createElement('div');
-    div.innerHTML = ru;
-    let span = [...div.querySelectorAll('span.name')].slice(1);
-
-    folders = span.map(s => s.innerText);  // ✅ Simpler: use map()
-    // console.log('Folders:', folders);
-}
-
-async function GetImages() {
-    for (let index = 0; index < folders.length; index++) {
-        const element = folders[index];
-        let foldersrc = await fetch(`http://127.0.0.1:5501/projects/Spotify%20Clone/Songs/${element}/`);
-        let html = await foldersrc.text();  // ✅ Add await!
-
-        let div = document.createElement('div');
-        div.innerHTML = html;  // ✅ Parse HTML first!
-
-        let rx = div.querySelectorAll('a[href$=".jpg"]');  // Gets <a> elements
-        let imageUrls = [...rx].map(a => a.href);  // ✅ Convert NodeList to Array + map()
-        imgsrc.push(...imageUrls);  // ✅ Spread into main array
-    }
-    console.log('All image URLs:', imgsrc);
-}
-
 let cardContainer = document.querySelector('.cards')
 
 async function DisplayAlbums() {
@@ -210,7 +179,7 @@ async function DisplayAlbums() {
         cardContainer.innerHTML = cardContainer.innerHTML + `
             <div class="card">
                 <div class="img-section">
-                    <img src="/projects/Spotify%20Clone/Songs/${Folder}/cover.jpg" alt="">
+                    <img src="./Songs/${Folder}/cover.jpg" alt="">
                     <button class="play" data-folder="${Folder}">
                         <svg data-encore-id="icon" role="img" aria-hidden="true"
                              class="e-91000-icon e-91000-baseline" viewBox="0 0 24 24">
@@ -294,8 +263,6 @@ carContainer.addEventListener('click', async (e) => {
 });
 
 async function Main() {
-    await FetchSongsFolder();      // gets folders list
-    await GetImages();             // album images
     await DisplayAlbums();         // show albums
 }
 
