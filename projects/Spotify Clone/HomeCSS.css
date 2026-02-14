@@ -400,9 +400,9 @@ input[type="search"]::-webkit-search-decoration {
     padding-top: 0;
     background-color: #121212;
     border-radius: 14px;
-    padding: 40px 80px 80px 80px;
+    /* padding: 40px 80px 80px 80px; */
     /* Extra bottom padding */
-    overflow-y: auto;
+    overflow-y: hidden;
     /* Vertical scroll only */
     height: 100%;
     /* Fill container height */
@@ -412,21 +412,21 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 /* Custom scrollbar for Webkit browsers (Chrome, Safari) */
-.main::-webkit-scrollbar {
+.playlist-list::-webkit-scrollbar {
     width: 12px;
 }
 
-.main::-webkit-scrollbar-track {
+.playlist-list::-webkit-scrollbar-track {
     background: #2a2a2a;
     border-radius: 6px;
 }
 
-.main::-webkit-scrollbar-thumb {
+.playlist-list::-webkit-scrollbar-thumb {
     background: #b3b3b3;
     border-radius: 6px;
 }
 
-.main::-webkit-scrollbar-thumb:hover {
+.playlist-list::-webkit-scrollbar-thumb:hover {
     background: white;
 }
 
@@ -524,6 +524,12 @@ input[type="search"]::-webkit-search-decoration {
 
 .h-r-l a {
     font-size: 22.75px;
+}
+
+.playlist-list {
+    padding: 40px 80px;
+    height: calc(100% - 120px);
+    overflow-y: auto;
 }
 
 .playlist-list h1 {
@@ -680,7 +686,7 @@ li.library-song {
 
 /* Firefox: thin, overlay-like */
 .asid-2,
-.main {
+.playlist-list {
     scrollbar-width: thin;
     scrollbar-color: #555 transparent;
     /* thumb, track */
@@ -688,17 +694,17 @@ li.library-song {
 
 /* WebKit (Chrome, Edge, Safari) */
 .asid-2::-webkit-scrollbar,
-.main::-webkit-scrollbar {
+.playlist-list::-webkit-scrollbar {
     width: 8px;
 }
 
 .asid-2::-webkit-scrollbar-track,
-.main::-webkit-scrollbar-track {
+.playlist-list::-webkit-scrollbar-track {
     background: transparent;
 }
 
 .asid-2::-webkit-scrollbar-thumb,
-.main::-webkit-scrollbar-thumb {
+.playlist-list::-webkit-scrollbar-thumb {
     background: transparent;
     /* default: invisible */
     border-radius: 999px;
@@ -706,12 +712,12 @@ li.library-song {
 
 /* On hover of the scrollable area → show thumb */
 .asid-2:hover::-webkit-scrollbar-thumb,
-.main:hover::-webkit-scrollbar-thumb {
+.playlist-list:hover::-webkit-scrollbar-thumb {
     background: #555;
 }
 
 .asid-2:hover::-webkit-scrollbar-thumb:hover,
-.main:hover::-webkit-scrollbar-thumb:hover {
+.playlist-list:hover::-webkit-scrollbar-thumb:hover {
     background: #aaa;
 }
 
@@ -855,6 +861,136 @@ a,
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
+.playing-song-detail {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    height: 120px;
+}
+
+.up-name {
+    font-weight: 500;
+}
+
+.playing-song-controller {
+    background: #1e2726;
+    padding: 1rem 2rem 0.5rem 2rem;
+    border-radius: 14px;
+    width: calc(100% - 28px);
+    margin-left: 14px;
+}
+
+.up {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.up-control-song-previous,
+.up-control-song-play,
+.up-control-song-next {
+    background: transparent;
+    border: 3.5px solid white;
+    padding: 3px;
+    border-radius: 51px;
+    box-sizing: content-box;
+    height: 32px;
+    width: 32px;
+}
+
+.up-control-song-play {
+    border: none;
+    height: 48px;
+    width: 48px;
+    padding: 0;
+}
+
+.up-control-song-previous svg,
+.up-control-song-play svg,
+.up-control-song-next svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: white;
+    fill: white;
+}
+
+.up-control-song-play svg {
+    width: 3rem;
+    height: 3rem;
+    fill: transparent;
+}
+
+.up-control-song {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.up-ti-vol {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+#volume-svgs {
+    background: none;
+    border: none;
+}
+
+.volume-high-svg,
+.volume-low-svg,
+.volume-mute {
+    height: 24px;
+}
+
+.volume-high-svg svg,
+.volume-low-svg svg,
+.volume-mute svg {
+    stroke: white;
+    width: 24px;
+    height: 24px;
+}
+
+.volume-high-svg {
+    display: none;
+}
+
+.volume-mute {
+    display: none;
+}
+
+.volume {
+    display: flex;
+    gap: 8px;
+}
+
+.dn {
+    width: 100%;
+    position: relative;
+    margin: 1rem auto 0.5rem auto;
+}
+
+.playball {
+    background: white;
+    width: 14px;
+    height: 14px;
+    border-radius: 37px;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+}
+
+.play-range {
+    width: 100%;
+    background: white;
+    height: 3px;
+    margin: auto;
+}
 
 @media screen and (max-width:1800px) {
     .offline-svg svg {
@@ -881,6 +1017,11 @@ a,
         padding-top: 24px;
         font-weight: 400;
         font-size: 1rem;
+    }
+
+    .playlist-list {
+        padding: 40px;
+        padding-bottom: 1rem;
     }
 
     .playlist-list h1 {
@@ -1288,7 +1429,7 @@ a,
     }
 
     .main {
-        padding: 40px;
+        /* padding: 40px; */
         height: 100%;
         overflow-y: auto;
     }
