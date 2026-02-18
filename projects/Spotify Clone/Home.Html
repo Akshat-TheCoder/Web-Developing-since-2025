@@ -164,33 +164,36 @@
                 <a href="https://www.spotify.com/legal/cookies-policy/" target="_blank" rel="noopener"
                     class="asid-3-white"> Cookies </a>
             </div>
+            <button class="scroll-to-top">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M18 4L5.99997 4" />
+                    <path d="M12 8V20" />
+                    <path d="M15.9999 12C15.9999 12 13.054 8.00001 11.9999 8C10.9458 7.99999 7.99994 12 7.99994 12" />
+                </svg>
+            </button>
         </aside>
         <main class="main">
             <div class="playlist-list">
                 <h1>Your Playlists</h1>
                 <div class="cards">
-                    <!-- <div class="card">
-                        <div class="img-section">
-                            <img src="Assest/AAshiqi.jpg" alt="">
-                            <button class="play">
-                                <svg data-encore-id="icon" role="img" aria-hidden="true"
-                                    class="e-91000-icon e-91000-baseline" viewBox="0 0 24 24">
-                                    <path
-                                        d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h2>Aashiqui 2</h2>
-                        <p>Mithoon, Ankit Tiwari, Jeet GannGulli</p>
-                    </div> -->
+                    <button class="scroll-to-top-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                            color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round">
+                            <path d="M18 4L5.99997 4" />
+                            <path d="M12 8V20" />
+                            <path
+                                d="M15.9999 12C15.9999 12 13.054 8.00001 11.9999 8C10.9458 7.99999 7.99994 12 7.99994 12" />
+                        </svg>
+                    </button>
                 </div>
             </div>
             <div class="playing-song-detailer">
                 <div class="playing-song-detail">
                     <div class="playing-song-controller">
                         <div class="up">
-                            <div class="up-name">efe</div>
+                            <div class="up-name"></div>
                             <div class="up-control-song">
                                 <button class="up-control-song-previous">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
@@ -221,7 +224,11 @@
                                 </button>
                             </div>
                             <div class="up-ti-vol">
-                                <div class="timing">01:06 / 03:34</div>
+                                <div class="timing">
+                                    <div class="timing-cr">23 : 04</div>
+                                    <div class="timing--">/</div>
+                                    <div class="timing-dura">33 : 04</div>
+                                </div>
                                 <div class="volume">
                                     <button id="volume-svgs">
                                         <div class="volume-high-svg">
@@ -257,7 +264,7 @@
                                             </svg>
                                         </div>
                                     </button>
-                                    <input type="range" name="Volume" id="volume-range">
+                                    <input type="range" name="Volume" min="0" max="1" step="0.1" id="volume-range">
                                 </div>
                             </div>
                         </div>
@@ -274,7 +281,7 @@
     </main>
     <!-- </div> -->
 
-    <script src="Home.js"></script>
+    <script src="Home.js" defer></script>
 </body>
 
 </html>

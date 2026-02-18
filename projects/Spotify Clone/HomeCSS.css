@@ -7,6 +7,13 @@
     font-family: "Roboto", sans-serif;
 }
 
+html,
+body,
+* {
+    scroll-behavior: smooth;
+}
+
+
 body {
     overflow: hidden;
     position: relative;
@@ -389,6 +396,7 @@ input[type="search"]::-webkit-search-decoration {
 .aisd {
     width: 25%;
     padding-top: 0;
+    position: relative;
     padding-right: 0;
     background-color: #121212;
     border-radius: 14px;
@@ -528,7 +536,7 @@ input[type="search"]::-webkit-search-decoration {
 
 .playlist-list {
     padding: 40px 80px;
-    height: calc(100% - 120px);
+    height: calc(100% - 16px);
     overflow-y: auto;
 }
 
@@ -543,6 +551,7 @@ input[type="search"]::-webkit-search-decoration {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    position: relative;
 }
 
 .card {
@@ -942,6 +951,10 @@ a,
     border: none;
 }
 
+#volume-range {
+    cursor: pointer;
+}
+
 .volume-high-svg,
 .volume-low-svg,
 .volume-mute {
@@ -972,7 +985,7 @@ a,
 .dn {
     width: 100%;
     position: relative;
-    margin: 1rem auto 0.5rem auto;
+    padding: 1rem 0 0.5rem 0;
 }
 
 .playball {
@@ -982,7 +995,7 @@ a,
     border-radius: 37px;
     position: absolute;
     left: 0;
-    bottom: -5px;
+    bottom: 3px;
 }
 
 .play-range {
@@ -990,6 +1003,73 @@ a,
     background: white;
     height: 3px;
     margin: auto;
+}
+
+.timing {
+    display: flex;
+    gap: 4px;
+}
+
+.playing-song-detailer {
+    display: none;
+}
+
+.scroll-to-top {
+    position: absolute;
+    bottom: 7.5rem;
+    right: 1.3rem;
+    background-color: #121212;
+    border: 2px solid #aaa;
+    border-radius: 200px;
+    box-sizing: content-box;
+    font-size: 1rem;
+    padding: 0.5rem;
+    height: 32px;
+    width: 32px;
+    display: none;
+}
+
+.scroll-to-top-2 {
+    position: fixed;
+    z-index: 100;
+    bottom: 2.3rem;
+    right: 2.3rem;
+    background-color: #121212;
+    border: 2px solid #aaa;
+    border-radius: 200px;
+    box-sizing: content-box;
+    font-size: 1rem;
+    padding: 0.5rem;
+    height: 32px;
+    width: 32px;
+}
+
+.scroll-to-top svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: #aaa;
+}
+
+.scroll-to-top:hover {
+    border-color: white;
+}
+
+.scroll-to-top-2:hover svg {
+    stroke: white;
+}
+
+.scroll-to-top-2 svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: #aaa;
+}
+
+.scroll-to-top-2:hover {
+    border-color: white;
+}
+
+.scroll-to-top-2:hover svg {
+    stroke: white;
 }
 
 @media screen and (max-width:1800px) {
@@ -1431,7 +1511,7 @@ a,
     .main {
         /* padding: 40px; */
         height: 100%;
-        overflow-y: auto;
+        overflow: hidden;
     }
 
     .asid-1 {
