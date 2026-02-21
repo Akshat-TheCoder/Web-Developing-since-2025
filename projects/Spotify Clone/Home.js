@@ -7,6 +7,13 @@ const pl = document.querySelector('.pl');
 const cross = document.querySelector('.cross');
 const inpl = document.querySelector('.inpl');
 const ctrlItems = document.querySelectorAll('.ctrl-k > div');
+const upPlay = document.querySelector('.up-play');
+const upPause = document.querySelector('.up-pause');
+const upNext = document.querySelector('.up-next');
+const upPrev = document.querySelector('.up-prev');
+let songs = [];        // array of all song URLs
+let currentIndex = 0;  // which song is playing
+
 
 // Input focus/blur handlers
 if (tuinp && pl) {
@@ -140,17 +147,17 @@ async function DisplayAlbums() {
     let ru = await r.text();
     let div = document.createElement('div');
     div.innerHTML = ru;
-    
+
     let lisa = [...div.querySelectorAll('li')]
-    .slice(1)                         // skip first li
-    .flatMap(li => [...li.querySelectorAll('a')]);  // collect <a> from each li
-    
+        .slice(1)                         // skip first li
+        .flatMap(li => [...li.querySelectorAll('a')]);  // collect <a> from each li
+
     lisa.forEach(async e => {
         let Folder = e.href.split("/").slice(-2)[1];
-        
+
         let r = await fetch(`${base}/projects/Spotify%20Clone/Songs/${Folder}/info.json`);
         let ru = await r.json();
-        
+
         cardContainer.innerHTML = cardContainer.innerHTML + `
         <div class="card">
         <div class="img-section">
@@ -176,15 +183,15 @@ async function GetSongs(folder) {
     let htmlText = await response.text();
     let div = document.createElement('div');
     div.innerHTML = htmlText;
-    
+
     let lis = [...div.querySelectorAll('ul li')];
 
     let spans = lis
-    .map(li => li.querySelector('span.name')?.textContent)
-    .filter(Boolean);
-    
+        .map(li => li.querySelector('span.name')?.textContent)
+        .filter(Boolean);
+
     let songs = spans.filter(name => name.toLowerCase().endsWith('.mp3'));
-    
+
     console.log('Songs (.mp3 only):', songs);
     return songs;
 }
@@ -193,24 +200,29 @@ let ListerScrollToTopBtn = document.querySelector('button.scroll-to-top-2');
 
 async function ShowSongsOnLibrary(folder) {
     window.currentFolder = folder;
-    let songs = await GetSongs(folder);
-    if (AsideScrollToTopBtn.style.display = 'none') {
+    songs = await GetSongs(folder);
+    currentIndex = 0;
+
+    if (AsideScrollToTopBtn) {
         AsideScrollToTopBtn.style.display = 'unset';
     }
-    ListerScrollToTopBtn.style.bottom = '8rem';
-    
+    if (ListerScrollToTopBtn) {
+        ListerScrollToTopBtn.style.bottom = '8rem';
+    }
+
+
     let ul = document.querySelector('ul.library');
     if (!ul) {
         console.error('No ul.library found');
         return;
     }
-    
+
     ul.innerHTML = '';
-    
+
     for (let i = 0; i < songs.length; i++) {
         const filename = songs[i];
         const cleanName = filename.substring(0, filename.lastIndexOf('.mp3'));
-        
+
         let liHTML = `
         <li class="library-song" id="Song-${i}">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -222,6 +234,7 @@ async function ShowSongsOnLibrary(folder) {
                 </svg>
                 <h2>${cleanName}</h2>
                 <button class="library-play-btn" data-content="${cleanName}">▶</button>
+                <button class="library-pause-btn" data-content="${cleanName}">&#x23F8;</button>
             </li>
         `;
 
@@ -244,30 +257,20 @@ if (carContainer) {
 
         await ShowSongsOnLibrary(folder);
 
-        const detailer = document.querySelector('.playing-song-detailer');
-        if (detailer) {
-            if (detailer.style.display === 'none' || detailer.style.display === '') {
-                detailer.style.display = 'block';   // or 'block' / 'flex'
-            }
-        }
-
-        const lister = document.querySelector('.playlist-list');
-        if (lister) {
-            if (lister.style.height === 'calc(100% - 16px)' || lister.style.height === '') {
-                lister.style.height = 'calc(100% - 120px)';
-            }
-        }
     });
 }
 
 // ================= Audio Player =================
 
 var currentAudio = null;
+var currentSongURL = null;
 var AudioDuration = 0;
 const PlaybarCurrent = document.querySelector('.timing-cr');
 const playbarPlayback = document.querySelector('.dn');
-const PlaybarPlaybackWidth = playbarPlayback.offsetWidth;
 const Playball = document.querySelector('.playball');
+const upControlPlay = document.querySelector('.up-control-song-play');
+let PlaybarName = document.querySelector('.up-name');
+var currentSongName = null;
 
 function formatTime(secs) {
     const mins = Math.floor(secs / 60);
@@ -300,11 +303,29 @@ function attachProgressUpdater(audio) {
 
 
 async function PlaySongs(a) {
-    // Stop previous audio
-    if (currentAudio && !currentAudio.paused) {
+
+    if (currentAudio && currentSongURL === a) {
+        currentAudio.play();
+        syncPlayerUI();
+
+        if (currentSongName) {
+            await PlaybarDetails(currentSongName, currentAudio.duration);
+        }
+
+        return {
+            audio: currentAudio,
+            duration: currentAudio.duration,
+            volume: currentAudio.volume
+        };
+    }
+
+    // If different song → reset
+    if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
     }
+
+    currentSongURL = a;
 
     return new Promise((resolve) => {
         let ad = new Audio(a);
@@ -313,21 +334,69 @@ async function PlaySongs(a) {
         ad.addEventListener('loadedmetadata', () => {
             AudioDuration = ad.duration;
             currentAudio = ad;
+            ad.addEventListener('play', syncPlayerUI);
+            ad.addEventListener('pause', syncPlayerUI);
+
+            attachTimeUpdater(ad);
+            attachAudioUpdater(ad);
+            attachVolumeUpdater(ad.volume);
+
             ad.play();
-            let volume = ad.volume;
-            // console.log(volume);
-            resolve({ audio: ad, duration: ad.duration, volume: ad.volume });
+            syncPlayerUI();
+
+            ad.addEventListener('ended', () => {
+                if (!songs.length || !window.currentFolder) return;
+
+                // small delay before switching (e.g. 500ms)
+                setTimeout(async () => {
+                    currentIndex = (currentIndex + 1) % songs.length;
+
+                    const base = window.location.origin;
+                    const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
+
+                    const result = await PlaySongs(url);
+                    if (!result) return;
+
+                    const cleanName = songs[currentIndex].replace('.mp3', '');
+                    await PlaybarDetails(cleanName, result.duration);
+                    currentSongName = cleanName;
+                    syncPlayerUI();
+                }, 500); // tweak this value for more/less delay
+            });
+
+
+
+
+            resolve({
+                audio: ad,
+                duration: ad.duration,
+                volume: ad.volume
+            });
         });
 
         ad.addEventListener('error', (e) => {
             console.error('Audio load error:', e);
             resolve(null);
         });
+
+        let detailer = document.querySelector('.playing-song-detailer');
+        if (detailer) {
+            if (detailer.style.display === 'none' || detailer.style.display === '') {
+                detailer.style.display = 'block';   // or 'block' / 'flex'
+            }
+        }
+
+        const lister = document.querySelector('.playlist-list');
+        if (lister) {
+            if (lister.style.height === 'calc(100% - 16px)' || lister.style.height === '') {
+                lister.style.height = 'calc(100% - 120px)';
+            }
+        }
     });
 }
 
+
 // Playbar details
-let PlaybarName = document.querySelector('.up-name');
 let PlaybarDuration = document.querySelector('.timing-dura');
 
 async function PlaybarDetails(a, dura) {
@@ -379,7 +448,7 @@ function attachAudioUpdater(audio) {
 
     const barWidth = playbarPlayback.offsetWidth;
     audio.addEventListener('timeupdate', () => {
-        if (!isDragging) return;
+        if (isDragging) return;
         if (!audio.duration) return;
         const progress = audio.currentTime / audio.duration;
         let x = progress * barWidth;
@@ -394,7 +463,7 @@ playbarPlayback.addEventListener('click', (e) => {
     Playball.style.transform = `translateX(${x}px)`;
     currentAudio.currentTime = ratio * currentAudio.duration;
 });
-let VolumeRange = document.querySelector('#volume-range');
+let VolumeRange = document.getElementById('volume-range');
 
 let MuteSvg = document.querySelector('.volume-mute');
 let HighSvg = document.querySelector('.volume-high-svg');
@@ -430,12 +499,12 @@ function attachVolumeUpdater(e) {
 }
 
 VolumeRange.addEventListener('input', (e) => {
-    // console.log('range value:', e.target.value);
+    console.log('range value:', e.target.value);
     const vol = Number(e.target.value);
     const v = Math.min(Math.max(vol, 0), 1);
     if (currentAudio) currentAudio.volume = v;
 
-    if (v === 0) {
+    if (v <= 0.0001) {
         MuteSvg.style.display = 'unset';
         HighSvg.style.display = 'none';
         LowSvg.style.display = 'none';
@@ -453,26 +522,61 @@ VolumeRange.addEventListener('input', (e) => {
 VolumeRange.dispatchEvent(new Event('input'));
 
 
-// Event delegation: play song from library
+
 document.addEventListener('click', async (e) => {
-    const btn = e.target.closest('.library-play-btn');
-    if (!btn) return;
+    const playBtn = e.target.closest('.library-play-btn');
+    const pauseBtn = e.target.closest('.library-pause-btn');
 
-    const songName = btn.getAttribute('data-content');
-    if (window.currentFolder && songName) {
-        const base = window.location.origin;
-        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songName}.mp3`;
+    // PLAY
+    if (playBtn) {
+        const songName = playBtn.getAttribute('data-content');
+        currentIndex = songs.findIndex(s => s === songName + '.mp3');
+        if (currentIndex === -1) currentIndex = 0;
+        if (window.currentFolder && songName) {
+            const base = window.location.origin;
+            const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songName}.mp3`;
 
-        const result = await PlaySongs(url);
-        if (result) {
-            await PlaybarDetails(songName, result.duration);
-            attachTimeUpdater(result.audio);      // updates time text
-            attachProgressUpdater(result.audio);  // moves .playball
-            attachVolumeUpdater(result.volume);
+            const result = await PlaySongs(url);
+            if (result) {
+                // document.querySelectorAll('.library-play-btn').forEach(btn => {
+                //     btn.style.display = 'inline-block';
+                // });
+
+                // document.querySelectorAll('.library-pause-btn').forEach(btn => {
+                //     btn.style.display = 'none';
+                // });
+                // playBtn.style.display = 'none';
+
+                await PlaybarDetails(songName, result.duration);
+                currentSongName = songName;
+                // attachTimeUpdater(result.audio);
+                // attachAudioUpdater(result.audio);
+                // attachVolumeUpdater(result.volume);
+
+                // PlayButtonTransform(playBtn);   // pass the play button element
+            }
         }
+    }
 
+    // PAUSE
+    else if (pauseBtn && currentAudio) {
+        currentAudio.pause();
+        syncPlayerUI();
+        // also stop any timers if you have them
     }
 });
+
+
+
+function PlayButtonTransform(playBtn) {
+    const li = playBtn.closest('.library-song');
+    if (!li) return;
+
+    const pauseBtn = li.querySelector('.library-pause-btn');
+    if (!pauseBtn) return;
+
+    pauseBtn.style.display = 'inline-block';
+}
 
 const AsideContainer = document.querySelector('.asid-2');
 
@@ -498,8 +602,162 @@ if (lister && ListerScrollToTopBtn) {
     });
 }
 
+function togglePlay() {
+    if (!currentAudio) return;
+
+    if (currentAudio.paused) {
+        currentAudio.play();
+    } else {
+        currentAudio.pause();
+    }
+
+    syncPlayerUI(); // ✅ REQUIRED
+}
+
+if (upControlPlay) {
+    upControlPlay.addEventListener('click', togglePlay);
+}
+
+// if (upPlay) {
+//     upPlay.addEventListener('click', togglePlay);
+// }
+
+// if (upPause) {
+//     upPause.addEventListener('click', togglePlay);
+// }
+
+if (upPrev) {
+    upPrev.addEventListener('click', async () => {
+        if (!songs.length || !window.currentFolder) return;
+
+        currentIndex--;
+
+        if (currentIndex < 0) {
+            currentIndex = songs.length - 1;
+        }
+
+        const base = window.location.origin;
+        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
+
+        const result = await PlaySongs(url);
+        if (!result) return;
+
+        const cleanName = songs[currentIndex].replace('.mp3', '');
+        await PlaybarDetails(cleanName, result.duration);
+        currentSongName = cleanName;
+    });
+}
+
+if (upNext) {
+    upNext.addEventListener('click', async () => {
+        if (!songs.length || !window.currentFolder) return;
+
+        currentIndex++;
+
+        if (currentIndex >= songs.length) {
+            currentIndex = 0;
+        }
+
+        const base = window.location.origin;
+        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
+
+        const result = await PlaySongs(url);
+        if (!result) return;
+
+        const cleanName = songs[currentIndex].replace('.mp3', '');
+        await PlaybarDetails(cleanName, result.duration);
+        currentSongName = cleanName;
+    });
+}
+
+function syncPlayerUI() {
+    if (!currentAudio) return;
+
+    const allPlayBtns = document.querySelectorAll('.library-play-btn');
+    const allPauseBtns = document.querySelectorAll('.library-pause-btn');
+
+    if (currentAudio.paused) {
+
+        // Top control icons
+        if (upPlay && upPause) {
+            upPause.classList.add('hidden');
+            upPlay.classList.remove('hidden');
+        }
+
+        if (upControlPlay) {
+            upControlPlay.classList.remove('playing');
+        }
+
+        // Library icons
+        allPauseBtns.forEach(btn => btn.style.display = 'none');
+        allPlayBtns.forEach(btn => btn.style.display = 'inline-block');
+
+    } else {
+
+        if (upPlay && upPause) {
+            upPlay.classList.add('hidden');
+            upPause.classList.remove('hidden');
+        }
+
+        if (upControlPlay) {
+            upControlPlay.classList.add('playing');
+        }
+
+        // Show pause only for current song
+        allPauseBtns.forEach(btn => btn.style.display = 'none');
+        allPlayBtns.forEach(btn => btn.style.display = 'inline-block');
+
+        if (currentSongName) {
+            const currentPlayBtn = document.querySelector(
+                `.library-play-btn[data-content="${currentSongName}"]`
+            );
+
+            if (currentPlayBtn) {
+                currentPlayBtn.style.display = 'none';
+
+                const li = currentPlayBtn.closest('.library-song');
+                const pauseBtn = li.querySelector('.library-pause-btn');
+                if (pauseBtn) pauseBtn.style.display = 'inline-block';
+            }
+        }
+    }
+}
 
 
+const NextBtn = document.querySelector('.up-control-song-next');
+const PrevBtn = document.querySelector('.up-control-song-previous');
+
+if (NextBtn) {
+    NextBtn.addEventListener('click', async () => {
+        if (!songs.length || !window.currentFolder) return;
+        currentIndex = (currentIndex + 1) % songs.length;
+        const base = window.location.origin;
+        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
+        const result = await PlaySongs(url);
+        if (result) {
+            const cleanName = songs[currentIndex].replace('.mp3', '');
+            await PlaybarDetails(cleanName, result.duration);
+            currentSongName = cleanName;
+            syncPlayerUI();
+        }
+    });
+}
+
+if (PrevBtn) {
+    PrevBtn.addEventListener('click', async () => {
+        if (!songs.length || !window.currentFolder) return;
+        currentIndex = currentIndex === 0 ? songs.length - 1 : currentIndex - 1;
+        const base = window.location.origin;
+        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
+        const result = await PlaySongs(url);
+        if (result) {
+            const cleanName = songs[currentIndex].replace('.mp3', '');
+            await PlaybarDetails(cleanName, result.duration);
+            currentSongName = cleanName;
+            syncPlayerUI();
+        }
+    });
+}
 
 
 // ================= Main =================
