@@ -13,6 +13,7 @@ const upNext = document.querySelector('.up-next');
 const upPrev = document.querySelector('.up-prev');
 let songs = [];        // array of all song URLs
 let currentIndex = 0;  // which song is playing
+let currentVolume = 1;
 
 
 // Input focus/blur handlers
@@ -339,7 +340,7 @@ async function PlaySongs(a) {
 
             attachTimeUpdater(ad);
             attachAudioUpdater(ad);
-            attachVolumeUpdater(ad.volume);
+            // attachVolumeUpdater(ad.volume);
 
             ad.play();
             syncPlayerUI();
@@ -382,24 +383,16 @@ async function PlaySongs(a) {
         let detailer = document.querySelector('.playing-song-detailer');
         if (detailer) {
             if (detailer.style.display === 'none' || detailer.style.display === '') {
-                detailer.style.display = 'block';   // or 'block' / 'flex'
+                detailer.style.display = 'block';   // or 'flex'
+                updatePlaylistHeight();             // run immediately when it becomes visible
+            } else {
+                // already visible, still ensure correct height
+                updatePlaylistHeight();
             }
         }
 
-        const lister = document.querySelector('.playlist-list');
-        if (lister) {
-            const WinWIdth = window.innerWidth;
-            if (WinWIdth > 1800) {
-                if (lister.style.height === 'calc(100% - 16px)' || lister.style.height === '') {
-                    lister.style.height = 'calc(100% - 11rem)';
-                }
-            }
-            else {
-                if (lister.style.height === 'calc(100% - 16px)' || lister.style.height === '') {
-                    lister.style.height = 'calc(100% - 128px)';
-                }
-            }
-        }
+
+
     });
 }
 
@@ -454,15 +447,30 @@ window.addEventListener('mousemove', (e) => {
 function attachAudioUpdater(audio) {
     if (!playbarPlayback || !Playball) return;
 
-    const barWidth = playbarPlayback.offsetWidth;
     audio.addEventListener('timeupdate', () => {
         if (isDragging) return;
         if (!audio.duration) return;
+
+        // always use live width
+        const barWidth = playbarPlayback.getBoundingClientRect().width;
         const progress = audio.currentTime / audio.duration;
-        let x = progress * barWidth;
+        const x = progress * barWidth;
+
         Playball.style.transform = `translateX(${x}px)`;
-    })
+    });
 }
+
+window.addEventListener('resize', () => {
+    updatePlaylistHeight();  // your existing function
+
+    if (!currentAudio || !currentAudio.duration || !playbarPlayback || !Playball) return;
+    const barWidth = playbarPlayback.getBoundingClientRect().width;
+    const progress = currentAudio.currentTime / currentAudio.duration;
+    const x = progress * barWidth;
+    Playball.style.transform = `translateX(${x}px)`;
+});
+
+
 
 playbarPlayback.addEventListener('click', (e) => {
     if (!currentAudio || !currentAudio.duration) return;
@@ -510,6 +518,7 @@ VolumeRange.addEventListener('input', (e) => {
     console.log('range value:', e.target.value);
     const vol = Number(e.target.value);
     const v = Math.min(Math.max(vol, 0), 1);
+    currentVolume = v;
     if (currentAudio) currentAudio.volume = v;
 
     if (v <= 0.0001) {
@@ -525,6 +534,32 @@ VolumeRange.addEventListener('input', (e) => {
         HighSvg.style.display = 'block';
         LowSvg.style.display = 'none';
     }
+});
+// Mute → full volume (example)
+MuteSvg.addEventListener('click', () => {
+    if (!currentAudio) return;
+    currentVolume = 1;          // remember new value
+    currentAudio.volume = 1;
+    VolumeRange.value = 1;
+    VolumeRange.dispatchEvent(new Event('input'));
+});
+
+// Medium volume
+HighSvg.addEventListener('click', () => {
+    if (!currentAudio) return;
+    currentVolume = 0.5;        // remember new value
+    currentAudio.volume = 0.5;
+    VolumeRange.value = 0.5;
+    VolumeRange.dispatchEvent(new Event('input'));
+});
+
+// Mute
+LowSvg.addEventListener('click', () => {
+    if (!currentAudio) return;
+    currentVolume = 0;          // remember new value
+    currentAudio.volume = 0;
+    VolumeRange.value = 0;
+    VolumeRange.dispatchEvent(new Event('input'));
 });
 
 VolumeRange.dispatchEvent(new Event('input'));
@@ -598,6 +633,31 @@ if (AsideContainer && AsideScrollToTopBtn) {
 }
 
 let lister = document.querySelector('.playlist-list');
+
+function updatePlaylistHeight() {
+    const detailer = document.querySelector('.playing-song-detailer');
+    // run only when detailer is visible
+    if (!detailer || detailer.style.display !== 'block') return;
+
+    const lister = document.querySelector('.playlist-list');
+    if (!lister) return;
+
+    const WinWIdth = window.innerWidth;
+
+    if (WinWIdth > 1800) {
+        lister.style.height = 'calc(100% - 11rem)';
+    } else {
+        lister.style.height = 'calc(100% - 128px)';
+    }
+}
+
+// Initial call
+updatePlaylistHeight();
+
+// Recheck on every resize
+// window.addEventListener('resize', updatePlaylistHeight);
+
+
 
 
 if (lister && ListerScrollToTopBtn) {

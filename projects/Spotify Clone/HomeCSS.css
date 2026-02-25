@@ -400,6 +400,7 @@ input[type="search"]::-webkit-search-decoration {
     background-color: #121212;
     border-radius: 14px;
     display: flex;
+    position: relative;
     flex-direction: column;
 }
 
@@ -818,13 +819,12 @@ a,
     justify-content: space-between;
 }
 
-/* Ensure layout space for button */
-.library-song {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.library-play-btn,
+.library-pause-btn,
+.library-song svg {
+    flex-shrink: 0;
 }
+
 
 /* Circular play button */
 .library-play-btn {
@@ -1059,7 +1059,7 @@ a,
 
 .scroll-to-top {
     position: absolute;
-    bottom: 5rem;
+    bottom: 6.5rem;
     right: 1.3rem;
     background-color: #121212;
     border: 2px solid #aaa;
@@ -1067,13 +1067,14 @@ a,
     box-sizing: content-box;
     font-size: 1rem;
     padding: 0.5rem;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
     display: none;
 }
 
 .scroll-to-top-2 {
     position: fixed;
+    /* display: none !important; */
     z-index: 100;
     bottom: 2.3rem;
     right: 2.3rem;
@@ -1088,8 +1089,8 @@ a,
 }
 
 .scroll-to-top svg {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     stroke: #aaa;
 }
 
@@ -1310,7 +1311,7 @@ a,
     .library-pause-btn {
         width: 2rem;
         height: 2rem;
-        font-size: 14px;
+        font-size: 20px;
     }
 
     .up-control-song-previous svg,
@@ -1804,5 +1805,66 @@ a,
 
     .online {
         font-size: unset;
+    }
+}
+
+@media screen and (max-width : 1200px) {
+    .library-song h2 {
+        font-size: 13px;
+    }
+
+    .h-right div>a {
+        font-size: 13px;
+    }
+
+    .up-name {
+        max-width: 200px;
+    }
+
+    .pl label {
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .timing {
+        font-size: 14px;
+    }
+
+    .up-control-song {
+        gap: 0;
+    }
+
+    .pl,
+    .search input,
+    .inpl {
+        width: 278px;
+    }
+
+    .log-in>a {
+        padding: 8px 24px;
+    }
+
+    .inst,
+    .su {
+        padding-right: 0;
+    }
+
+    .lambal {
+        margin: 0;
+    }
+
+    .card {
+        width: 11.9rem;
+    }
+
+    .card img {
+        width: 9.8rem;
+        height: 9.8rem;
+    }
+
+    .card h2 {
+        font-size: 14px;
     }
 }
