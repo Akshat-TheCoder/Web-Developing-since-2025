@@ -33,6 +33,8 @@ a {
     cursor: pointer;
 }
 
+
+
 .header {
     padding: 14px;
     display: flex;
@@ -148,7 +150,7 @@ a {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    width: 840px;
+    width: 695px;
     transition: all 0.5s;
 }
 
@@ -395,13 +397,13 @@ input[type="search"]::-webkit-search-decoration {
 
 .aisd {
     width: 25%;
-    padding-top: 0;
-    position: relative;
-    padding-right: 0;
     background-color: #121212;
     border-radius: 14px;
-    min-height: calc(100vh - 72px);
+    display: flex;
+    flex-direction: column;
 }
+
+
 
 .main {
     width: 75%;
@@ -441,7 +443,7 @@ input[type="search"]::-webkit-search-decoration {
 .asid-1 {
     display: flex;
     justify-content: space-between;
-    padding: 16px 16px 8px;
+    padding: 1rem;
     align-items: center;
 }
 
@@ -449,7 +451,7 @@ input[type="search"]::-webkit-search-decoration {
     font-weight: 700;
     margin-left: 4px;
     color: white;
-    font-size: 28px;
+    font-size: 32px;
 }
 
 .create {
@@ -481,9 +483,6 @@ input[type="search"]::-webkit-search-decoration {
 
 .asid-3 {
     margin: 32px 24px;
-    position: absolute;
-    bottom: 0;
-    width: calc(25vw - 56px);
 }
 
 .asid-3-grey {
@@ -558,12 +557,18 @@ input[type="search"]::-webkit-search-decoration {
     padding: 1.5rem;
     background: #3b3b3b;
     border-radius: 15px;
-    border: 2px solid #ffffff;
-    max-width: 350px;
+    border: 3px solid #ffffff;
+    width: 22rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 2rem;
 }
 
 .card img {
     border-radius: 5px;
+    width: 17.9rem;
+    height: 17.9rem;
 }
 
 .card h2 {
@@ -576,7 +581,7 @@ input[type="search"]::-webkit-search-decoration {
     margin-top: 0.6rem;
     width: initial;
     display: flex;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: #d3d3d3;
 }
 
@@ -651,16 +656,9 @@ input[type="search"]::-webkit-search-decoration {
     background: black;
 }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
 .asid-2 {
-    height: calc(100% - 170px);
+    flex: 1;
     overflow: auto;
-    padding: 25px;
 }
 
 .library {
@@ -680,17 +678,17 @@ li.library-song {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 2px solid #b3b3b3;
-    padding: 16px;
-    margin-bottom: 1rem;
-    border-radius: 1rem;
-    gap: 1rem;
+    border: 3px solid #b3b3b3;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 1.5rem;
+    gap: 1.5rem;
 }
 
 .library-song svg {
     stroke: #b3b3b3;
-    width: 2rem;
-    height: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 
 /* Firefox: thin, overlay-like */
@@ -770,14 +768,14 @@ a,
 
 .library-song h2 {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 1.5rem;
     font-weight: 500;
     letter-spacing: 0.01em;
     text-align: center;
 }
 
 .asid-2 {
-    padding: 8px 10px 12px;
+    padding: 1rem 2rem;
 }
 
 /* .header {
@@ -833,9 +831,9 @@ a,
     border: none;
     outline: none;
     min-width: 32px;
-    width: 32px;
+    width: 3rem;
     min-height: 32px;
-    height: 32px;
+    height: 3rem;
     border-radius: 50%;
     cursor: pointer;
 
@@ -846,7 +844,7 @@ a,
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 1.5rem;
     font-weight: 700;
 
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
@@ -866,9 +864,9 @@ a,
     border: none;
     outline: none;
     min-width: 32px;
-    width: 32px;
+    width: 3rem;
     min-height: 32px;
-    height: 32px;
+    height: 3rem;
     border-radius: 50%;
     cursor: pointer;
     background: #1f1f1f;
@@ -876,13 +874,13 @@ a,
     /* display: inline-flex; */
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 2rem;
     font-weight: 700;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
     /* padding-left: 3px;*/
     padding-left: 1px;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
     display: none;
 }
 
@@ -912,16 +910,17 @@ a,
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
-    height: 120px;
+    height: 10rem;
 }
 
 .up-name {
     font-weight: 500;
+    font-size: 2rem;
 }
 
 .playing-song-controller {
     background: #1e2726;
-    padding: 1rem 2rem 0.5rem 2rem;
+    padding: 2rem 3rem 1rem 3rem;
     border-radius: 14px;
     width: calc(100% - 28px);
     margin-left: 14px;
@@ -938,38 +937,38 @@ a,
 .up-control-song-next {
     background: transparent;
     border: 3.5px solid white;
-    padding: 3px;
+    padding: 0.5rem;
     border-radius: 51px;
     box-sizing: content-box;
-    height: 32px;
-    width: 32px;
+    height: 3rem;
+    width: 3rem;
 }
 
 .up-control-song-play {
     border: none;
-    height: 48px;
-    width: 48px;
+    height: 5rem;
+    width: 5rem;
     padding: 0;
 }
 
 .up-control-song-previous svg,
 .up-control-song-play svg,
 .up-control-song-next svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     stroke: white;
     fill: white;
 }
 
 .up-control-song-play svg {
-    width: 3rem;
-    height: 3rem;
+    width: 5rem;
+    height: 5rem;
     fill: transparent;
 }
 
 .up-control-song {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     align-items: center;
     justify-content: center;
 }
@@ -980,7 +979,11 @@ a,
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
+}
+
+.up {
+    margin-bottom: 16px;
 }
 
 #volume-svgs {
@@ -990,20 +993,22 @@ a,
 
 #volume-range {
     cursor: pointer;
+    width: 10rem;
 }
 
 .volume-high-svg,
 .volume-low-svg,
 .volume-mute {
-    height: 24px;
+    height: 2rem;
 }
 
 .volume-high-svg svg,
 .volume-low-svg svg,
 .volume-mute svg {
     stroke: white;
-    width: 24px;
-    height: 24px;
+    width: 2rem;
+    stroke-width: 2;
+    height: 2rem;
 }
 
 .volume-high-svg {
@@ -1027,24 +1032,25 @@ a,
 
 .playball {
     background: white;
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
     border-radius: 37px;
     position: absolute;
     left: 0;
-    bottom: 3px;
+    bottom: 0px;
 }
 
 .play-range {
     width: 100%;
     background: white;
-    height: 3px;
+    height: 8px;
     margin: auto;
 }
 
 .timing {
     display: flex;
     gap: 4px;
+    font-size: 2rem;
 }
 
 .playing-song-detailer {
@@ -1133,6 +1139,10 @@ a,
 }
 
 @media screen and (max-width:1800px) {
+    .dn {
+        padding: 0;
+    }
+
     .offline-svg svg {
         width: 80px;
         fill: #b3b3b3;
@@ -1175,6 +1185,9 @@ a,
     .card {
         max-width: 13rem;
         padding: 1rem;
+        width: 13rem;
+        border-width: 2px;
+        border-radius: 1rem;
     }
 
     .play svg {
@@ -1186,10 +1199,7 @@ a,
         height: 48px;
     }
 
-    .card img {
-        width: 10.9rem;
-        height: 10.9rem;
-    }
+
 
     .card p {
         font-size: 0.8rem;
@@ -1207,6 +1217,12 @@ a,
         height: 64px;
     }
 
+    .card img {
+        width: 10.9rem;
+        height: 10.9rem;
+        border-radius: 8px;
+    }
+
     .h-r-l a {
         font-size: unset;
     }
@@ -1214,6 +1230,20 @@ a,
     .home:hover.home:hover {
         background-color: #2a2a2a;
         transform: scale(1.04);
+    }
+
+    .library-song svg {
+        stroke: #b3b3b3;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .up {
+        margin-bottom: 0;
+    }
+
+    .library-song h2 {
+        font-size: 0.95rem;
     }
 
     .svg {
@@ -1235,6 +1265,9 @@ a,
         width: 32px;
     }
 
+    .playing-song-detail {
+        height: 120px;
+    }
 
     .h-left {
         display: flex;
@@ -1255,6 +1288,10 @@ a,
         fill: currentColor;
     }
 
+    .up-name {
+        font-size: 1rem;
+    }
+
     .home.home {
         margin-left: 8px;
         background: #1f1f1f;
@@ -1262,6 +1299,47 @@ a,
         border-radius: 50px;
         transition: all 0.2s ease-in-out;
         height: 48px;
+    }
+
+    .library-play-btn {
+        width: 2rem;
+        height: 2rem;
+        font-size: 14px;
+    }
+
+    .library-pause-btn {
+        width: 2rem;
+        height: 2rem;
+        font-size: 14px;
+    }
+
+    .up-control-song-previous svg,
+    .up-control-song-play svg,
+    .up-control-song-next svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .up-control-song {
+        gap: 1rem;
+    }
+
+    .up-control-song-play {
+        width: 4rem !important;
+        height: 4rem !important;
+    }
+
+    .up-control-song-play svg {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .up-control-song-previous,
+    .up-control-song-play,
+    .up-control-song-next {
+        width: 2rem;
+        height: 2rem;
+        padding: 0.25rem;
     }
 
     .search {
@@ -1279,6 +1357,10 @@ a,
         /* filter: invert(1); */
         fill: #b3b3b3;
         transition: all 0.2s ease-in-out;
+    }
+
+    .asid-2 {
+        padding: 8px 10px 12px;
     }
 
     .searchy {
@@ -1320,6 +1402,10 @@ a,
         transition: all 0.5s;
     }
 
+    .up-ti-vol {
+        gap: 1rem;
+    }
+
     .inpl {
         position: relative;
         width: 470px;
@@ -1328,6 +1414,20 @@ a,
     .search input:hover {
         background: #2a2a2a;
         box-shadow: inset 0 0 0 1px #ffffff1a;
+    }
+
+    .volume-high-svg,
+    .volume-low-svg,
+    .volume-mute {
+        height: 24px;
+    }
+
+    .volume-high-svg svg,
+    .volume-low-svg svg,
+    .volume-mute svg {
+        stroke: white;
+        width: 24px;
+        height: 24px;
     }
 
     input[type="search"]::-webkit-search-cancel-button {
@@ -1365,6 +1465,10 @@ a,
         transform: scale(1.04);
     }
 
+    #volume-range {
+        width: unset;
+    }
+
     .pl {
         position: absolute;
         width: 470px;
@@ -1376,6 +1480,10 @@ a,
         align-items: center;
         pointer-events: none;
         font-size: 16px;
+    }
+
+    .play-range {
+        height: 4px;
     }
 
     .ctrl-k {
@@ -1403,6 +1511,14 @@ a,
         border-radius: 5px;
     }
 
+    .timing {
+        font-size: 1rem;
+    }
+
+    .playing-song-controller {
+        padding: 1rem 2rem 0.5rem 2rem;
+    }
+
     /* visible state (also via keyboard focus) */
     .ctrl-k>div.visible,
     .inpl:focus-within .ctrl-k>div,
@@ -1410,6 +1526,20 @@ a,
         opacity: 1;
         transform: translateY(0);
         visibility: visible;
+    }
+
+    .playball {
+        width: 14px;
+        height: 14px;
+        bottom: -5px;
+    }
+
+    li.library-song {
+        border-width: 2px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        gap: 1rem;
     }
 
     /* visible state (used by CSS :focus-within or JS class) */
@@ -1560,12 +1690,7 @@ a,
     }
 
     .aisd {
-        width: 25%;
-        padding-top: 0;
-        padding-right: 0;
-        background-color: #121212;
         border-radius: 8px;
-        min-height: calc(100vh - 72px);
     }
 
     .main {
@@ -1613,13 +1738,6 @@ a,
     .create-h1 {
         font-size: 14px;
         font-weight: 700;
-    }
-
-    .asid-3 {
-        margin: 32px 24px;
-        position: absolute;
-        bottom: 0;
-        width: calc(25vw - 56px);
     }
 
     .asid-3-grey {

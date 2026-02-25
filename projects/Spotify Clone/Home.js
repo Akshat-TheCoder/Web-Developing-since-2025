@@ -35,7 +35,7 @@ const updateCross = () => {
     if (tuinp && cross) {
         cross.style.display =
             document.activeElement === tuinp && tuinp.value.trim() !== ''
-                ? 'unset'
+                ? 'block'
                 : 'none';
     }
 };
@@ -204,7 +204,7 @@ async function ShowSongsOnLibrary(folder) {
     currentIndex = 0;
 
     if (AsideScrollToTopBtn) {
-        AsideScrollToTopBtn.style.display = 'unset';
+        AsideScrollToTopBtn.style.display = 'block';
     }
     if (ListerScrollToTopBtn) {
         ListerScrollToTopBtn.style.bottom = '8rem';
@@ -388,8 +388,16 @@ async function PlaySongs(a) {
 
         const lister = document.querySelector('.playlist-list');
         if (lister) {
-            if (lister.style.height === 'calc(100% - 16px)' || lister.style.height === '') {
-                lister.style.height = 'calc(100% - 120px)';
+            const WinWIdth = window.innerWidth;
+            if (WinWIdth > 1800) {
+                if (lister.style.height === 'calc(100% - 16px)' || lister.style.height === '') {
+                    lister.style.height = 'calc(100% - 11rem)';
+                }
+            }
+            else {
+                if (lister.style.height === 'calc(100% - 16px)' || lister.style.height === '') {
+                    lister.style.height = 'calc(100% - 128px)';
+                }
             }
         }
     });
@@ -505,16 +513,16 @@ VolumeRange.addEventListener('input', (e) => {
     if (currentAudio) currentAudio.volume = v;
 
     if (v <= 0.0001) {
-        MuteSvg.style.display = 'unset';
+        MuteSvg.style.display = 'block';
         HighSvg.style.display = 'none';
         LowSvg.style.display = 'none';
     } else if (v <= 0.5) {
         MuteSvg.style.display = 'none';
         HighSvg.style.display = 'none';
-        LowSvg.style.display = 'unset';
+        LowSvg.style.display = 'block';
     } else {
         MuteSvg.style.display = 'none';
-        HighSvg.style.display = 'unset';
+        HighSvg.style.display = 'block';
         LowSvg.style.display = 'none';
     }
 });
@@ -539,7 +547,7 @@ document.addEventListener('click', async (e) => {
             const result = await PlaySongs(url);
             if (result) {
                 // document.querySelectorAll('.library-play-btn').forEach(btn => {
-                //     btn.style.display = 'inline-block';
+                //     btn.style.display = 'inline-flex';
                 // });
 
                 // document.querySelectorAll('.library-pause-btn').forEach(btn => {
@@ -575,7 +583,7 @@ function PlayButtonTransform(playBtn) {
     const pauseBtn = li.querySelector('.library-pause-btn');
     if (!pauseBtn) return;
 
-    pauseBtn.style.display = 'inline-block';
+    pauseBtn.style.display = 'inline-flex';
 }
 
 const AsideContainer = document.querySelector('.asid-2');
@@ -690,7 +698,7 @@ function syncPlayerUI() {
 
         // Library icons
         allPauseBtns.forEach(btn => btn.style.display = 'none');
-        allPlayBtns.forEach(btn => btn.style.display = 'inline-block');
+        allPlayBtns.forEach(btn => btn.style.display = 'inline-flex');
 
     } else {
 
@@ -705,7 +713,7 @@ function syncPlayerUI() {
 
         // Show pause only for current song
         allPauseBtns.forEach(btn => btn.style.display = 'none');
-        allPlayBtns.forEach(btn => btn.style.display = 'inline-block');
+        allPlayBtns.forEach(btn => btn.style.display = 'inline-flex');
 
         if (currentSongName) {
             const currentPlayBtn = document.querySelector(
@@ -717,7 +725,7 @@ function syncPlayerUI() {
 
                 const li = currentPlayBtn.closest('.library-song');
                 const pauseBtn = li.querySelector('.library-pause-btn');
-                if (pauseBtn) pauseBtn.style.display = 'inline-block';
+                if (pauseBtn) pauseBtn.style.display = 'inline-flex';
             }
         }
     }
