@@ -5,6 +5,7 @@
     letter-spacing: 0.5px;
     color: white;
     font-family: "Roboto", sans-serif;
+    transition: all .2s ease-in-out;
 }
 
 html,
@@ -1326,8 +1327,8 @@ a,
     }
 
     .up-control-song-play {
-        width: 4rem !important;
-        height: 4rem !important;
+        width: 4rem;
+        height: 4rem;
     }
 
     .up-control-song-play svg {
@@ -1818,7 +1819,7 @@ a,
     }
 
     .up-name {
-        max-width: 200px;
+        width: 200px;
     }
 
     .pl label {
@@ -1866,5 +1867,155 @@ a,
 
     .card h2 {
         font-size: 14px;
+    }
+}
+
+@media screen and (max-width : 1024px) {
+    .h-right div>a {
+        font-size: 12px;
+    }
+
+    .pl,
+    .search input,
+    .inpl {
+        width: 229px;
+    }
+
+    .home-search-1 {
+        min-width: unset;
+    }
+
+    .log-in>a {
+        padding: 12px 16px;
+        min-height: unset;
+    }
+
+    .su {
+        padding-left: 0;
+    }
+
+    .inst-icon {
+        inset-inline-start: 0;
+    }
+
+    .inst {
+        padding-left: 20px;
+    }
+
+    .home.home {
+        margin-left: 0;
+    }
+
+    .h-left {
+        width: 3.5rem;
+    }
+
+    .library-song svg {
+        height: 1.5rem;
+        height: 1.5rem;
+    }
+
+    li.library-song {
+        gap: 4px;
+        padding: 8px;
+    }
+
+    .library-song h2 {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+
+    .create {
+        display: none;
+    }
+
+    .asid-3-grey>a {
+        font-size: 8px;
+        margin: 0 8px 4px 0;
+    }
+
+    .card {
+        width: 9.9rem;
+        padding: 0.7rem;
+    }
+
+    .card img {
+        width: 8.3rem;
+        height: 8.3rem;
+    }
+
+    .card h2 {
+        font-size: 13px;
+        margin-top: 0.5rem;
+    }
+
+    .card p {
+        margin-top: 0.3rem;
+    }
+
+    .asid-3 {
+        margin: 1rem;
+    }
+
+    .up-control-song-previous,
+    .up-control-song-play,
+    .up-control-song-next {
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0.25rem;
+    }
+
+    .up-control-song-previous svg,
+    .up-control-song-next svg {
+        width: 1.3rem;
+        height: 1.3rem;
+    }
+
+    .up-control-song-play svg {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .up-control-song-play {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .up-name {
+        font-size: 13px;
+        margin-right: 8px;
+    }
+
+    .timing {
+        font-size: 12px;
+    }
+
+    .volume-high-svg svg,
+    .volume-low-svg svg,
+    .volume-mute svg {
+        stroke: white;
+        width: 20px;
+        height: 20px;
+    }
+
+    .up-name {
+        width: 9rem;
+        margin-right: 0;
+    }
+
+    .volume {
+        gap: 4px;
+    }
+
+    .up-ti-vol {
+        gap: 8px;
+    }
+
+    #volume-range {
+        width: 80px;
+    }
+
+    .up {
+        margin-bottom: 8px;
     }
 }
