@@ -659,7 +659,6 @@ updatePlaylistHeight();
 
 
 
-
 if (lister && ListerScrollToTopBtn) {
     ListerScrollToTopBtn.addEventListener('click', () => {
         console.log(`Clicked`);
@@ -826,12 +825,43 @@ if (PrevBtn) {
         }
     });
 }
-
-
-// ================= Main =================
-
 async function Main() {
     await DisplayAlbums();
 }
 
-Main();
+// Move .h-left and .home-search from header into .asid-0
+function relocateHeaderToSidebar() {
+    const header = document.querySelector('.header');
+    const asid0 = document.querySelector('.asid-0');
+    if (!header || !asid0) return;
+
+    const hLeft = header.querySelector('.h-left') || asid0.querySelector('.h-left');
+    const homeSearch = header.querySelector('.home-search') || asid0.querySelector('.home-search');
+    const hRight = header.querySelector('.h-right');
+
+    if (!hLeft || !homeSearch) return;
+
+    const isDesktop = window.innerWidth <= 768;
+
+    if (isDesktop) {
+        asid0.insertBefore(hLeft, asid0.firstChild);
+        asid0.insertBefore(homeSearch, hLeft.nextSibling);
+    } else {
+        header.insertBefore(hLeft, header.firstChild);
+        if (hRight) {
+            header.insertBefore(homeSearch, hRight);
+        } else {
+            header.appendChild(homeSearch);
+        }
+    }
+}
+
+// initial placement after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    relocateHeaderToSidebar();
+    Main();
+});
+
+// update on resize
+window.addEventListener('resize', relocateHeaderToSidebar);
+
