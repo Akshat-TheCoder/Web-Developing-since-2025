@@ -5,6 +5,7 @@ const crossIcon = document.getElementById('cross-icon');
 const tuinp = document.getElementById('tuinp');
 const pl = document.querySelector('.pl');
 const cross = document.querySelector('.cross');
+const hamburger = document.getElementById('hamburger');
 const inpl = document.querySelector('.inpl');
 const ctrlItems = document.querySelectorAll('.ctrl-k > div');
 const upPlay = document.querySelector('.up-play');
@@ -139,48 +140,58 @@ window.addEventListener('online', () => {
 });
 
 // ================= Albums / Library =================
-
 let cardContainer = document.querySelector('.cards');
 
+// Dynamic base so it works with any parent folder
+const origin = window.location.origin;          // e.g. http://127.0.0.1:5500
+const path = window.location.pathname;        // e.g. /Home.Html or /projects/Spotify%20Clone/Home.Html
+const dir = path.substring(0, path.lastIndexOf("/"));  // folder containing Home.Html
+
+const base = origin + dir;                      // full URL of folder that has Home.Html
+const songsRoot = base + "/Songs/";             // Songs folder next to Home.Html
+
+
+
 async function DisplayAlbums() {
-    const base = window.location.origin; // safer base
-    let r = await fetch(`${base}/projects/Spotify%20Clone/Songs/`);
+    // list Songs/ directory
+    let r = await fetch(songsRoot);          // GET http://127.0.0.1:5500/Songs/
     let ru = await r.text();
-    let div = document.createElement('div');
+    let div = document.createElement("div");
     div.innerHTML = ru;
 
-    let lisa = [...div.querySelectorAll('li')]
-        .slice(1)                         // skip first li
-        .flatMap(li => [...li.querySelectorAll('a')]);  // collect <a> from each li
+    let lisa = [...div.querySelectorAll("li")]
+        .slice(1)                             // skip first li
+        .flatMap(li => [...li.querySelectorAll("a")]);
 
     lisa.forEach(async e => {
         let Folder = e.href.split("/").slice(-2)[1];
 
-        let r = await fetch(`${base}/projects/Spotify%20Clone/Songs/${Folder}/info.json`);
+        // fetch info.json inside that folder
+        let r = await fetch(songsRoot + Folder + "/info.json");
         let ru = await r.json();
 
-        cardContainer.innerHTML = cardContainer.innerHTML + `
-        <div class="card">
+        cardContainer.innerHTML += `
+      <div class="card">
         <div class="img-section">
-        <img src="./Songs/${Folder}/cover.jpg" alt="">
-        <button class="play" data-folder="${Folder}">
-        <svg data-encore-id="icon" role="img" aria-hidden="true"
-        class="e-91000-icon e-91000-baseline" viewBox="0 0 24 24">
-        <path
-        d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606">
-        </path>
-        </svg>
-        </button>
+          <img src="./Songs/${Folder}/cover.jpg" alt="">
+          <button class="play" data-folder="${Folder}">
+            <svg data-encore-id="icon" role="img" aria-hidden="true"
+                 class="e-91000-icon e-91000-baseline" viewBox="0 0 24 24">
+              <path
+                d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606">
+              </path>
+            </svg>
+          </button>
         </div>
         <h2>${ru.PlaylistName}</h2>
         <p>${ru.Artist}</p>
-        </div>`;
+      </div>`;
     });
 }
 
+
 async function GetSongs(folder) {
-    const base = window.location.origin;
-    let response = await fetch(`${base}/projects/Spotify%20Clone/Songs/${folder}`);
+    let response = await fetch(songsRoot + folder);
     let htmlText = await response.text();
     let div = document.createElement('div');
     div.innerHTML = htmlText;
@@ -258,6 +269,10 @@ if (carContainer) {
 
         await ShowSongsOnLibrary(folder);
 
+        const width = window.innerWidth;
+        if (width < 769) {
+            hamburger.click();
+        }
     });
 }
 
@@ -352,8 +367,7 @@ async function PlaySongs(a) {
                 setTimeout(async () => {
                     currentIndex = (currentIndex + 1) % songs.length;
 
-                    const base = window.location.origin;
-                    const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
+                    const url = songsRoot + window.currentFolder + "/" + songs[currentIndex];
 
                     const result = await PlaySongs(url);
                     if (!result) return;
@@ -362,7 +376,8 @@ async function PlaySongs(a) {
                     await PlaybarDetails(cleanName, result.duration);
                     currentSongName = cleanName;
                     syncPlayerUI();
-                }, 500); // tweak this value for more/less delay
+                }, 500);
+
             });
 
 
@@ -576,9 +591,7 @@ document.addEventListener('click', async (e) => {
         currentIndex = songs.findIndex(s => s === songName + '.mp3');
         if (currentIndex === -1) currentIndex = 0;
         if (window.currentFolder && songName) {
-            const base = window.location.origin;
-            const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songName}.mp3`;
-
+            const url = songsRoot + window.currentFolder + "/" + songName + ".mp3";
             const result = await PlaySongs(url);
             if (result) {
                 // document.querySelectorAll('.library-play-btn').forEach(btn => {
@@ -635,21 +648,29 @@ if (AsideContainer && AsideScrollToTopBtn) {
 let lister = document.querySelector('.playlist-list');
 
 function updatePlaylistHeight() {
-    const detailer = document.querySelector('.playing-song-detailer');
-    // run only when detailer is visible
-    if (!detailer || detailer.style.display !== 'block') return;
-
-    const lister = document.querySelector('.playlist-list');
+    const lister = document.querySelector(".playlist-list");
     if (!lister) return;
 
-    const WinWIdth = window.innerWidth;
+    const header = document.querySelector(".header");
+    const headerHeight = header ? header.offsetHeight : 0;
 
-    if (WinWIdth > 1800) {
-        lister.style.height = 'calc(100% - 11rem)';
-    } else {
-        lister.style.height = 'calc(100% - 128px)';
-    }
+    const controller = document.querySelector(".playing-song-controller");
+    // Measure only the controller, not the whole wrapper
+    const controllerHeight = controller ? controller.offsetHeight : 0;
+
+    // Extra free space above the controller (margin)
+    const controllerMargin = 32; // px, tweak as you like
+
+    const winHeight = window.innerHeight;
+
+    // Height left for playlist: viewport - header - controller - margin
+    const available =
+        winHeight - headerHeight - controllerHeight - controllerMargin;
+
+    const minHeight = 200; // avoid collapsing
+    lister.style.height = Math.max(available, minHeight) + "px";
 }
+
 
 // Initial call
 updatePlaylistHeight();
@@ -703,10 +724,9 @@ if (upPrev) {
             currentIndex = songs.length - 1;
         }
 
-        const base = window.location.origin;
-        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
-
+        const url = songsRoot + window.currentFolder + "/" + songs[currentIndex];
         const result = await PlaySongs(url);
+
         if (!result) return;
 
         const cleanName = songs[currentIndex].replace('.mp3', '');
@@ -725,10 +745,9 @@ if (upNext) {
             currentIndex = 0;
         }
 
-        const base = window.location.origin;
-        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
-
+        const url = songsRoot + window.currentFolder + "/" + songs[currentIndex];
         const result = await PlaySongs(url);
+
         if (!result) return;
 
         const cleanName = songs[currentIndex].replace('.mp3', '');
@@ -798,9 +817,9 @@ if (NextBtn) {
     NextBtn.addEventListener('click', async () => {
         if (!songs.length || !window.currentFolder) return;
         currentIndex = (currentIndex + 1) % songs.length;
-        const base = window.location.origin;
-        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
+        const url = songsRoot + window.currentFolder + "/" + songs[currentIndex];
         const result = await PlaySongs(url);
+
         if (result) {
             const cleanName = songs[currentIndex].replace('.mp3', '');
             await PlaybarDetails(cleanName, result.duration);
@@ -814,9 +833,10 @@ if (PrevBtn) {
     PrevBtn.addEventListener('click', async () => {
         if (!songs.length || !window.currentFolder) return;
         currentIndex = currentIndex === 0 ? songs.length - 1 : currentIndex - 1;
-        const base = window.location.origin;
-        const url = `${base}/projects/Spotify%20Clone/Songs/${window.currentFolder}/${songs[currentIndex]}`;
+
+        const url = songsRoot + window.currentFolder + "/" + songs[currentIndex];
         const result = await PlaySongs(url);
+
         if (result) {
             const cleanName = songs[currentIndex].replace('.mp3', '');
             await PlaybarDetails(cleanName, result.duration);
@@ -825,8 +845,12 @@ if (PrevBtn) {
         }
     });
 }
+
 async function Main() {
-    await DisplayAlbums();
+    await DisplayAlbums()
+        .then(() => console.log('All albums loaded'))
+        .catch(err => console.error('DisplayAlbums error:', err));
+
 }
 
 // Move .h-left and .home-search from header into .asid-0
@@ -856,11 +880,135 @@ function relocateHeaderToSidebar() {
     }
 }
 
-// initial placement after DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+const asid0 = document.querySelector('.asid-0');
+if (asid0) {
+    // Create button wrapper
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'asid-close-btn';
+
+    // Create SVG
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('width', '48');
+    svg.setAttribute('height', '48');
+    svg.setAttribute('color', '#ffffff');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', '#ffffff');
+    svg.setAttribute('stroke-width', '1.5');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+
+    // Create path
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M18 6L6.00081 17.9992M17.9992 18L6 6.00085');
+
+    // Assemble: path → SVG → button → .asid-0 (last child)
+    svg.appendChild(path);
+    closeBtn.appendChild(svg);
+    asid0.appendChild(closeBtn);
+}
+
+const closeBtn = document.querySelector('button.asid-close-btn');
+const aisd = document.querySelector('.aisd')
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        aisd.style.transform = `translate(-101%)`;
+    })
+}
+
+
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        aisd.style.transform = 'none';
+    })
+}
+
+document.addEventListener("keydown", (e) => {
+    // Ignore when typing in inputs/textareas
+    const tag = document.activeElement.tagName.toLowerCase();
+    if (tag === "input" || tag === "textarea") return;
+
+    // Space = play / pause
+    if (e.code === "Space") {
+        e.preventDefault();
+        togglePlay();
+    }
+});
+
+const SEEK_STEP = 5; // seconds
+
+document.addEventListener("keydown", (e) => {
+    const tag = document.activeElement.tagName.toLowerCase();
+    if (tag === "input" || tag === "textarea") return;
+
+    // need an audio playing/loaded
+    if (!currentAudio || !currentAudio.duration) return;
+
+    // Shift + Right = seek forward
+    if (e.code === "ArrowRight" && e.shiftKey) {
+        e.preventDefault();
+        currentAudio.currentTime = Math.min(
+            currentAudio.currentTime + SEEK_STEP,
+            currentAudio.duration
+        );
+    }
+
+    // Shift + Left = seek backward
+    if (e.code === "ArrowLeft" && e.shiftKey) {
+        e.preventDefault();
+        currentAudio.currentTime = Math.max(
+            currentAudio.currentTime - SEEK_STEP,
+            0
+        );
+    }
+});
+
+
+// const NextBtn = document.querySelector(".up-control-song-next");
+// const PrevBtn = document.querySelector(".up-control-song-previous");
+
+document.addEventListener("keydown", (e) => {
+    const tag = document.activeElement.tagName.toLowerCase();
+    if (tag === "input" || tag === "textarea") return;
+
+    if (e.code === "ArrowRight") {
+        e.preventDefault();
+        if (NextBtn) NextBtn.click();
+    }
+
+    if (e.code === "ArrowLeft") {
+        e.preventDefault();
+        if (PrevBtn) PrevBtn.click();
+    }
+});
+
+
+// const nextPlaylistBtn = document.querySelector(".next-playlist");
+// const prevPlaylistBtn = document.querySelector(".prev-playlist");
+
+// document.addEventListener("keydown", (e) => {
+//     const tag = document.activeElement.tagName.toLowerCase();
+//     if (tag === "input" || tag === "textarea") return;
+
+//     // Example: N/P for playlists
+//     if (e.key === "n" && nextPlaylistBtn) {
+//         e.preventDefault();
+//         nextPlaylistBtn.click();
+//     }
+//     if (e.key === "p" && prevPlaylistBtn) {
+//         e.preventDefault();
+//         prevPlaylistBtn.click();
+//     }
+// });
+
+
+
+window.addEventListener('load', () => {
     relocateHeaderToSidebar();
     Main();
 });
+
+
 
 // update on resize
 window.addEventListener('resize', relocateHeaderToSidebar);
