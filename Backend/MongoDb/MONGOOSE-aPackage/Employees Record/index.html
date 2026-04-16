@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Generator</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Button */
+        button {
+            padding: 14px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* Glass Table */
+        .table-container {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        td {
+            padding: 14px;
+        }
+
+        tr {
+            transition: 0.3s;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.01);
+        }
+
+        /* Badge */
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .manager {
+            background: #28a745;
+        }
+
+        .employee {
+            background: #6c757d;
+        }
+
+        /* Loader */
+        .loader {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>🚀 Employee Data Generator</h1>
+
+        <button id="btn">Generate Data</button>
+        <div class="loader" id="loader">⏳ Generating...</div>
+
+        <div class="table-container">
+            <table id="dataTable" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>👤 Name</th>
+                        <th>💰 Salary</th>
+                        <th>💻 Language</th>
+                        <th>🌍 City</th>
+                        <th>👔 Role</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let btn = document.querySelector('#btn')
+        let table = document.querySelector('#dataTable')
+        let tbody = document.querySelector('#tableBody')
+        let loader = document.querySelector('#loader')
+
+        async function generateData() {
+            try {
+                loader.style.display = "block"
+                btn.disabled = true
+
+                const res = await fetch('http://localhost:3000/generate-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                const {data} = await res.json()
+
+                tbody.innerHTML = ''
+
+                data.forEach(emp => {
+                    const row = document.createElement('tr')
+
+                    row.innerHTML = `
+                <td>${emp.name}</td>
+                <td>₹${emp.salary.toLocaleString()}</td>
+                <td>${emp.language}</td>
+                <td>${emp.city}</td>
+                <td>
+                    <span class="badge ${emp.isManager ? 'manager' : 'employee'}">
+                        ${emp.isManager ? 'Manager' : 'Employee'}
+                    </span>
+                </td>
+            `
+
+                    tbody.appendChild(row)
+                })
+
+                table.style.display = 'table'
+                btn.textContent = "🔄 Regenerate Data"
+
+            } catch (error) {
+                alert("Error: " + error.message)
+            } finally {
+                loader.style.display = "none"
+                btn.disabled = false
+            }
+        }
+
+        btn.addEventListener('click', generateData)
+    </script>
+
+</body>
+
+</html>
