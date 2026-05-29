@@ -1,0 +1,14 @@
+h1{
+    color: black;
+    font-size: 1.5rem;
+    margin: 2px;
+    margin-bottom: 6px;
+}
+
+.main{
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 1rem;
+    margin: 0 1rem;
+    min-width: 100px;
+}

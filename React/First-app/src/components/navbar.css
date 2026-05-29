@@ -1,0 +1,25 @@
+nav {
+  background-color: beige;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  gap: 2rem;
+}
+
+ul li {
+  color: black;
+  list-style-type: none;
+  margin: 1rem;
+}
+
+.username {
+  background: none;
+  color: black;
+  font-weight: 800;
+  font-size: xx-large;
+  text-transform: capitalize;
+}
