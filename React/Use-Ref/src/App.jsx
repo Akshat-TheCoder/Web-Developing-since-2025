@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -6,6 +6,20 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+
+  function randomcolora() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r},${g},${b})`;  // Direct full string
+  }
+
+  const btnRef = useRef();
+
+  useEffect(() => {
+    btnRef.current.style.backgroundColor = randomcolora();
+  },[count])
+
 
   return (
     <>
@@ -25,6 +39,7 @@ function App() {
           type="button"
           className="counter"
           onClick={() => setCount((count) => count + 1)}
+          ref={btnRef}
         >
           Count is {count}
         </button>
