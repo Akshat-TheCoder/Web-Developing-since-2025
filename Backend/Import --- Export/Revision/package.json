@@ -1,0 +1,12 @@
+{
+  "name": "imex",
+  "version": "1.0.0",
+  "description": "rev",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "module.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
