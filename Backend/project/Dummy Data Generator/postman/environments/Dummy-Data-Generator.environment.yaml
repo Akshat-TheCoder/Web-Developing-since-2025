@@ -1,0 +1,6 @@
+name: Dummy Data Generator - Local
+values:
+  - key: baseUrl
+    value: 'http://localhost:3000'
+    enabled: true
+    type: default

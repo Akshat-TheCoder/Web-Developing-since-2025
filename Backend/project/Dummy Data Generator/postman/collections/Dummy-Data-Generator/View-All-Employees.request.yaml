@@ -1,0 +1,9 @@
+$kind: http-request
+name: View All Employees
+method: GET
+url: '{{baseUrl}}/view'
+order: 4000
+description: |-
+  Retrieves all employee records from MongoDB.
+  Returns an object with `total` (count) and `employees` (array of employee documents).
+  Each employee has: name, salary, city, language, isManager.

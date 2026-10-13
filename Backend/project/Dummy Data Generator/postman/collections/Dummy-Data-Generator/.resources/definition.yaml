@@ -1,0 +1,6 @@
+$kind: collection
+name: Dummy Data Generator
+description: API collection for the Dummy Data Generator Express app
+variables:
+  - key: baseUrl
+    value: 'http://localhost:3000'

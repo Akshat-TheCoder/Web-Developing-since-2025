@@ -1,0 +1,10 @@
+$kind: http-request
+name: Generate Employee
+method: GET
+url: '{{baseUrl}}/generate'
+order: 3000
+description: |-
+  Generates a random employee record and saves it to MongoDB.
+  Randomly picks name (Akshat, Riya, Saumya, Ranu), salary, city (Pratapgarh, Gorakhpur, Delhi, Aminabad),
+  language (Hindi, English, Math, Urdu, Marathi, Bhojpuri, Bengali, Tamil), and isManager (true/false).
+  Returns the created employee document.

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dummy Data Generator</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      .container {
+        width: 100%;
+        min-height: 100vh;
+        padding: 200px;
+        background-color: darkgreen;
+      }
+
+      #btn-1 {
+        font-size: 2rem;
+        color: wheat;
+        background-color: chocolate;
+        border-radius: 25px;
+        padding: 20px;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <button id="btn-1">Generate Data</button>
+    </div>
+
+    <script>
+      let btn = document.getElementById("btn-1");
+
+      btn.addEventListener("click", async () => {
+        console.log("Button clicked");
+
+        try {
+          let response = await fetch("/generate-many");
+
+          let result = await response.json();
+
+          console.log(result);
+
+          console.log(`${result.count} new employees generated!`);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      });
+    </script>
+  </body>
+</html>
